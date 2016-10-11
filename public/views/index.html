@@ -1,0 +1,40 @@
+<!-- public/views/index.html -->
+<!Doctype html>
+<html lang="en" ng-app="JStack">
+<head>
+  <meta charset="UTF-8">
+  <title>JStack</title>
+  <link rel="stylesheet" type="text/css" href="/vendor/bootstrap/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css">
+</head>
+<body>
+    <a href="/#/login" class="btn btn-warning">Login</a>
+    <a href="/#/register" class="btn btn-warning">Register</a>
+    <div ng-view></div>
+  <!-- Vendor -->
+  <script src="/vendor/jquery/dist/jquery.min.js "></script>
+  <script src="/vendor/bootstrap/dist/js/bootstrap.min.js "></script>
+  <script src="/vendor/angular/angular.min.js "></script>
+  <script src="/vendor/angular-route/angular-route.min.js "></script>
+  <script src="/vendor/simplemde/dist/simplemde.min.js "></script>
+
+  <!-- Custom -->
+  <script src="/views/module.js"></script>
+  <script src="/views/auth/module.js"></script>
+  <script src="/views/auth/authService.js"></script>
+  <script src="/views/auth/login/loginCtrl.js"></script>
+  <script src="/views/auth/register/registerCtrl.js"></script>
+  <script src="/views/blogs/module.js"></script>
+  <script src="/views/blogs/blogsCtrl.js"></script>
+  <script src="/views/blogs/blogsService.js"></script>
+  <script src="/views/blogs/viewBlog/viewBlogCtrl.js"></script>
+  <script src="/views/blogs/editBlog/editBlogCtrl.js"></script>
+<!--   <script>
+  
+  var simplemde = new SimpleMDE({
+   element: document.querySelector(".editor") ,
+   showIcons: ["code"]
+ });
+  </script> -->
+</body>
+</html>

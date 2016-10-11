@@ -1,0 +1,19 @@
+<form>
+  <div class="form-group">
+    <label>Name:
+      <input type="text" class="form-control" ng-model="nerd.name" placeholder="Name">
+    </label>
+  </div>
+  <div class="form-group">
+    <label>Superpower:
+      <input type="text" class="form-control" ng-model="nerd.superpower" placeholder="Superpower">
+    </label>
+  </div>
+  <button class="btn btn-success" ng-click="setNerd()">Save</button>
+</form>
+<ul class="list-group">
+  <li class="list-group-item" ng-repeat="user in users">{{$index + 1}}. <strong>{{user.name}}</strong> : <em>{{user.superpower}}</em> </li>
+</ul>
+<script>
+// var app = angular.module('nerd',[]);
+</script>
