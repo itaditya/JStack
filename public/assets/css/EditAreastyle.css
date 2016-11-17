@@ -1,0 +1,81 @@
+#editor {
+	border: solid #ddd 1px;
+	font-family:"Helvetica Neue",sans-serif !important;
+}
+.area_toolbar {
+	background: #f3f3f3 !important;
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	border: 1px solid #ddd ;
+}
+.editAreaSeparatorLine {
+	width: 1px !important;
+}
+.area_toolbar img{
+	width: 30px;
+	height: 30px;
+	border: none !important;
+	/*border: 1px solid #ddd ;*/
+
+}
+.area_toolbar img{
+	/*display: none;*/
+}
+.area_toolbar select {
+	font-family:"Helvetica Neue",sans-serif !important;
+	font-size: 16px;
+	font-weight: bold;
+	color: #555;
+
+	background: transparent;
+}
+.area_toolbar select,.area_toolbar select:hover,.area_toolbar select:focus {
+	border: none;	
+	outline: none;
+
+}
+#line_number {
+	border-right: solid #ddd 2px;
+	/*border: none;*/
+	text-align: center;
+	color: #555;
+	font-weight: bold;
+	/*background: #f3f3f3 !important;*/
+	font-family:"Helvetica Neue",sans-serif !important;
+}
+#result {
+	border-top: solid #ddd 1px;
+	border-bottom: solid #ddd 1px; 
+	background: #fff;
+	box-shadow: inset -10px 4px 39px 0px rgba(0,0,0,0.1);
+}
+#textarea {
+	font-family:"Helvetica Neue",sans-serif !important;
+	color: #555;
+	font-weight: bold;
+}
+.editAreaButtonNormal {
+	border: none;
+}
+.area_toolbar td.total {
+	font-size: 16px;
+	font-weight: bold;
+	padding-left: 10px;
+	color: #555;
+	
+}
+.area_toolbar td.infos {
+	font-size: 16px;
+}
+/*________*/
+
+#result::-webkit-scrollbar {
+    width: 10px;
+    background: transparent;
+}
+#result::-webkit-scrollbar-thumb {
+    width: 8px;
+    background: #666;    
+}

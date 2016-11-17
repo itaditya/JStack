@@ -7,6 +7,7 @@
     "animate.css": "latest",
     "angular": "latest",
     "angular-route": "latest",
-    "simplemde": "^1.11.2"
+    "simplemde": "^1.11.2",
+    "angular-permission": "^4.0.6"
   }
 }

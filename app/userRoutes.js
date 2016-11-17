@@ -59,7 +59,7 @@ module.exports = function(app) {
         })
         .delete('/api/users/:id', function(req, res) {
             var userId = req.params.id;
-            user.remove({ _id: userId }, function(err) {
+            User.remove({ _id: userId }, function(err) {
                 if (err) res.send(err);
                 res.json({ message: 'user deleted!' });
             });

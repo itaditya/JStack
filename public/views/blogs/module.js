@@ -1,11 +1,31 @@
-angular.module('blogs', []).config(function($routeProvider) {
-  // route for the home page
-  $routeProvider.when('/blogs/:id', {
-    templateUrl: 'views/blogs/viewBlog/viewBlog.html',
-    controller: 'viewBlogCtrl'
-  })
-  .when('/blogs/:id/edit', {
-      templateUrl: 'views/blogs/editBlog/editBlog.html',
-      controller: 'editBlogCtrl'
+angular.module('blogs', [])
+    // ['permission', 'permission.ng']
+    .config(function($routeProvider) {
+        // route for the home page
+        $routeProvider.when('/blogs/:id', {
+                templateUrl: 'views/blogs/viewBlog/viewBlog.html',
+                controller: 'viewBlogCtrl'
+            })
+            .when('/blogs/:id/edit', {
+                templateUrl: 'views/blogs/editBlog/editBlog.html',
+                controller: 'editBlogCtrl',
+                // data: {
+                //     permissions: {
+                //         only: ['AUTHOR','ADMIN'],
+                //         redirectTo: '/'
+                //     }
+                // }
+            });
     });
-});
+// .run(function(PermRoleStore, PermPermissionStore) {
+//     PermRoleStore
+//         .defineRole('AUTHOR', ['editBlog']);
+//         .defineRole('ADMIN', ['seeDashboard'],['editBlog']);
+//     PermPermissionStore
+//         .definePermission('seeDashboard', function() {
+//             return false;
+//         })
+//         .definePermission('editBlog', function() {
+//             return false;
+//         });
+// });

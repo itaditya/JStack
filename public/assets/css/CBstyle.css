@@ -1,0 +1,420 @@
+body {
+	padding: 0;
+	margin: 0;
+	font-family:"Helvetica Neue",sans-serif;
+	font-size: 18px;
+	font-weight: 300;
+	color: #333;
+	letter-spacing: 2px;
+	word-spacing: 3px;
+	background: #fafafa;
+
+}
+
+/*Layout*/
+
+* {
+	box-sizing:border-box;
+}
+a {
+	color: #fff;
+	text-decoration: none;
+}
+.page {
+	height: 100vh;
+	overflow: auto;
+	width: 100%;
+	margin-right: -10px;
+}
+.page > * {
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;	
+}
+.navbar,.footer {
+	width: 100%;
+	height: 70px;
+	/*flex:70%;*/
+}
+.container {
+	/*position: relative;*/
+	/*min-height: 200px;*/
+	width: 100%;
+	/*background: #000;*/
+	-webkit-box-align: start;
+	    -ms-flex-align: start;
+	            -ms-grid-row-align: flex-start;
+	        align-items: flex-start;
+
+
+}
+.sidebar {
+	position: relative;
+	/*To fix the scrolling bug I have to use JS
+	to find .hero-banner rendered height and 
+	when the scroll position is less than height ,
+	the sidebar will be pos-rel , when the scroll 
+	position is greater than hero height , sidebar will be pos-fixed
+*/
+	height: 800px;
+	height: 100vh;
+	/*background: #000;*/
+	width: 30%;
+	/*bottom: 70px;*/
+	top: 10px;
+	overflow: auto;
+}
+.main {
+	min-height: 1000px;
+	width: 70%;
+	background: #fff;
+}
+.footer {
+	margin-top: 10px;
+	position: relative;
+	z-index: 1;
+}
+/*Basic Layout Ends*/
+
+/*Custom Styling starts*/
+@font-face{ 
+	font-family: 'handwriting';
+	src: url('fonts/fabfeltscript-bold.eot');
+	src: url('fonts/fabfeltscript-bold.eot?#iefix') format('embedded-opentype'),
+	     url('fonts/fabfeltscript-bold.woff') format('woff'),
+	     url('fonts/fabfeltscript-bold.ttf') format('truetype'),
+	     url('fonts/fabfeltscript-bold.svg#webfont') format('svg');
+}
+
+.input-field {
+	border: 2px solid #E57E31;
+	border-radius: 20px;
+	width: 200px;
+	height: 36px;
+	margin-right: 20px;
+	/*font-size: 16px;*/
+	padding-left: 20px;
+	letter-spacing: 1px;
+	word-spacing: 2px;
+	background: transparent;
+	-webkit-transition: .5s;
+	transition:.5s;
+	
+}
+.posts-card {
+	margin: 20px 0;
+	height: 200px;
+	width: 70%;
+}
+.card-details {
+	width: 33.33;
+	padding: 0 5px;
+}
+.card-details>img {
+	width: 100%;
+	height: 200px;
+	-o-object-fit:cover;
+	   object-fit:cover;
+}
+.input-field:focus {
+	background: #fff;
+	border-color: #fff;
+}
+* ,*:hover,*:focus {
+	outline: 0px;
+}
+.navbar {
+	background: #fff;
+	background: -webkit-linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+	background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+	position: relative;
+	z-index: 2;
+	/*border-bottom: 1px solid rgba(192,201,208,1);*/
+	margin-bottom: -70px;
+}
+.hero-banner {
+	background: -webkit-linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url("../assets/hero.jpg");
+	background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url("../assets/hero.jpg");
+	background-size: cover;
+	height: 100vh;
+	position: relative;
+	z-index: 1;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack:center;
+	    -ms-flex-pack:center;
+	        justify-content:center;
+	width: 100%;
+}
+.topic {
+	font-size: 24px;
+	font-weight: 900;
+	color: #fff;
+	font-family: 'handwriting';
+	word-spacing: 4px;
+	width: 50%;
+	text-align: center;
+	/*height: 100%;*/
+
+
+}
+.author-pic {
+	margin-top: 40px;
+	width: 120px;
+	height: 120px;
+	border-radius: 100%;
+	border: 10px solid #141415;
+	background: #e1e1e1;
+	box-shadow: 5px 6px 14px 2px rgba(0,0,0,0.4);
+
+}
+.author-name {
+	font-size: 16px;
+	font-family: 'Open Sans',sans-serif;
+}
+.logo {}
+.brand-name {
+	font-size: 26px;
+	font-family: 'handwriting';
+	margin-left: 20px;
+	color: #FBB913;
+}
+.main {
+	margin-top: 20px;
+	padding: 20px;
+	line-height: 2em;
+	font-size: 14px;
+	letter-spacing: 2px;
+	padding-right: 40px;
+}
+.breadcrumb>li {
+	display: inline;
+}
+li {
+	/*text-align: left;*/
+	list-style-type: none;
+}
+.widget p {
+	color: #000;
+	text-align: center;
+}
+.index-list {
+	padding: 0;
+}
+.index-list li{
+	padding: 10px 15px;
+	font-weight: 300;
+	cursor: pointer;
+	-webkit-transition: .3s;
+	transition: .3s;
+	border: 1px solid #E8DADA;
+	font-size: 12px;
+	color: #666;
+}
+.index-list li:hover{
+	background: rgba(0,0,0,0.1);
+	margin-left: 12px;
+	/*border-left: 2px solid  rgba(41,169,93,.67);*/
+	border-left: 2px solid rgba(229,126,49,1);
+	color: #333;
+	
+	/*color: #fff;*/
+}
+.widget {
+	/*background: linear-gradient(rgba(255,255,255,0.1),rgba(230,230,230,0.1));*/
+	padding: 20px 30px;
+	background: #fff;
+	margin: 20px 40px;
+	min-height: 300px;
+	max-height: 400px;
+	border-left: 4px solid rgba(229,126,49,1) !important;
+	overflow-y: auto;
+}
+.widget-sm {
+	padding: 20px 30px;
+	background: #fff;
+	margin: 20px 40px;
+	height: 150px !important;
+	border-left: 4px solid #09B1CF !important;
+	text-align: center;
+
+}
+.widget-sm .btn {
+	font-size: 14px;
+	padding: 10px 0;
+}
+.btn {
+	border: 2px solid #09B1CF;
+	-webkit-transition: .4s;
+	transition: .4s;
+	cursor: pointer;
+}
+.btn:hover {
+	/*border: 2px solid  rgba(0,182,72,1);*/
+	/*border: 2px solid #09B1CF;*/
+	/*background: rgba(0,182,72,1);*/
+	background: #09B1CF;
+	color: #fff;
+}
+.hyperlink {
+	font-weight: 600;
+}
+.emphasise {
+	padding: 7px 4px;
+	font-size: 14px;
+	background: rgba(0,0,0,0.1);
+}
+.hyperlink:hover {
+	text-decoration: underline;
+}
+.heading:before {
+	content: " ";
+	width: 0; 
+	height: 0; 
+	border-top: 6px solid transparent;
+	border-right: 6px solid transparent;
+	border-bottom: 6px solid transparent;
+	border-left: 6px solid green;
+	margin-left: -20px;
+}
+.support-image {
+	padding: 40px;
+	overflow-y: auto;
+	width: 100%;
+	text-align: center;
+}
+.support-image img{
+	width: auto;
+	max-height: 300px;
+	-o-object-fit:contain;
+	   object-fit:contain;
+
+}
+.quoted-text{
+	/*padding-top: 30px;*/
+	font-family: 'handwriting';
+	font-size: 25px;
+	position: relative;
+}
+.quoted-text>p {
+	/*width: 80%;*/
+	margin: 0px;
+	text-align: center;
+	line-height: 40px;
+}
+.quoted-text>p:before,.quoted-text>p:after {
+	content: "''";
+	font-size: 60px;
+}
+.codebox {
+	margin-top: 80px;
+	padding: 20px 30px;
+	background: #2B303B;
+	color: #EBCB8A;
+	border-radius: 5px;
+	position: relative;
+	box-shadow:inset 0 -20px 80px 0px rgba(0,0,0,0.2);
+	overflow: auto;
+}
+.codebox:before {
+	content: "Here is the Code :" ;
+	color : #555;
+	font-size: 22px;
+	position: absolute;
+	top: -50px;
+	left: -10px;
+	/*text-decoration: underline;*/
+}
+.footer {
+	margin-top: 100px;
+	height: 100vh;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack:center;
+	    -ms-flex-pack:center;
+	        justify-content:center;
+}
+.subscribe>form>input {
+	height: 40px;
+	background: #fff;
+	border-radius: 30px;
+	width: 500px;
+	border: none;
+	padding-left: 40px;
+	font-size: 30px;
+	font-family: 'handwriting';
+	font-style: normal !important;
+	/*font-weight: 600;*/
+	letter-spacing: 2px;
+}
+
+/*Custom color palllete */
+
+.bg-purple {
+	background: purple;
+}
+.bg-green {
+	background: rgba(41,169,93,.67);
+}
+.bg-dk-purple {
+	background: #053140;
+}
+.txt-green {
+	color: rgba(41,169,93,.67) !important;
+}
+.z-depth-1 {
+	box-shadow: 1px 6px 14px 5px rgba(0,0,0,0.1);
+
+}
+.z-depth-2 {
+	box-shadow: 1px 6px 14px 5px rgba(0,0,0,0.2);
+}
+.z-depth-4 {
+	box-shadow: 5px 6px 14px 2px rgba(0,0,0,0.4);
+}
+.border {
+	border: 1px solid #E8DADA;
+}
+/*Custom scrollbar */
+
+/*body::-webkit-scrollbar {
+    width: 8px;
+}
+
+*::-webkit-scrollbar {
+    width: 10px;
+    position: relative;
+    z-index: 200;
+}
+
+::-webkit-scrollbar-track {
+
+}
+
+::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    background: #000;
+	display: block !important;
+
+
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: transparent;
+}*/
+.sidebar::-webkit-scrollbar {
+	display: none;
+}

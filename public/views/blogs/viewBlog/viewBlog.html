@@ -1,19 +1,176 @@
-<form>
-  <div class="form-group">
-    <label>Name:
-      <input type="text" class="form-control" ng-model="nerd.name" placeholder="Name">
-    </label>
-  </div>
-  <div class="form-group">
-    <label>Superpower:
-      <input type="text" class="form-control" ng-model="nerd.superpower" placeholder="Superpower">
-    </label>
-  </div>
-  <button class="btn btn-success" ng-click="setNerd()">Save</button>
+<div class="page animated fadeIn">
+    <div info="nav" class="navbar">
+        <a href="#" class="brand-name">JStack </a>
+        <!-- <div class="menu txt-orange" role="dropdown" tabindex="2"></div> -->
+        <form action="#" class="search sm-hide" role="search articles">
+            <input type="text" class="has-icon input-field" ng-model="searchQuery" placeholder="Search Blogs">
+            <span class="icon-pencil"></span>
+        </form>
+    </div>
+    <div info="author" class="hero-banner">
+        <div class="topic">
+            <img ng-src="{{ info.image }}" class="author-pic sm-hide">
+            <p><strong class="author-name"> {{ info.name }}</strong>
+                <br>on</p>
+            <h2> {{ info.title }} </h2>
+        </div>
+    </div>
+    <section class="container" role="blog content">
+        <main class="main z-depth border animated fadeIn">
+            <ul class="breadcrumb">
+                <li data-ng-repeat="crumbs in breads"> {{ crumbs | uppercase }} </li>
+            </ul>
+            <!-- <span class="blog-date"></span> -->
+            <!-- {{ blogParagraphs }} -->
+        </main>
+        <!-- End of Main -->
+        <!-- sidebar starts -->
+        <aside class="sidebar sm-hide">
+            <div class="widget border">
+                <p>Contents</p>
+                <ul class="index-list">
+                    <li data-ng-repeat="topic in topics">{{topic}}</li>
+                </ul>
+            </div>
+            <div info="sidebar" class="sm-hide">
+                <div class="border widget-sm" role="comments">
+                    <p data-num="89"> comments</p>
+                    <div class="btn modalBtn" data-toggle-id="commentModal">View Comments
+                    </div>
+                </div>
+                <div class="border widget-sm">
+                    <p>Ads</p>
+                    <div class="btn modalBtn" data-toggle-id="adModal">Link To Ad</div>
+                </div>
+                <div class="border widget-sm">
+                    <p>Quiz of Today</p>
+                    <div class="btn modalBtn" data-toggle-id="quizModal">View Quiz</div>
+                </div>
+                <div class="border widget-sm" id="user-widget">
+                    <p>Hey tell us more about you !</p>
+                    <input type="text" id="user-name" placeholder="Name">
+                    <input type="text" id="user-domain" placeholder="Domain">
+                    <div class="btn" id="user-save">Save Details</div>
+                </div>
+            </div>
+        </aside>
+    </section>
+    <section class="posts-card">
+        <div class="preloader-box" ng-hide="postsLoaded">
+            <div class="preloader"></div>
+        </div>
+        <div class="card-details border" >
+        <!-- ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded" -->
+            <div class="img-container">
+                <img ng-src=" {{post.imgsrc}} ">
+                <div class="overlay">
+                    <div class="caption">
+                        <a ng-href="{{post.link}}" class="btn">View</a>
+                    </div>
+                </div>
+            </div>
+            <p>{{post.title}} ({{post.date | date}})</p>
+        </div>
+        <!-- <input autofocus> -->
+    </section>
+    <footer info="footer" class="footer bg-dk-purple">
+        <div class="brand-details">
+            <a href="http://hackncs.com/"><h3>&copy;{{info.title}}</h3></a>
+            <div class="social-bar">
+                <a href="#f"><span class=" icon-facebook"></span></a>
+                <a href="#g"><span class=" icon-google-plus"></span></a>
+                <a href="#e"><span class=" icon-github"></span></a>
+            </div>
+        </div>
+        <div class="subscribe">
+            <form action="">
+                <input type="email" placeholder="Never miss any updates .">
+                <!-- Trick : use autofocus in input to scroll to that on reload -->
+                <div class="submit btn"><h3>Subscribe</h3></div>
+            </form>
+        </div>
+        <div class="posts-list txt-orange">
+            <!-- <h4 class="txt-orange"></h4> ng-repeat="category in categories" -->
+            <div class="post" >
+                <h5 class="txt-orange">{{info.categories[0].title}}</h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">css flexbox</span>
+                        <span class="tags">css triangles</span>
+                        <span class="tags">cross browser</span>
+                        <span class="tags">animations</span>
+                    </p>
+                </div>
+            </div>
+            <div class="post" >
+                <h5 class="txt-orange">{{info.categories[1].title}}</h5>
+                <div class="tag-box">
+                    <p>
+                        
+                        <span class="tags">github</span>
+                        <span class="tags">how a server works</span>
+                        <span class="tags">{{info.categories[1].tags[1]}}</span>
+                        <span class="tags">getting started</span>
+                        <span class="tags">cross browser</span>
+                        <span class="tags">animations</span>
+                    </p>
+                </div>
+            </div>
+            <div class="post" >
+                <h5 class="txt-orange">{{info.categories[2].title}}</h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">css flexbox</span>
+                        <span class="tags">css triangles</span>
+                        <span class="tags">getting started</span>
+                        <span class="tags">cross browser</span>
+                        <span class="tags">animations</span>
+                    </p>
+                </div>
+            </div>
+            <div class="post" >
+                <h5 class="txt-orange">{{info.categories[3].title}}</h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">css flexbox</span>
+                        <span class="tags">css triangles</span>
+                        <span class="tags">getting started</span>
+                        <span class="tags">cross browser</span>
+                        <span class="tags">animations</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="modal" id="commentModal">
+        <span class="closeModal icon-cross"></span>
+        <h2>Fb Comments Coming Soon ..</h2>
+    </div>
+    <div class="modal" id="quizModal">
+        <span class="closeModal icon-cross"></span>
+        <h2>Quiz Coming Soon ..</h2>
+    </div>
+    <div class="modal" id="adModal">
+        <span class="closeModal icon-cross"></span>
+        <h2>Ads Not Coming Soon ..</h2>
+    </div>
+</div>
+<!-- <form>
+    <div class="form-group">
+        <label>Name:
+            <input type="text" class="form-control" ng-model="nerd.name" placeholder="Name">
+        </label>
+    </div>
+    <div class="form-group">
+        <label>Superpower:
+            <input type="text" class="form-control" ng-model="nerd.superpower" placeholder="Superpower">
+        </label>
+    </div>
+    <button class="btn btn-success" ng-click="setNerd()">Save</button>
 </form>
 <ul class="list-group">
-  <li class="list-group-item" ng-repeat="user in users">{{$index + 1}}. <strong>{{user.name}}</strong> : <em>{{user.superpower}}</em> </li>
+    <li class="list-group-item" ng-repeat="user in users">{{$index + 1}}. <strong>{{user.name}}</strong> : <em>{{user.superpower}}</em> </li>
 </ul>
-<script>
+ --><script>
 // var app = angular.module('nerd',[]);
 </script>
