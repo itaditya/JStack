@@ -1,11 +1,13 @@
 {
     "name": "JStack",
     "main": "app.js",
+    "version": "6.9.1",
     "scripts": {
         "start": "node app.js",
-        "postinstall": "bower install"
+        "postinstall": "./node_modules/bower/bin/bower install"
     },
     "dependencies": {
+        "bower": "0.6.x",
         "express": "~4.5.1",
         "mongoose": "~3.8.0",
         "body-parser": "~1.4.2",
