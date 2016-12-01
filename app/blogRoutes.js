@@ -16,28 +16,35 @@
              });
          })
          .get('/api/recentBlogs', function(req, res) {
-            var recentBlogs = [];
+             var recentBlogs = [];
+             // console.log(Blog.find().sort({ "date": -1 }).limit(1));
              Blog.find(function(err, blogs) {
-                 if (err) res.send(err);
-                 for (var i = blogs.length - 1; i >= 0; i--) {
-                    console.log(blogs[i].date);
-                    if(blogs[i].date.length != 0){
-                        recentBlogs.push(blogs[i]);
-                    }
+                 var l = blogs.length;
+                 for (var i = 1; i <= 3; i++) {
+                     var a = l - i;
+                     if (a >= 0) {
+                         var stripBlog = {
+                             _id: blogs[a]._id,
+                             coverImg: blogs[a].coverImg,
+                             date: blogs[a].date,
+                             title: blogs[a].title
+                         }
+                         recentBlogs.push(stripBlog);
+                     }
                  }
                  res.json(recentBlogs);
              });
          })
          .post('/api/blogs', function(req, res) {
              var blog = new Blog();
-             blog.authorId = req.body.authorId || blog.authorId;
-             blog.date = req.body.date || blog.date;
-             blog.title = req.body.title || blog.title;
-             blog.coverImg = req.body.coverImg || blog.coverImg;
-             blog.content = req.body.content || blog.content;
-             blog.tags = req.body.tags || blog.tags;
-             blog.likes = req.body.likes || blog.likes;
-             blog.comments = req.body.comments || blog.comments;
+             blog.authorId = req.body.authorId;
+             blog.date = Date.now();
+             blog.title = req.body.title;
+             blog.coverImg = req.body.coverImg;
+             blog.content = req.body.content;
+             blog.tags = req.body.tags;
+             blog.likes = req.body.likes;
+             blog.comments = req.body.comments;
              blog.save(function(err) {
                  if (err) res.send(err);
                  res.json({ message: 'blog created!' });

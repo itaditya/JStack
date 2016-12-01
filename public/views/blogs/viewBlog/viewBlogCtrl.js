@@ -1,8 +1,9 @@
 angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, blogFactory, userFactory, $routeParams) {
     $(document).ready(function() {
+        $scope.postsLoaded = false;
         console.log($routeParams.id);
         blogFactory.get($routeParams.id).success(function(blog) {
-            // console.log(blog);
+            console.log(blog);
             $scope.blog = blog;
             var parent = $rootScope.d('.main');
             $rootScope.d(".menu").addEventListener("click", function() {
@@ -12,6 +13,12 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
             userFactory.get($scope.blog.authorId).success(function(author) {
                 $scope.author = author;
             });
+            blogFactory.recent().success(function(recentBlogs) {
+                $scope.posts = recentBlogs;
+                $scope.postsLoaded = true;
+                console.log(recentBlogs);
+            });
+
             var btnList = $rootScope.dd('.btn');
             for (var i = btnList.length - 1; i >= 0; i--) {
                 btnList[i].addEventListener("click", function() {

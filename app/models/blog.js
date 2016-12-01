@@ -10,7 +10,7 @@ module.exports = mongoose.model('Blog', {
         default: ""
     },
     date: {
-        type: String,
+        type: Number,
         default: ""
     },
     title: {

@@ -59,17 +59,18 @@
         <div class="preloader-box" ng-hide="postsLoaded">
             <div class="preloader"></div>
         </div>
-        <div class="card-details border">
+        <div class="card-details border" ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded">
             <!-- ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded" -->
             <div class="img-container">
-                <img ng-src=" {{post.imgsrc}} ">
+                <img ng-src="/assets/img/{{post.coverImg}} ">
                 <div class="overlay">
                     <div class="caption">
-                        <a ng-href="{{post.link}}" class="btn">View</a>
+                        <a ng-href="/#/blogs/{{post._id}}" class="btn" target="_blank">View</a>
                     </div>
                 </div>
             </div>
-            <p>{{post.title}} ({{post.date | date}})</p>
+            <p>{{post.title}} </p>
+            <span class="post-date">{{post.date | date}}</span>
         </div>
         <!-- <input autofocus> -->
     </section>
