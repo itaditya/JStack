@@ -1,6 +1,7 @@
 {
     "name": "JStack",
     "main": "app.js",
+    "scripts": { "start": "node app.js" },
     "dependencies": {
         "express": "~4.5.1",
         "mongoose": "~3.8.0",
