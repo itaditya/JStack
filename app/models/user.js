@@ -13,6 +13,10 @@ module.exports = mongoose.model('User', {
     type: String,
     default : ""
   },
+  image : {
+    type: String,
+    default : ""
+  },
   email : {
     type: String,
     default : ""

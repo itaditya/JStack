@@ -16,6 +16,14 @@ angular.module('blogs', [])
                 //     }
                 // }
             });
+    })
+    .run(function($rootScope) {
+        $rootScope.d = function(elem) {
+            return document.querySelector(elem);
+        }
+        $rootScope.dd = function(elem) {
+            return document.querySelectorAll(elem);
+        }
     });
 // .run(function(PermRoleStore, PermPermissionStore) {
 //     PermRoleStore

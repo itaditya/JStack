@@ -45,9 +45,14 @@ module.exports = function(app) {
         .put('/api/users/:id', function(req, res) {
             User.findById(req.params.id, function(err, user) {
                 if (typeof user != "undefined") {
-                    user.name = req.body.name;
-                    user.description = req.body.description;
-                    user.blogs = req.body.blogs;
+                    user.name = req.body.name || user.name;
+                    user.description = req.body.description || user.description;
+                    user.image = req.body.image || user.image;
+                    user.email = req.body.email || user.email;
+                    user.password = req.body.password || user.password;
+                    user.blogs = req.body.blogs || user.blogs;
+                    user.verified = req.body.verified || user.verified;
+                    user.role = req.body.role || user.role;
                     user.save(function(err) {
                         if (err) res.send(err);
                         res.json({ message: 'user updated!' });

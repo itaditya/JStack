@@ -61,7 +61,7 @@ li {
 	top: 0px;
 	height: 100vh;
 	overflow: auto;
-	right: 0px;
+	right: 10px;
 }
 .main {
 	/*min-height: 2000px;*/
@@ -102,6 +102,9 @@ li {
 	margin-top: 10px;
 	position: relative;
 	z-index: 1;
+}
+.hidden{
+	display: none !important;
 }
 /*Basic Layout Ends*/
 
@@ -370,6 +373,8 @@ li {
 }
 .btn {
 	border: 2px solid #09B1CF;
+	perspective: 200px;
+	-webkit-perspective: 200px;
 	transition: .4s;
 	cursor: pointer;
 }

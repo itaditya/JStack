@@ -1,5 +1,5 @@
-angular.module('blogs').factory('blogFactory', function($http) {
-    var urlBase = '/api/blogs';
+angular.module('JStack').factory('userFactory', function($http) {
+    var urlBase = '/api/users';
     return {
         // call to get all blogs
         get: function(id) {
