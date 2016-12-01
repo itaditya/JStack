@@ -10,16 +10,23 @@
     <!-- Custom CSS-->
     <link rel="stylesheet" type="text/css" href="/assets/css/style.css">
     <!-- <link rel="stylesheet" type="text/css" href="/assets/css/lightanim.css"> -->
-
 </head>
 
 <body>
+    <div id="fb-root"></div>
+    <script>
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1149863308401381";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
     <!-- <a href="/#/register" class="btn btn-warning">Register</a> -->
-
     <!-- Route Content -->
     <div ng-view></div>
-
-    
     <!-- Vendor -->
     <script src="/vendor/jquery/dist/jquery.min.js"></script>
     <!-- <script src="/vendor/bootstrap/dist/js/bootstrap.min.js"></script> -->
@@ -36,13 +43,10 @@
     <script src="/views/blogs/userFactory.js"></script>
     <script src="/views/auth/login/loginCtrl.js"></script>
     <script src="/views/auth/register/registerCtrl.js"></script>
-    
     <script src="/views/blogs/module.js"></script>
     <script src="/views/blogs/blogsCtrl.js"></script>
     <script src="/views/blogs/viewBlog/viewBlogCtrl.js"></script>
     <script src="/views/blogs/editBlog/editBlogCtrl.js"></script>
-    
-
     <!--   <script>
   
   var simplemde = new SimpleMDE({
@@ -50,6 +54,6 @@
    showIcons: ["code"]
  });
   </script> -->
-
 </body>
+
 </html>
