@@ -291,7 +291,7 @@ li {
 
 .navbar {
     /*background: #fff;*/
-    /*background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));*/
+    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
     position: relative;
     z-index: 2;
     /*border-bottom: 1px solid rgba(192,201,208,1);*/
