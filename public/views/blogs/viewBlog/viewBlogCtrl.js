@@ -24,7 +24,8 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
                 btnList[i].addEventListener("click", function() {
                     this.classList.add("btn-click");
                     setTimeout(function() {
-                        $rootScope.d('.btn-click').classList.remove("btn-click");
+                        if($rootScope.d('.btn-click')){
+                            $rootScope.d('.btn-click').classList.remove("btn-click");}
                     }, 600);
                 });
             }
@@ -57,22 +58,23 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
             closeBtn.addEventListener('click', function() {
                 that.click();
             });
-            document.addEventListener('keydown', escKeyQuit);
-        }
 
-        function escKeyQuit(event) {
-            var evt = event || window.event;
-            console.log(evt);
-            if (evt.keyCode == 27) {
-                that.click();
+            function escKeyQuit(event) {
+                var evt = event || window.event;
+                if (evt.keyCode == 27) {
+                evt.preventDefault();
+                    that.click();
+                }
             }
-            evt.preventDefault();
+            document.addEventListener('keydown', escKeyQuit);
         }
 
         function toggler(elem) {
 
             var comModal = elem.dataset.toggleId;
             comModal = document.getElementById(comModal);
+            // console.log(comModal);
+            // comModal.focus();
 
             if (comModal.style.display == 'block') {
                 comModal.style.display = 'none';

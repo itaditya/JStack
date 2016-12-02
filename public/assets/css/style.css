@@ -99,7 +99,9 @@ li {
     text-align: center;
     margin-top: 12%;
 }
-
+.modal:focus{
+    background: #000;
+}
 .closeModal {
     background: transparent !important;
     position: absolute;
