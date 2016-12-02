@@ -1,6 +1,10 @@
  // app/routes.js
  // grab the nerd model we just created
  var Blog = require('./models/blog');
+var nodemailer = require('nodemailer');
+var mailSender = require('./../config/auth');
+
+
  module.exports = function(app) {
      app.get('/api/blogs', function(req, res) {
              Blog.find(function(err, blogs) {
@@ -76,6 +80,34 @@
                  if (err) res.send(err);
                  res.json({ message: 'blog deleted!' });
              });
+         })
+         .post('/api/subscribe', function(req, res) {
+            var emailId = req.body.emailId;
+            var transporter = nodemailer.createTransport({
+                    service: 'Gmail',
+                    auth: {
+                        user:mailSender.mailer.auth.user,
+                        pass:mailSender.mailer.auth.pass,
+                    }
+                });
+
+            // setup e-mail data with unicode symbols
+            var mailOptions = {
+                from: '"Jstack Team" <adityaa803@gmail.com>', // sender address
+                // to: 'git2adi@gmail.com, adityaa803@gmail.com', // list of receivers
+                to: emailId, // list of receivers
+                subject: 'Subscription Confirmation', // Subject line
+                text: 'We are happy that you subscribed us!', // plaintext body
+                html: '<b>We are happy that you subscribed us!</b>' // html body
+            };
+
+            // send mail with defined transport object
+            transporter.sendMail(mailOptions, function(error, info){
+                if(error){
+                    return console.log(error);
+                }
+                console.log('Message sent: ' + info.response);
+            });
          })
          .get('*', function(req, res) {
              res.sendfile('./public/views/index.html'); // load our public/index.html file

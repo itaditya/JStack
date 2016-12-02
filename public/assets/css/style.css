@@ -2,6 +2,8 @@ body {
     padding: 0;
     margin: 0;
     font-family: "Helvetica Neue", sans-serif !important;
+    font-family: 'Noto Sans', sans-serif;
+
     font-size: 18px;
     font-weight: 300;
     color: #333;
@@ -171,6 +173,7 @@ li {
 }
 
 .posts-card {
+    font-family: 'Roboto Condensed', sans-serif;
     position: relative;
     margin: 140px 0;
     height: 300px;
@@ -363,12 +366,15 @@ li {
 }
 
 .info-text {
-    font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+    /*font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;*/
+    font-family: 'Noto Sans', sans-serif;
+
     /*font-weight: 400;*/
     font-style: normal;
     line-height: 2;
     font-size: 18px;
     color: black;
+    color: #616161;
     word-spacing: 6px;
     letter-spacing: 0px;
 }
