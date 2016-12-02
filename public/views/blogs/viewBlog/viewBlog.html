@@ -146,7 +146,19 @@
     <div class="modal" id="commentModal">
         <span class="closeModal icon-cross"></span>
         <h2>Fb Comments Coming Soon ..</h2>
-        <div class="fb-comments" data-href="https://developers.facebook.com/docs/plugins/comments#configurator" data-width="800" data-numposts="5"></div>
+        <div id="fb-root"></div>
+        <script>
+        (function(d, s, id) {
+            console.log(d, s, id);
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1149863308401381";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <div class="fb-comments" data-href="http://localhost:8080/" data-width="800" data-numposts="5"></div>
     </div>
     <div class="modal" id="quizModal">
         <span class="closeModal icon-cross"></span>
