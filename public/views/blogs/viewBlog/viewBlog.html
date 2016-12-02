@@ -1,4 +1,4 @@
-<div class="page animated fadeIn">
+<div class="page animated fadeIn" ng-cloak ng-show="author">
     <div info="nav" class="navbar">
         <a href="#" class="brand-name">JStack </a>
         <div class="menu txt-orange" role="dropdown" tabindex="2"></div>
@@ -10,9 +10,9 @@
     <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/{{blog.coverImg}}')">
         <div class="topic">
             <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide">
-            <p><strong class="author-name"> {{ author.name }}</strong>
+            <p><span class="author-name"> {{ author.name }}</span>
                 <br>on</p>
-            <h2> {{ blog.title }}</h2>
+            <h3> {{ blog.title }}</h3>
         </div>
     </div>
     <section class="container" role="blog content">
@@ -55,7 +55,7 @@
             </div>
         </aside>
     </section>
-    <section class="posts-card">
+    <section class="posts-card border">
         <div class="preloader-box" ng-hide="postsLoaded">
             <div class="preloader"></div>
         </div>
@@ -168,4 +168,9 @@
         <span class="closeModal icon-cross"></span>
         <h2>Ads Not Coming Soon ..</h2>
     </div>
+</div>
+<div class="page" ng-hide="author">
+<div class="preloader-box">
+    <div class="preloader"></div>
+</div>
 </div>

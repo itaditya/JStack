@@ -53,11 +53,14 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
         // Modal toggling ------------------
 
         function toggleCommentModal() {
-            var closeBtn = toggler(this);
+            var comModal = toggler(this);
             var that = this;
-            closeBtn.addEventListener('click', function() {
+            comModal.querySelector(".closeModal").addEventListener('click', function() {
                 that.click();
             });
+            // comModal.addEventListener('blur', function() {
+            //     that.click();
+            // });
 
             function escKeyQuit(event) {
                 var evt = event || window.event;
@@ -73,8 +76,9 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
 
             var comModal = elem.dataset.toggleId;
             comModal = document.getElementById(comModal);
-            // console.log(comModal);
-            // comModal.focus();
+            setTimeout(function(){
+                comModal.focus();
+            },0);
 
             if (comModal.style.display == 'block') {
                 comModal.style.display = 'none';
@@ -83,7 +87,7 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
                 comModal.classList.add('animated');
                 comModal.classList.add('fadeIn');
             }
-            return comModal.querySelector(".closeModal");
+            return comModal;
         }
 
         // Logic
