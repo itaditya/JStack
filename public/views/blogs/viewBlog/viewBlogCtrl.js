@@ -34,6 +34,11 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
                 modalBtn[i].addEventListener('click', toggleCommentModal);
             };
         });
+        $scope.subscribe = function(){
+            blogFactory.subscribe($scope.emailId).success(function(message) {
+                console.log(message);
+            });
+        }
         $rootScope.d(".page").addEventListener('scroll', function(e) {
             sidebarFix(e);
         }, false);

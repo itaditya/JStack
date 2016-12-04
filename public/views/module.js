@@ -1,5 +1,5 @@
-angular.module('JStack', ['ngRoute', 'auth', 'blogs'])
-    .config(function($routeProvider) {
+angular.module('JStack', ['ngRoute', 'auth', 'blogs','LocalStorageModule'])
+    .config(function($routeProvider,localStorageServiceProvider) {
         $routeProvider
             .when('/', {
                 templateUrl: 'views/blogs/blogs.html',
@@ -16,4 +16,7 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs'])
             .otherwise({
                 redirectTo: '/'
             });
+        localStorageServiceProvider
+            .setPrefix('JStack')
+           .setStorageType('sessionStorage');
     });

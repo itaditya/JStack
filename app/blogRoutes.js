@@ -1,9 +1,9 @@
  // app/routes.js
  // grab the nerd model we just created
- var Blog = require('./models/blog');
+var Blog = require('./models/blog');
 var nodemailer = require('nodemailer');
 var mailSender = require('./../config/auth');
-
+var showdown  = require('showdown');
 
  module.exports = function(app) {
      app.get('/api/blogs', function(req, res) {
@@ -40,18 +40,22 @@ var mailSender = require('./../config/auth');
              });
          })
          .post('/api/blogs', function(req, res) {
+             var converter = new showdown.Converter();
              var blog = new Blog();
              blog.authorId = req.body.authorId;
              blog.date = Date.now();
              blog.title = req.body.title;
              blog.coverImg = req.body.coverImg;
-             blog.content = req.body.content;
+             blog.content = converter.makeHtml(req.body.content);
              blog.tags = req.body.tags;
              blog.likes = req.body.likes;
              blog.comments = req.body.comments;
              blog.save(function(err) {
                  if (err) res.send(err);
-                 res.json({ message: 'blog created!' });
+                 res.json({
+                    message: 'blog created!',
+                    id: blog._id
+                });
              });
          })
          .put('/api/blogs/:id', function(req, res) {
@@ -107,6 +111,7 @@ var mailSender = require('./../config/auth');
                     return console.log(error);
                 }
                 console.log('Message sent: ' + info.response);
+                res.json({ message: 'User Subscribed!' });
             });
          })
          .get('*', function(req, res) {

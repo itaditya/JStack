@@ -16,6 +16,9 @@ angular.module('JStack').factory('blogFactory', function($http) {
         create: function(blogData) {
             return $http.post(urlBase, blogData);
         },
+        subscribe: function(email) {
+            return $http.post("/api/subscribe", {emailId : email});
+        },
         save: function(id, blogData) {
             return $http.delete((urlBase + "/" + id), blogData);
         },

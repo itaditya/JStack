@@ -1,1 +1,13 @@
-<a href="dsb">Hello</a>
+<script src="/vendor/simplemde/dist/simplemde.min.js "></script>
+<link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/texteditor.css">
+<div class="main-content">
+<textarea class="editor"></textarea>
+</div>
+<script>
+    var simplemde = new SimpleMDE({
+        element: document.querySelector(".editor") ,
+        promptURLs: true,
+        showIcons: ["code", "table"]
+    });
+</script>

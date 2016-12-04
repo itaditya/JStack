@@ -2,11 +2,12 @@ angular.module('blogs', [])
     // ['permission', 'permission.ng']
     .config(function($routeProvider) {
         // route for the home page
-        $routeProvider.when('/blogs/:id', {
-                templateUrl: 'views/blogs/viewBlog/viewBlog.html',
-                controller: 'viewBlogCtrl'
+        $routeProvider
+            .when('/blogs/create', {
+                templateUrl: 'views/blogs/createBlog/createBlog.html',
+                controller: 'createBlogCtrl'
             })
-            .when('/blogs/:id/edit', {
+            .when('/blogs/edit/:id', {
                 templateUrl: 'views/blogs/editBlog/editBlog.html',
                 controller: 'editBlogCtrl',
                 // data: {
@@ -15,6 +16,10 @@ angular.module('blogs', [])
                 //         redirectTo: '/'
                 //     }
                 // }
+            })
+            .when('/blogs/:id', {
+                templateUrl: 'views/blogs/viewBlog/viewBlog.html',
+                controller: 'viewBlogCtrl'
             });
     })
     .run(function($rootScope) {
