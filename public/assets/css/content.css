@@ -33,7 +33,7 @@
 }
 
 .support-image {
-    padding: 40px;
+    padding: 20px;
     overflow-y: auto;
     width: 100%;
     text-align: center;
@@ -51,15 +51,10 @@
     /*text-align: center;*/
     line-height: 40px;
 }
-
-.main pre {
-    /*margin-top: 80px;*/
-    /*font-family: "Helvetica Neue", sans-serif !important;*/
+/*
+.main .pre{
     padding: 20px 30px;
-    /*background: #2B303B;*/
     font-weight: normal;
-    /*color: #EBCB8A;*/
-    /*color: rgb(191, 179, 169);*/
     color: #EBE9EA;
     border-radius: 5px;
     position: relative;
@@ -69,7 +64,12 @@
     overflow: auto;
     font-size: 16px;
 }
-
+*/
+.main pre{
+    padding: 20px 30px;
+    border-radius: 2px;
+    font-size: 14px;
+}
 .codepen {
     height: 500px;
     overflow-y: auto;

@@ -5,11 +5,12 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
         blogFactory.get($routeParams.id).success(function(blog) {
             console.log(blog);
             $scope.blog = blog;
-            var parent = $rootScope.d('.main');
+            $rootScope.d('.main').insertAdjacentHTML('beforeend', $scope.blog.content);
+            $rootScope.d('.main pre').classList.add("prettyprint");
+            $rootScope.d('.main img').parentNode.classList.add("support-image");
             $rootScope.d(".menu").addEventListener("click", function() {
                 document.querySelector(".sidebar").classList.toggle("sm-hide");
             });
-            parent.insertAdjacentHTML('beforeend', $scope.blog.content);
             userFactory.get($scope.blog.authorId).success(function(author) {
                 $scope.author = author;
             });
