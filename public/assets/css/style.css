@@ -7,8 +7,8 @@ body {
     font-size: 18px;
     font-weight: 300;
     color: #333;
-    letter-spacing: 2px;
-    word-spacing: 3px;
+    /*letter-spacing: 2px;*/
+    /*word-spacing: 3px;*/
     background: #fafafa;
     overflow: hidden;
 }
@@ -488,7 +488,7 @@ div[role="comments"]>p:before {
 
 
 /*blog content styling*/
-
+/*
 .hyperlink {
     font-weight: 600;
 }
@@ -592,7 +592,7 @@ div[role="comments"]>p:before {
     font-size: 20px !important;
 }
 
-
+*/
 /*blog content styling ends*/
 
 .togetherjs-dock-right {
