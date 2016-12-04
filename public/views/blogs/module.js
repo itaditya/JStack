@@ -24,7 +24,8 @@ angular.module('blogs', [])
     })
     .run(function($rootScope) {
         $rootScope.d = function(elem) {
-            return document.querySelector(elem);
+            elem = document.querySelector(elem);
+            return (elem || document.querySelector(".null"));
         }
         $rootScope.dd = function(elem) {
             return document.querySelectorAll(elem);

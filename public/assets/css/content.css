@@ -69,6 +69,8 @@
     padding: 20px 30px;
     border-radius: 2px;
     font-size: 14px;
+    /*overflow-x: auto;*/
+    white-space: pre-wrap;
 }
 .codepen {
     height: 500px;

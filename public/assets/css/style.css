@@ -2,7 +2,6 @@ body {
     padding: 0;
     margin: 0;
     /*font-family: 'Fira Mono', monospace;*/
-    /*font-family: "Helvetica Neue", sans-serif !important;*/
     font-family: 'Noto Sans', sans-serif;
 
     font-size: 16px;
@@ -125,6 +124,8 @@ li {
 }
 
 .hidden {
+    visibility: none;
+    opacity: 0;
     display: none !important;
 }
 
@@ -341,7 +342,7 @@ li {
 
 .author-name {
     font-size: 16px;
-    font-family: 'Open Sans', sans-serif;
+    font-family: 'Noto Sans', sans-serif;
 }
 
 .logo {}
@@ -556,7 +557,6 @@ div[role="comments"]>p:before {
 
 .codebox {
     margin-top: 80px;
-    font-family: "Helvetica Neue", sans-serif !important;
     padding: 20px 30px;
     /*background: #2B303B;*/
     font-weight: normal;
