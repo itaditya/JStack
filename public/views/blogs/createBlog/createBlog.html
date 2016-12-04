@@ -2,9 +2,15 @@
 <!-- <link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
 <script src="/vendor/simplemde/dist/simplemde.min.js "></script>
 <link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css">
-<script>
-    
-</script>
+<style>
+.image-change{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 7px 4px;
+    /*background: #000;*/
+}   
+</style>
 <div class="page animated fadeIn" ng-cloak ng-show="author">
     <div info="nav" class="navbar">
         <a href="#" class="brand-name">JStack </a>
@@ -21,6 +27,8 @@
                 <br>on</p>
             <h3 class="blog-title" contenteditable="true"> Write Title Here </h3>
         </div>
+        <input type="text"  placeholder="Image Name" class="image-change" ng-model="blog.coverImg">
+        <!-- <input type="file" class="image-change" placeholder=""> -->
     </div>
     <section class="container" role="blog content">
         <main class="main z-depth border animated fadeIn" style="font-size: 14px;">

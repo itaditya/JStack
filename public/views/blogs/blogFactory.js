@@ -20,7 +20,7 @@ angular.module('JStack').factory('blogFactory', function($http) {
             return $http.post("/api/subscribe", {emailId : email});
         },
         save: function(id, blogData) {
-            return $http.delete((urlBase + "/" + id), blogData);
+            return $http.put((urlBase + "/" + id), blogData);
         },
         // call to DELETE a blog
         delete: function(id) {

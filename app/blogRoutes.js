@@ -4,6 +4,7 @@ var Blog = require('./models/blog');
 var nodemailer = require('nodemailer');
 var mailSender = require('./../config/auth');
 var showdown  = require('showdown');
+var converter = new showdown.Converter();
 
  module.exports = function(app) {
      app.get('/api/blogs', function(req, res) {
@@ -40,16 +41,16 @@ var showdown  = require('showdown');
              });
          })
          .post('/api/blogs', function(req, res) {
-             var converter = new showdown.Converter();
              var blog = new Blog();
              blog.authorId = req.body.authorId;
              blog.date = Date.now();
              blog.title = req.body.title;
              blog.coverImg = req.body.coverImg;
-             blog.content = converter.makeHtml(req.body.content);
+             blog.mdString = req.body.content;
+             blog.content = converter.makeHtml(blog.mdString);
              blog.tags = req.body.tags;
-             blog.likes = req.body.likes;
-             blog.comments = req.body.comments;
+             // blog.likes = req.body.likes;
+             // blog.comments = req.body.comments;
              blog.save(function(err) {
                  if (err) res.send(err);
                  res.json({
@@ -65,7 +66,8 @@ var showdown  = require('showdown');
                      blog.date = req.body.date || blog.date;
                      blog.title = req.body.title || blog.title;
                      blog.coverImg = req.body.coverImg || blog.coverImg;
-                     blog.content = req.body.content || blog.content;
+                     blog.mdString = req.body.content || blog.content;
+                     blog.content = converter.makeHtml(blog.mdString);
                      blog.tags = req.body.tags || blog.tags;
                      blog.likes = req.body.likes || blog.likes;
                      blog.comments = req.body.comments || blog.comments;

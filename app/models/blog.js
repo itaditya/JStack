@@ -21,6 +21,10 @@ module.exports = mongoose.model('Blog', {
         type: String,
         default: ""
     },
+    mdString: {
+        type: String,
+        default: ""
+    },
     content: {
         type: String,
         default: ""

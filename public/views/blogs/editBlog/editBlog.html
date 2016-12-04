@@ -1,13 +1,128 @@
+<!-- Custom CSS-->
+<!-- <link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
 <script src="/vendor/simplemde/dist/simplemde.min.js "></script>
 <link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css">
-<link rel="stylesheet" type="text/css" href="/assets/css/texteditor.css">
-<div class="main-content">
-<textarea class="editor"></textarea>
+<style>
+.image-change{
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    padding: 7px 4px;
+    /*background: #000;*/
+}   
+</style>
+<div class="page animated fadeIn" ng-cloak ng-show="author">
+    <div info="nav" class="navbar">
+        <a href="#" class="brand-name">JStack </a>
+        <div class="menu txt-orange" role="dropdown" tabindex="2"></div>
+        <form action="#" class="search sm-hide" role="search articles">
+            <input type="text" class="has-icon input-field" ng-model="searchQuery" placeholder="Search Blogs">
+            <span class="icon-pencil"></span>
+        </form>
+    </div>
+    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/{{blog.coverImg}}')">
+        <div class="topic">
+            <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide">
+            <p><span class="author-name"> {{ author.name }}</span>
+                <br>on</p>
+            <h3 class="blog-title" contenteditable="true"> Write Title Here </h3>
+        </div>
+        <input type="text"  placeholder="Image Name" class="image-change" ng-model="blog.coverImg">
+        <!-- <input type="file" class="image-change" placeholder=""> -->
+    </div>
+    <section class="container" role="blog content">
+        <main class="main z-depth border animated fadeIn" style="font-size: 14px;">
+            <textarea class="editor"></textarea>
+            <button ng-click="saveBlog()">Save</button>
+            <a ng-show="postid" ng-href="/#/blogs/{{postid}}" target="_blank" style="color:#000;">View Blog</a>
+        </main>
+        <!-- End of Main -->
+        <!-- sidebar starts -->
+        <aside class="sidebar sm-hide">
+            <div>
+                <div class="border widget-sm">
+                    <p>Ads</p>
+                    <div class="btn modalBtn" data-toggle-id="adModal">Link To Ad</div>
+                </div>
+            </div>
+        </aside>
+    </section>
+    <footer info="footer" class="footer bg-dk-purple">
+        <div class="brand-details">
+            <a href="http://hackncs.com/"><h3>&copy;Nibble Computer Society</h3></a>
+            <div class="social-bar">
+                <a href="#f"><span class=" icon-facebook"></span></a>
+                <a href="#g"><span class=" icon-google-plus"></span></a>
+                <a href="#e"><span class=" icon-github"></span></a>
+            </div>
+        </div>
+        <div class="subscribe">
+            <form action="">
+                <input type="email" placeholder="Never miss any updates ." ng-model="emailId">
+                <!-- Trick : use autofocus in input to scroll to that on reload -->
+                <div class="submit btn" ng-click="subscribe()">
+                    <h3>Subscribe</h3></div>
+            </form>
+        </div>
+        <div class="posts-list txt-orange">
+            <!-- <h4 class="txt-orange"></h4> ng-repeat="category in categories" -->
+            <div class="post">
+                <h5 class="txt-orange">{{blog.categories[0].title}}</h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">css flexbox</span>
+                        <span class="tags">css triangles</span>
+                        <span class="tags">cross browser</span>
+                        <span class="tags">animations</span>
+                    </p>
+                </div>
+            </div>
+            <div class="post">
+                <h5 class="txt-orange">{{blog.categories[1].title}}</h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">github</span>
+                        <span class="tags">how a server works</span>
+                        <!-- <span class="tags">{{blog.categories[1].tags[1]}}</span> -->
+                        <span class="tags">getting started</span>
+                        <span class="tags">cross browser</span>
+                        <span class="tags">animations</span>
+                    </p>
+                </div>
+            </div>
+            <div class="post">
+                <h5 class="txt-orange">{{blog.categories[2].title}}</h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">css flexbox</span>
+                        <span class="tags">css triangles</span>
+                        <span class="tags">getting started</span>
+                        <span class="tags">cross browser</span>
+                        <span class="tags">animations</span>
+                    </p>
+                </div>
+            </div>
+            <div class="post">
+                <h5 class="txt-orange">{{blog.categories[3].title}}</h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">css flexbox</span>
+                        <span class="tags">css triangles</span>
+                        <span class="tags">getting started</span>
+                        <span class="tags">cross browser</span>
+                        <span class="tags">animations</span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="modal" tabindex="1" id="adModal">
+        <span class="closeModal icon-cross"></span>
+        <h2>Ads Not Coming Soon ..</h2>
+    </div>
 </div>
-<script>
-    var simplemde = new SimpleMDE({
-        element: document.querySelector(".editor") ,
-        promptURLs: true,
-        showIcons: ["code", "table"]
-    });
-</script>
+<div class="page" ng-hide="author">
+<div class="preloader-box">
+    <div class="preloader"></div>
+</div>
+</div>
