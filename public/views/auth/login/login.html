@@ -1,6 +1,6 @@
+<pre-loader ng-show="isLoading"></pre-loader>
 <link rel="stylesheet" href="/assets/css/login.css">
-<div class="align container">
-
+<div class="align container" ng-hide="isLoading" ng-cloak>
   <div class="grid">
 
     <form  name="loginForm" ng-submit="login(loginForm)" class="form login">
@@ -14,10 +14,9 @@
         <label for="login__password"><svg class="icon"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#lock"></use></svg><span class="hidden">Password</span></label>
         <input id="login__password" type="password" ng-model="user.password" class="form__input" placeholder="Password" required>
       </div>
-
       <div class="form__field">
-        <input class="preloaderEffect" type="submit" value="Sign In" ng-hide="isLoading">
-        <img class="preloaderEffect" style="margin: 0px;padding: 10px;" src="/assets/img/preloader2.svg" alt="" ng-show="isLoading">
+        <input class="preloaderEffect" type="submit" value="Sign In" ng-hide="isValidating">
+        <img class="preloaderEffect" style="margin: 0px;padding: 10px;" src="/assets/img/preloader2.svg" alt="" ng-show="isValidating">
       </div>
 
     </form>
