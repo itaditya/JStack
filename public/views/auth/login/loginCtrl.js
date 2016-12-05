@@ -1,6 +1,5 @@
-angular.module('auth').controller('loginCtrl', function($scope, authFactory,PermPermissionStore,localStorageService, $routeParams) {
-  PermPermissionStore.clearStore();
-  localStorageService.clearAll();
+angular.module('auth').controller('loginCtrl', function($scope, authFactory,localStorageService, $routeParams,SessionService) {
+  SessionService.setUserAuthenticated(false);
   $scope.login = function(form) {
     if (form.$valid) {
       console.log($scope.user);
@@ -8,8 +7,9 @@ angular.module('auth').controller('loginCtrl', function($scope, authFactory,Perm
         console.log(data);
         data.type = "author";
         // authorization.loadDashboard(data);
-        if(data.status === 1){
+        if(data.status === "1"){
           alert("Yeah !");
+          SessionService.setUserAuthenticated(true);
         }
       });
     }

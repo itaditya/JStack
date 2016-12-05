@@ -40,7 +40,7 @@ angular.module('blogs',[])
                 controller: 'viewBlogCtrl'
             });
     })
-    .run(function($rootScope,SessionService,routes){
+    .run(function($rootScope,$location,SessionService,routes){
 
         $rootScope.$on("$locationChangeStart", function(event, next, current) {
             for(var i in routes) {
@@ -48,7 +48,8 @@ angular.module('blogs',[])
                 if(next.indexOf(path) != -1) {
                     if(routes[i].requireLogin && !SessionService.getUserAuthenticated()) {
                         alert("You need to be authenticated to see this page!");
-                        event.preventDefault();
+                        $location.path( "/login" );
+                        // event.preventDefault();
                     }
                 }
             }

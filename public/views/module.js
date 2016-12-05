@@ -18,20 +18,22 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs','LocalStorageModule'])
     });
     localStorageServiceProvider
     .setPrefix('JStack')
+    // .setStorageType('cookie');
     .setStorageType('sessionStorage');
 })
-.service('SessionService', function(){
-    var userIsAuthenticated = false;
+.service('SessionService', function(localStorageService){
+    // localStorageService.set("userIsAuthenticated",false);
 
     this.setUserAuthenticated = function(value){
-        userIsAuthenticated = value;
+        localStorageService.set("userIsAuthenticated",value);
+        // userIsAuthenticated = value;
     };
 
     this.getUserAuthenticated = function(){
-        return userIsAuthenticated;
+        return localStorageService.get("userIsAuthenticated");
     };
 })
-.run(function($rootScope,localStorageService) {
+.run(function($rootScope) {
     // ,PermRoleStore, PermPermissionStore
     $rootScope.d = function(elem) {
         elem = document.querySelector(elem);
