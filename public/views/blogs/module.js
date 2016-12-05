@@ -1,6 +1,6 @@
 angular.module('blogs',[])
     // ['permission', 'permission.ng']
-    .constant('routes',{
+    .constant('blogRoutes',{
             '/blogs/edit/:id': {
                 templateUrl: 'views/blogs/editBlog/editBlog.html',
                 controller: 'editBlogCtrl',
@@ -12,11 +12,11 @@ angular.module('blogs',[])
                 requireLogin: true
             }
     })
-    .config(function($routeProvider,routes) {
+    .config(function($routeProvider,blogRoutes) {
         // route for the home page
-        for(var path in routes) {
-            console.log(path,typeof routes);
-            $routeProvider.when(path, routes[path]);
+        for(var path in blogRoutes) {
+            console.log(path,typeof blogRoutes);
+            $routeProvider.when(path, blogRoutes[path]);
         };
         $routeProvider
             .when('/blogs/create', {
@@ -40,14 +40,14 @@ angular.module('blogs',[])
                 controller: 'viewBlogCtrl'
             });
     })
-    .run(function($rootScope,$location,SessionService,routes){
-
+    .run(function($rootScope,$location,SessionService,blogRoutes){
+        console.log(blogRoutes);
         $rootScope.$on("$locationChangeStart", function(event, next, current) {
-            for(var i in routes) {
+            for(var i in blogRoutes) {
                 var path = i.substring(0, i.lastIndexOf('/'));
                 if(next.indexOf(path) != -1) {
-                    if(routes[i].requireLogin && !SessionService.getUserAuthenticated()) {
-                        alert("You need to be authenticated to see this page!");
+                    if(blogRoutes[i].requireLogin && !SessionService.getUserAuthenticated()) {
+                        // alert("You need to be authenticated to see this page!");
                         $location.path( "/login" );
                         // event.preventDefault();
                     }

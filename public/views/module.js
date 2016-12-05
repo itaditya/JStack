@@ -1,4 +1,4 @@
-angular.module('JStack', ['ngRoute', 'auth', 'blogs','LocalStorageModule'])
+angular.module('JStack', ['ngRoute', 'auth', 'blogs','dashboard','LocalStorageModule'])
 .config(function($routeProvider,localStorageServiceProvider) {
     $routeProvider
     .when('/', {
