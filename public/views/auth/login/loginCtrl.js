@@ -1,6 +1,8 @@
 angular.module('auth').controller('loginCtrl', function($scope,$location, authFactory,localStorageService, $routeParams,SessionService) {
   SessionService.setUserAuthenticated(false);
+  $scope.isLoading = false;
   $scope.login = function(form) {
+    $scope.isLoading = true;
     if (form.$valid) {
       console.log($scope.user);
       authFactory.loginUser($scope.user).success(function(data) {

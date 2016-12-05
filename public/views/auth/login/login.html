@@ -16,7 +16,8 @@
       </div>
 
       <div class="form__field">
-        <input type="submit" value="Sign In">
+        <input class="preloaderEffect" type="submit" value="Sign In" ng-hide="isLoading">
+        <img class="preloaderEffect" style="margin: 0px;padding: 10px;" src="/assets/img/preloader2.svg" alt="" ng-show="isLoading">
       </div>
 
     </form>
