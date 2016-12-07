@@ -1,8 +1,10 @@
 <pre-loader ng-hide="author"></pre-loader>
 <!-- Custom CSS-->
 <!-- <link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
-<script src="/vendor/simplemde/dist/simplemde.min.js "></script>
+<script src="/vendor/simplemde/dist/simplemde.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css">
+<script src="/vendor/highlight/highlight.pack.js" type="text/javascript" charset="utf-8" async defer></script>
+<link rel="stylesheet" href="/vendor/highlight/styles/default.css">
 <style>
 .image-change{
     position: absolute;
@@ -26,7 +28,7 @@
             <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide">
             <p><span class="author-name"> {{ author.name }}</span>
                 <br>on</p>
-            <h3 class="blog-title" contenteditable="true"> Write Title Here </h3>
+            <h3 class="blog-title" contenteditable="true" ng-bind="blog.title"></h3>
         </div>
         <input type="text"  placeholder="Image Name" class="image-change" ng-model="blog.coverImg">
         <!-- <input type="file" class="image-change" placeholder=""> -->
@@ -35,6 +37,7 @@
         <main class="main z-depth border animated fadeIn" style="font-size: 14px;">
             <textarea class="editor"></textarea>
             <button ng-click="saveBlog()">Save</button>
+            <button ng-click="uploadBlog()">Upload</button>
             <a ng-show="postid" ng-href="/#/blogs/{{postid}}" target="_blank" style="color:#000;">View Blog</a>
         </main>
         <!-- End of Main -->

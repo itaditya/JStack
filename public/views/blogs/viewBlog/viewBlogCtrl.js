@@ -6,9 +6,17 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
             console.log(blog);
             $scope.blog = blog;
             $rootScope.d('.main').insertAdjacentHTML('beforeend', $scope.blog.content);
-            $rootScope.d('.main pre').classList.add("prettyprint");
+            var codeBlocks = $rootScope.dd('.main pre');
+            // $rootScope.d('.main pre').classList.add("prettyprint");
+            // $rootScope.d('.main img').parentNode.classList.add("support-image");
+            var imgBlocks = $rootScope.dd('.main img');
+            for (var i = codeBlocks.length - 1; i >= 0; i--) {
+                codeBlocks[i].classList.add("prettyprint");
+            }
+            for (var i = imgBlocks.length - 1; i >= 0; i--) {
+                imgBlocks[i].parentNode.classList.add("support-image");
+            }
             prettyPrint();
-            $rootScope.d('.main img').parentNode.classList.add("support-image");
             $rootScope.d(".menu").addEventListener("click", function() {
                 document.querySelector(".sidebar").classList.toggle("sm-hide");
             });

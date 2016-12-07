@@ -1,19 +1,32 @@
-angular.module('blogs').controller('createBlogCtrl', function($scope, $rootScope,localStorageService, blogFactory, userFactory, $routeParams) {
+angular.module('blogs').controller('createBlogCtrl', function($scope, $rootScope, $interval,localStorageService, blogFactory, userFactory, $routeParams) {
     $(document).ready(function() {
         localStorageService.set("authorId", "57fcdedcea223b1a2c8411cb");
         userFactory.get(localStorageService.get("authorId")).success(function(author) {
             var simplemde = new SimpleMDE({
                 element: document.querySelector(".editor") ,
                 promptURLs: true,
-                showIcons: ["code", "table"]
+                showIcons: ["code", "table","strikethrough","heading-bigger"],
+                placeholder: "Type here...",
+                renderingConfig: {
+                    codeSyntaxHighlighting: true,
+                },
+                hideIcons: ["fullscreen","side-by-side"]
             });
             $scope.author = author;
             var parent = $rootScope.d('.main');
             $rootScope.d(".menu").addEventListener("click", function() {
                 document.querySelector(".sidebar").classList.toggle("sm-hide");
             });
-            $scope.blog = {
-                coverImg : "hero.jpg",
+            var blog = localStorageService.get("blog");
+            if(blog){
+                $scope.blog = blog;
+                simplemde.value($scope.blog.content);
+            }
+            else{
+                $scope.blog = {
+                    coverImg : "hero.jpg",
+                    title : "Write Title Here"
+                }    
             }
             var btnList = $rootScope.dd('.btn');
             for (var i = btnList.length - 1; i >= 0; i--) {
@@ -26,6 +39,12 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $rootScope
                 });
             }
             $scope.saveBlog = function(){
+                $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
+                $scope.blog.content = simplemde.value();
+                localStorageService.set("blog",$scope.blog);
+            }
+            $interval($scope.saveBlog(), 300000);
+            $scope.uploadBlog = function(){
                 $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
                 $scope.blog.content = simplemde.value();
                 $scope.blog.authorId = localStorageService.get("authorId");
