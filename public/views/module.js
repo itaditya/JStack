@@ -36,7 +36,7 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs','dashboard','LocalStorageMo
 .directive('preLoader', function() {
   return {
     restrict: 'E',
-    template: '<div class="page bg-dk-purple" ng-hide="author"><div class="preloader-box"><img class="preloader" src="/assets/img/preloaderLg.svg" alt=""></div></div>'
+    template: '<div class="page bg-dk-purple"><div class="preloader-box"><img class="preloader" src="/assets/img/preloaderLg.svg" alt=""></div></div>'
   }
 })
 .run(function($rootScope) {

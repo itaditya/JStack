@@ -15,7 +15,6 @@ angular.module('blogs',[])
     .config(function($routeProvider,blogRoutes) {
         // route for the home page
         for(var path in blogRoutes) {
-            console.log(path,typeof blogRoutes);
             $routeProvider.when(path, blogRoutes[path]);
         };
         $routeProvider
@@ -41,7 +40,6 @@ angular.module('blogs',[])
             });
     })
     .run(function($rootScope,$location,SessionService,blogRoutes){
-        console.log(blogRoutes);
         $rootScope.$on("$locationChangeStart", function(event, next, current) {
             for(var i in blogRoutes) {
                 var path = i.substring(0, i.lastIndexOf('/'));

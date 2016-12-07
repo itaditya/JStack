@@ -1,6 +1,6 @@
-<pre-loader ng-show="isLoading"></pre-loader>
+<pre-loader ng-hide="isLoaded"></pre-loader>
 <link rel="stylesheet" href="/assets/css/login.css">
-<div class="align container" ng-hide="isLoading" ng-cloak>
+<div class="align container" ng-show="isLoaded" ng-cloak>
   <div class="grid">
 
     <form  name="loginForm" ng-submit="login(loginForm)" class="form login">

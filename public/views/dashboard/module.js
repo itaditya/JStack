@@ -21,7 +21,6 @@ angular.module('dashboard', [])
         };
     })
     .run(function($rootScope,$location,SessionService,dashboardRoutes){
-        console.log(dashboardRoutes);
         $rootScope.$on("$locationChangeStart", function(event, next, current) {
             for(var i in dashboardRoutes) {
                 var path = i.substring(0, i.lastIndexOf('/'));

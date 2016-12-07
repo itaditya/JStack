@@ -1,10 +1,8 @@
 angular.module('auth').controller('loginCtrl', function($scope,$location, authFactory,localStorageService, $routeParams,SessionService) {
   SessionService.setUserAuthenticated(false);
-    $scope.isLoading = true;
   $(document).ready(function(){
-    $scope.isLoading = false;
+    $scope.isLoaded = true;
     $scope.isValidating = false;
-    console.log($("input"));
     $scope.login = function(form) {
       $scope.isValidating = true;
       if (form.$valid) {
