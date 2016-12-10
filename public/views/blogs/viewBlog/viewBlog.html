@@ -1,61 +1,98 @@
 <pre-loader ng-hide="author"></pre-loader>
 <!-- Custom CSS-->
-<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
-<link rel="stylesheet" href="/vendor/google-code-prettify/bin/prettify.min.css">
-<link rel="stylesheet" type="text/css" href="/assets/css/themes/tranquil-heart.min.css">
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
+<link rel="stylesheet" href="/vendor/google-code-prettify/bin/prettify.min.css"/>
+<link rel="stylesheet" type="text/css" href="/assets/css/themes/tranquil-heart.min.css"/>
 <script src="/vendor/google-code-prettify/bin/prettify.min.js"></script>
 <script src="/vendor/google-code-prettify/bin/run_prettify.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/assets/css/content.css">
-
+<link rel="stylesheet" type="text/css" href="/assets/css/content.css"/>
 <div class="page animated fadeIn mainPage" ng-cloak ng-show="author">
     <div info="nav" class="navbar">
-        <a href="#" class="brand-name">JStack </a>
+        <a href="#" class="brand-name">
+            JStack
+        </a>
         <div class="menu txt-orange" role="dropdown" tabindex="2"></div>
         <form action="#" class="search sm-hide" role="search articles">
-            <input type="text" class="has-icon input-field" ng-model="searchQuery" placeholder="Search Blogs">
+            <input type="text" class="has-icon input-field" ng-model="searchQuery" placeholder="Search Blogs"/>
             <span class="icon-pencil"></span>
         </form>
     </div>
-    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(29,33,41,0.88),rgba(29,33,41,0.88)),url('/assets/img/coverImg/{{blog.coverImg}}')">
+    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(29,33,41,0.88),rgba(29,33,41,0.88)),url('/assets/img/coverImg/{{ blog.coverImg }}')">
         <div class="topic">
-            <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide">
-            <p><span class="author-name"> {{ author.name }}</span>
-                <br>on</p>
-            <h3> {{ blog.title }}</h3>
+            <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide"/>
+            <p>
+                <span class="author-name">
+                    {{ author.name }}
+                </span>
+                <br/>
+                on
+            </p>
+            <h3>
+                {{ blog.title }}
+            </h3>
         </div>
     </div>
     <section class="container" role="blog content">
-        <main class="main z-depth border animated fadeIn">
-        </main>
+        <main class="main z-depth border"></main>
         <!-- End of Main -->
         <!-- sidebar starts -->
         <aside class="sidebar sm-hide">
             <div class="widget border hidden">
-                <p>Contents</p>
+                <p>
+                    Contents
+                </p>
                 <ul class="index-list">
-                    <li data-ng-repeat="topic in topics">{{topic}}</li>
+                    <li data-ng-repeat="topic in topics">
+                        {{ topic }}
+                    </li>
                 </ul>
             </div>
             <div info="sidebar" class="sm-hide">
                 <div class="border widget-sm" role="comments">
-                    <p data-num="89"> comments</p>
-                    <div class="btn modalBtn" data-toggle-id="commentModal">View Comments
+                    <p data-num="89">
+                        comments
+                    </p>
+                    <div class="btn modalBtn" data-toggle-id="commentModal">
+                        View Comments
                     </div>
                 </div>
                 <div class="border widget-sm">
-                    <p>Ads</p>
-                    <div class="btn modalBtn" data-toggle-id="adModal">Link To Ad</div>
+                    <p>
+                        Ads
+                    </p>
+                    <div class="btn modalBtn" data-toggle-id="adModal">
+                        Link To Ad
+                    </div>
                 </div>
                 <div class="border widget-sm">
-                    <p>Quiz of Today</p>
-                    <div class="btn modalBtn" data-toggle-id="quizModal">View Quiz</div>
+                    <p>
+                        Quiz of Today
+                    </p>
+                    <div class="btn modalBtn" data-toggle-id="quizModal">
+                        View Quiz
+                    </div>
                 </div>
-                <div class="border widget-sm" id="user-widget">
+                <div class="border widget-sm animated" id="user-widget"  ng-hide="endFade" ng-class="{fadeOut: startFade}">
+                <!-- ng-hide="endFade" -->
+                    <p>
+                        Was This Helpfull ?
+                    </p>
+                    <label>
+                        <input type="radio" name="userChoice" ng-model="user.choice" value="1" ng-change="userChoice()"/>
+                        <span class="icon-radio-checked"></span>
+                    </label>
+                    <span style="padding-left: 18px;"></span>
+                    <label>
+                        <input type="radio" name="userChoice" ng-model="user.choice" value="-1" ng-change="userChoice()"/>
+                        <span class="icon-radio-unchecked"></span>
+                    </label>
+                </div>
+                <!-- <div class="border widget-sm" id="user-widget">
                     <p>Hey tell us more about you !</p>
                     <input type="text" id="user-name" placeholder="Name">
                     <input type="text" id="user-domain" placeholder="Domain">
                     <div class="btn" id="user-save">Save Details</div>
-                </div>
+                </div> -->
             </div>
         </aside>
     </section>
@@ -66,82 +103,147 @@
         <div class="card-details border" ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded">
             <!-- ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded" -->
             <div class="img-container">
-                <img ng-src="/assets/img/coverImg/{{post.coverImg}} ">
+                <img ng-src="/assets/img/coverImg/{{ post.coverImg }} "/>
                 <div class="overlay">
                     <div class="caption">
-                        <a ng-href="/#/blogs/{{post._id}}" class="btn" target="_blank">View</a>
+                        <a ng-href="/#/blogs/{{ post._id }}" class="btn" target="_blank">
+                            View
+                        </a>
                     </div>
                 </div>
             </div>
-            <p>{{post.title}} </p>
-            <span class="post-date">{{post.date | date}}</span>
+            <p>
+                {{ post.title }}
+            </p>
+            <span class="post-date">
+                {{ post.date | date }}
+            </span>
         </div>
         <!-- <input autofocus> -->
     </section>
     <footer info="footer" class="footer bg-dk-purple">
         <div class="brand-details">
-            <a href="http://hackncs.com/"><h3>&copy;Nibble Computer Society</h3></a>
+            <a href="http://hackncs.com/">
+                <h3>
+                    &copy;Nibble Computer Society
+                </h3>
+            </a>
             <div class="social-bar">
-                <a href="#f"><span class=" icon-facebook"></span></a>
-                <a href="#g"><span class=" icon-google-plus"></span></a>
-                <a href="#e"><span class=" icon-github"></span></a>
+                <a href="#f">
+                    <span class=" icon-facebook"></span>
+                </a>
+                <a href="#g">
+                    <span class=" icon-google-plus"></span>
+                </a>
+                <a href="#e">
+                    <span class=" icon-github"></span>
+                </a>
             </div>
         </div>
         <div class="subscribe">
             <form action="">
-                <input type="email" placeholder="Never miss any updates ." ng-model="emailId">
+                <input type="email" placeholder="Never miss any updates ." ng-model="emailId"/>
                 <!-- Trick : use autofocus in input to scroll to that on reload -->
                 <div class="submit btn" ng-click="subscribe()">
-                    <h3>Subscribe</h3></div>
+                    <h3>
+                        Subscribe
+                    </h3>
+                </div>
             </form>
         </div>
         <div class="posts-list txt-orange">
             <!-- <h4 class="txt-orange"></h4> ng-repeat="category in categories" -->
             <div class="post">
-                <h5 class="txt-orange">{{blog.categories[0].title}}</h5>
+                <h5 class="txt-orange">
+                    {{ blog.categories[0].title }}
+                </h5>
                 <div class="tag-box">
                     <p>
-                        <span class="tags">css flexbox</span>
-                        <span class="tags">css triangles</span>
-                        <span class="tags">cross browser</span>
-                        <span class="tags">animations</span>
+                        <span class="tags">
+                            css flexbox
+                        </span>
+                        <span class="tags">
+                            css triangles
+                        </span>
+                        <span class="tags">
+                            cross browser
+                        </span>
+                        <span class="tags">
+                            animations
+                        </span>
                     </p>
                 </div>
             </div>
             <div class="post">
-                <h5 class="txt-orange">{{blog.categories[1].title}}</h5>
+                <h5 class="txt-orange">
+                    {{ blog.categories[1].title }}
+                </h5>
                 <div class="tag-box">
                     <p>
-                        <span class="tags">github</span>
-                        <span class="tags">how a server works</span>
+                        <span class="tags">
+                            github
+                        </span>
+                        <span class="tags">
+                            how a server works
+                        </span>
                         <!-- <span class="tags">{{blog.categories[1].tags[1]}}</span> -->
-                        <span class="tags">getting started</span>
-                        <span class="tags">cross browser</span>
-                        <span class="tags">animations</span>
+                        <span class="tags">
+                            getting started
+                        </span>
+                        <span class="tags">
+                            cross browser
+                        </span>
+                        <span class="tags">
+                            animations
+                        </span>
                     </p>
                 </div>
             </div>
             <div class="post">
-                <h5 class="txt-orange">{{blog.categories[2].title}}</h5>
+                <h5 class="txt-orange">
+                    {{ blog.categories[2].title }}
+                </h5>
                 <div class="tag-box">
                     <p>
-                        <span class="tags">css flexbox</span>
-                        <span class="tags">css triangles</span>
-                        <span class="tags">getting started</span>
-                        <span class="tags">cross browser</span>
-                        <span class="tags">animations</span>
+                        <span class="tags">
+                            css flexbox
+                        </span>
+                        <span class="tags">
+                            css triangles
+                        </span>
+                        <span class="tags">
+                            getting started
+                        </span>
+                        <span class="tags">
+                            cross browser
+                        </span>
+                        <span class="tags">
+                            animations
+                        </span>
                     </p>
                 </div>
             </div>
             <div class="post">
-                <h5 class="txt-orange">{{blog.categories[3].title}}</h5>
+                <h5 class="txt-orange">
+                    {{ blog.categories[3].title }}
+                </h5>
                 <div class="tag-box">
                     <p>
-                        <span class="tags">css flexbox</span>
-                        <span class="tags">css triangles</span>
-                        <span class="tags">getting started</span>
-                        <span class="tags">cross browser</span>
-                        <span class="tags">animations</span>
+                        <span class="tags">
+                            css flexbox
+                        </span>
+                        <span class="tags">
+                            css triangles
+                        </span>
+                        <span class="tags">
+                            getting started
+                        </span>
+                        <span class="tags">
+                            cross browser
+                        </span>
+                        <span class="tags">
+                            animations
+                        </span>
                     </p>
                 </div>
             </div>
@@ -162,15 +264,19 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
         </script>
-        <div class="fb-comments" data-href="http://localhost:8080/#/blogs/{{blog._id}}" data-order-by="reverse_time" data-width="800" data-numposts="5"></div>
+        <div class="fb-comments" data-href="http://localhost:8080/#/blogs/{{ blog._id }}" data-order-by="reverse_time" data-width="800" data-numposts="5"></div>
     </div>
     <div class="modal" tabindex="1" id="quizModal">
         <span class="closeModal icon-cross"></span>
-        <h2>Quiz Coming Soon ..</h2>
+        <h2>
+            Quiz Coming Soon ..
+        </h2>
     </div>
     <div class="modal" tabindex="1" id="adModal">
         <span class="closeModal icon-cross"></span>
-        <h2>Ads Not Coming Soon ..</h2>
+        <h2>
+            Ads Not Coming Soon ..
+        </h2>
     </div>
 </div>
 <!-- <div class="page bg-dk-purple" ng-hide="author">

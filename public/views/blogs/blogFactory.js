@@ -6,9 +6,9 @@ angular.module('JStack').factory('blogFactory', function($http) {
             return $http.get(urlBase + "/" + id);
         },
         getList: function(query) {
-            if(query){
-                return $http.get(urlBase+"?"+query);
-            }else{
+            if (query) {
+                return $http.get(urlBase + "?" + query);
+            } else {
                 return $http.get(urlBase);
             }
         },
@@ -21,7 +21,14 @@ angular.module('JStack').factory('blogFactory', function($http) {
             return $http.post(urlBase, blogData);
         },
         subscribe: function(email) {
-            return $http.post("/api/subscribe", {emailId : email});
+            return $http.post("/api/subscribe", {
+                emailId: email
+            });
+        },
+        userChoice: function(id,choice) {
+            return $http.post(urlBase + "/userChoice/" + id, {
+                value: choice
+            });
         },
         save: function(id, blogData) {
             return $http.put((urlBase + "/" + id), blogData);

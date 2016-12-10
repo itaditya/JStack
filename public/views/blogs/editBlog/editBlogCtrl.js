@@ -1,9 +1,9 @@
-angular.module('blogs').controller('editBlogCtrl', function($scope,$rootScope, blogFactory,$rootScope,userFactory,$routeParams,localStorageService) {
+angular.module('blogs').controller('editBlogCtrl', function($scope, $rootScope, blogFactory, $rootScope, userFactory, $routeParams, localStorageService) {
     $(document).ready(function() {
         console.log($rootScope.isAuthor);
         userFactory.get(localStorageService.get("authorId")).success(function(author) {
             var simplemde = new SimpleMDE({
-                element: document.querySelector(".editor") ,
+                element: document.querySelector(".editor"),
                 promptURLs: true,
                 showIcons: ["code", "table"]
             });
@@ -22,21 +22,24 @@ angular.module('blogs').controller('editBlogCtrl', function($scope,$rootScope, b
                 btnList[i].addEventListener("click", function() {
                     this.classList.add("btn-click");
                     setTimeout(function() {
-                        if($rootScope.d('.btn-click')){
-                            $rootScope.d('.btn-click').classList.remove("btn-click");}
-                        }, 600);
+                        if ($rootScope.d('.btn-click')) {
+                            $rootScope.d('.btn-click').classList.remove("btn-click");
+                        }
+                    }, 600);
                 });
             }
-            $scope.saveBlog = function(){
+            $scope.saveBlog = function() {
                 $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
                 $scope.blog.content = simplemde.value();
                 $scope.blog.authorId = localStorageService.get("authorId");
-                blogFactory.save($routeParams.id,$scope.blog).success(function(message) {
+                blogFactory.save($routeParams.id, $scope.blog).success(function(message) {
                     $scope.postid = message.id;
+                    notification.notify('success', 'Save Successfull');
                 });
             }
-            $scope.subscribe = function(){
+            $scope.subscribe = function() {
                 blogFactory.subscribe($scope.emailId).success(function(message) {
+                    notification.notify('success', 'Subscribed Successfully');
                     console.log(message);
                 });
             }

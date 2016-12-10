@@ -1,6 +1,7 @@
-angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, blogFactory, userFactory, $routeParams) {
+angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope,$timeout, blogFactory, userFactory, $routeParams) {
     $(document).ready(function() {
         $scope.postsLoaded = false;
+        $scope.user = {};
         console.log($routeParams.id);
         blogFactory.get($routeParams.id).success(function(blog) {
             console.log(blog);
@@ -44,6 +45,16 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
             $rootScope.d(".mainPage").addEventListener('scroll', function(e) {
                 sidebarFix();
             });
+            $scope.userChoice = function(){
+                console.log($scope.user.choice);
+                $scope.startFade = true;
+                $timeout(function(){
+                    $scope.endFade = true;
+                }, 2000);
+                blogFactory.userChoice($routeParams.id,$scope.user.choice).success(function(message) {
+                    notification.notify('success', 'Thank You');
+                });
+            }
         });
         $scope.subscribe = function(){
             blogFactory.subscribe($scope.emailId).success(function(message) {

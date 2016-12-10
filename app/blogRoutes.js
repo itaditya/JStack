@@ -128,13 +128,13 @@ module.exports = function(app) {
             _id: blogId
         }, function(err, blog) {
             if (err) res.send(err);
-            if(blog){
+            if (blog) {
                 User.findOne({
                     _id: blog.authorId
                 }, function(err, user) {
-                    if(user){
+                    if (user) {
                         var index = user.blogs.indexOf(blogId);
-                        user.blogs.splice(index,1);
+                        user.blogs.splice(index, 1);
                         user.save();
                     }
                 });
@@ -147,6 +147,21 @@ module.exports = function(app) {
                     });
                 });
             }
+        });
+    }).post('/api/blogs/userChoice/:id', function(req, res) {
+        var blogId = req.params.id;
+        console.log(blogId);
+        Blog.findOne({
+            _id: blogId
+        }, function(err, blog) {
+            blog.likes += parseInt(req.body.value);
+            console.log(blog.likes);
+            blog.save(function(err) {
+                if (err) res.send(err);
+                res.json({
+                    message: 'blog liked!'
+                });
+            });
         });
     }).post('/api/subscribe', function(req, res) {
         var emailId = req.body.emailId;
