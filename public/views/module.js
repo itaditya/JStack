@@ -25,12 +25,18 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs','dashboard','LocalStorageMo
 
     this.setUserAuthenticated = function(value,allowEdit){
         localStorageService.set("userIsAuthenticated",value);
-        // localStorageService.set("allowedToEdit",allowEdit);
-        // userIsAuthenticated = value;
     };
 
     this.getUserAuthenticated = function(){
         return localStorageService.get("userIsAuthenticated");
+    };
+
+    this.getCanEditBlog = function(blogId){
+        var blogs = localStorageService.cookie.get("editBlogs");
+        if(blogs && blogs.indexOf(blogId) != -1){
+            return true;
+        }
+        return false;
     };
 })
 .directive('preLoader', function() {

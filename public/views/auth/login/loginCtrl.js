@@ -13,6 +13,7 @@ angular.module('auth').controller('loginCtrl', function($scope, $location, authF
                     // authorization.loadDashboard(data);
                     if (data.status === "1") {
                         localStorageService.set("authorId",data.id);
+                        localStorageService.cookie.set("editBlogs",data.blogs);
                         SessionService.setUserAuthenticated(true);
                         $location.path("/profile");
                     }

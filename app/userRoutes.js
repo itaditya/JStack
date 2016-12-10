@@ -43,10 +43,10 @@ module.exports = function(app) {
         }, function(err, user) {
             if (err) res.send(err);
             if (req.body.password === user.password) {
-                console.log(user);
                 res.json({
                     status: '1',
-                    id: user._id
+                    id: user._id,
+                    blogs: user.blogs
                 });
             } else {
                 res.json({
