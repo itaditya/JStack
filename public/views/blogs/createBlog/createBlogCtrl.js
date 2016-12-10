@@ -42,8 +42,9 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $rootScope
                 $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
                 $scope.blog.content = simplemde.value();
                 localStorageService.set("blog",$scope.blog);
+                console.log($scope.blog.title);
             }
-            $interval($scope.saveBlog(), 300000);
+            // $interval($scope.saveBlog(), 300000);
             $scope.uploadBlog = function(){
                 $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
                 $scope.blog.content = simplemde.value();

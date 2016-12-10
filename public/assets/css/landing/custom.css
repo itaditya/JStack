@@ -1,0 +1,290 @@
+@media screen and (min-width: 981px) {
+  html {
+    font-size: 10px;
+  }
+}
+@media screen and (min-width: 641px) and (max-width: 980px) {
+  html {
+    font-size: 9px;
+  }
+}
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 9px;
+  }
+}
+body{
+}
+.mainPage{
+  background: #F1F2F1;
+}
+.container {
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  padding-top: 80px;
+}
+.title {
+  font-size: 3rem;
+  font-weight: 400;
+  text-align: center;
+}
+p {
+  line-height: 1.8;
+  margin-bottom: 2rem;
+}
+p:last-child {
+  margin-bottom: 0;
+}
+/*
+ * Core for cards
+ */
+.cards {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  font-family: 'Noto Sans', sans-serif;
+  width: 100%;
+}
+.card {
+  /*box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);*/
+  margin-bottom: 5rem;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+.card_main {
+  width: 100%;
+}
+@media screen and (min-width: 801px) {
+  .card_main .card__title {
+    font-size: 180%;
+  }
+  .card_main .card__main-action {
+    width: 4.48em;
+    height: 4.48em;
+  }
+}
+.card_size-2xl {
+  width: 66%;
+}
+.card_size-xl {
+  /*width: 49%;*/
+  width: 40%;
+}
+@media screen and (min-width: 801px) {
+  .card_size-xl .card__title {
+    font-size: 20px;
+  }
+}
+.card_size-m {
+  width: 32%;
+  width: 27%;
+}
+@media screen and (min-width: 481px) and (max-width: 800px) {
+  .card_size-m,
+  .card_size-2xl {
+    width: 49%;
+  }
+}
+@media screen and (max-width: 480px) {
+  .card_size-m,
+  .card_size-xl,
+  .card_size-2xl {
+    width: 100%;
+  }
+}
+.card__header {
+  position: relative;
+  line-height: 0;
+  height: 186px;
+  background-position: center;
+  background-size: cover;
+  transition: 0.6s;
+}
+*::-ms-backdrop,
+.card__header {
+  display: -ms-flexbox;
+  display: flex;
+}
+.card__preview {
+  max-width: 100%;
+  height: auto;
+}
+*::-ms-backdrop,
+.card__preview {
+  -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+}
+.card__main-action {
+  font-size: 100%;
+  text-decoration: none;
+  text-indent: -9999px;
+  cursor: pointer;
+  display: none;
+  border: none;
+  border-radius: 50%;
+  padding: 0;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  right: 5%;
+  bottom: 0;
+  -webkit-transform: translateY(50%);
+          transform: translateY(50%);
+  width: 4em;
+  height: 4em;
+}
+.card__main-action:before {
+  content: "";
+  display: block;
+  width: 60%;
+  height: 60%;
+  box-sizing: border-box;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+.card__main-action:focus {
+  outline: none;
+}
+.card__body {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justify-content: space-around;
+  -webkit-box-flex: 2;
+  -webkit-flex-grow: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+}
+.card__title {
+  /*font-size: 140%;*/
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 1.5;
+  margin-top: 0;
+  margin-bottom: .8em;
+  transition: 0.8s;
+}
+.card__showmore {
+  text-decoration: none;
+}
+.card__content {
+  /*padding: 2.5em 4% 1.5em;*/
+  padding: 2.5em 10% 1.5em;
+  -webkit-box-flex: 2;
+  -webkit-flex-grow: 2;
+      -ms-flex-positive: 2;
+          flex-grow: 2;
+}
+.card__footer {
+  padding: 1.5em 4%;
+  border-top-width: 1px;
+  /*border-top-style: solid;*/
+  background: #f7f7f7;
+  font-size: 90%;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.card__meta-item {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: .8em;
+}
+.card__meta-icon {
+  display: inline-block;
+  vertical-align: middle;
+  text-align: right;
+  width: 1.5em;
+  height: 1.5em;
+  margin-right: .2em;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+/*
+ * Skin for cards
+ */
+.card {
+  background-color: #fff;
+  color: #212121;
+  font-size: 1.4rem;
+}
+@media screen and (min-width: 801px) {
+  .card_main,
+  .card_size-2xl,
+  .card_size-xl {
+    font-size: 1.6rem;
+  }
+}
+.card__main-action {
+  background-color: #3f51b5;
+}
+.card__main-action:before {
+  background-image: url("https://stas-melnikov.ru/cssgrid/bookmark.svg");
+}
+.card__main-action:hover,
+.card__main-action:focus {
+  background-color: #303f9f;
+}
+.card__footer {
+  border-top-color: #bdbdbd;
+}
+.card__showmore {
+  color: #303f9f;
+  color: #444;
+  -webkit-transition: color 0.3s ease-out;
+  transition: color 0.3s ease-out;
+}
+.card__showmore:hover,
+.card__showmore:focus {
+  color: #3f51b5;
+}
+.card__meta-comments {
+  background-image: url("https://stas-melnikov.ru/cssgrid/comment.svg");
+}
+.card__meta-likes {
+  background-image: url("https://stas-melnikov.ru/cssgrid/favorite.svg");
+}
+.card:hover .card__header{
+  height: 150px;
+  filter: blur(1px) brightness(.5);
+}
+.card:hover .card__title{
+  font-size: 22px;
+}

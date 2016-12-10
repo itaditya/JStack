@@ -1,5 +1,50 @@
-<!-- <p>Leonidas</p> -->
-    <a href="/#/blogs/58404a7d9f47cf90133c0443" style="color: #000;">Blog</a>
-<script>
-// var app = angular.module('nerd',[]);
-</script>
+<!-- <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+  <div class="grid-item"></div>
+  <div class="grid-item"></div>
+  ...
+</div>
+<script src="/vendor/angular-local-storage/dist/angular-local-storage.min.js"></script> -->
+<pre-loader ng-hide="blogs"></pre-loader>
+<link rel="stylesheet" href="/assets/css/style.css">  
+<link rel="stylesheet" href="/assets/css/landing/custom.css">  
+<div class="page animated fadeIn mainPage" ng-show="blogs">
+    <div info="nav" class="navbar">
+        <a href="#" class="brand-name">JStack </a>
+        <div class="menu txt-orange" role="dropdown" tabindex="2"></div>
+        <form action="#" class="search sm-hide" role="search articles">
+            <input type="text" class="has-icon input-field" ng-model="searchQuery" placeholder="Search Blogs">
+            <span class="icon-pencil"></span>
+        </form>
+    </div>
+    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/l1.jpg')">
+        <!-- <input type="file" class="image-change" placeholder=""> -->
+    </div>
+    <div class="container">
+        <div class="cards">
+            <article class="card" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in blogs">
+                <header class="card__header" style="background-image: url('/assets/img/coverImg/{{blog.coverImg}}');">
+                    <button class="card__main-action" type="button">In bookmarks</button>
+                </header>
+                <div class="card__body">
+                    <div class="card__content">
+                        <h3 class="card__title"><a ng-href="/#/blogs/{{blog._id}}" class="card__showmore">{{blog.title}}</a></h3>
+                        <!-- target="_blank" -->
+                    </div>
+                    <footer class="card__footer">
+                        <span class="card__author">by <strong>{{blog.authorName}}</strong></span>
+                        <div class="card__meta">
+                            <div class="card__meta-item">
+                                <i class="card__meta-icon card__meta-comments"></i>
+                                <span class="card__label">7 comments</span>
+                            </div>
+                            <div class="card__meta-item">
+                                <i class="card__meta-icon card__meta-likes"></i>
+                                <span class="card__label">19</span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </article>      
+        </div>
+    </div>
+    </div>

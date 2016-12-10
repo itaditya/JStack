@@ -1,15 +1,13 @@
 <pre-loader ng-hide="author"></pre-loader>
 <!-- Custom CSS-->
-<!-- <link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
-<!-- <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script> -->
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
 <link rel="stylesheet" href="/vendor/google-code-prettify/bin/prettify.min.css">
 <link rel="stylesheet" type="text/css" href="/assets/css/themes/tranquil-heart.min.css">
 <script src="/vendor/google-code-prettify/bin/prettify.min.js"></script>
 <script src="/vendor/google-code-prettify/bin/run_prettify.min.js"></script>
-<!-- <<script></script> -->
 <link rel="stylesheet" type="text/css" href="/assets/css/content.css">
 
-<div class="page animated fadeIn" ng-cloak ng-show="author">
+<div class="page animated fadeIn mainPage" ng-cloak ng-show="author">
     <div info="nav" class="navbar">
         <a href="#" class="brand-name">JStack </a>
         <div class="menu txt-orange" role="dropdown" tabindex="2"></div>
@@ -18,7 +16,7 @@
             <span class="icon-pencil"></span>
         </form>
     </div>
-    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/{{blog.coverImg}}')">
+    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.6)),url('/assets/img/coverImg/{{blog.coverImg}}')">
         <div class="topic">
             <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide">
             <p><span class="author-name"> {{ author.name }}</span>
@@ -68,7 +66,7 @@
         <div class="card-details border" ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded">
             <!-- ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded" -->
             <div class="img-container">
-                <img ng-src="/assets/img/{{post.coverImg}} ">
+                <img ng-src="/assets/img/coverImg/{{post.coverImg}} ">
                 <div class="overlay">
                     <div class="caption">
                         <a ng-href="/#/blogs/{{post._id}}" class="btn" target="_blank">View</a>

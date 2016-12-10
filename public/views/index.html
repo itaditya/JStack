@@ -1,23 +1,26 @@
-<!-- public/views/index.html -->
 <!Doctype html>
 <html lang="en" ng-app="JStack">
-
 <head>
     <meta charset="UTF-8">
     <title>JStack</title>
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Source+Code+Pro" rel="stylesheet">
-    
     <!-- Custom CSS-->
-    <link rel="stylesheet" href="/assets/css/style.css">
     <link rel="stylesheet" href="/assets/css/preloader.css">
     <!-- <link rel="stylesheet" type="text/css" href="/assets/css/lightanim.css"> -->
+    <style>
+    body {
+        padding: 0;
+        margin: 0;
+        font-family: 'Noto Sans', sans-serif;
+    }
+    </style>
 </head>
 
 <body ng-cloak>
     <!-- Route Content -->
     <div ng-view ng-cloak></div>
     <!-- Vendor -->
-    <script src="/vendor/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/vendor/angular/angular.min.js"></script>
     <script src="/vendor/angular-route/angular-route.min.js"></script>
     <script src="/vendor/angular-permission/dist/angular-permission.min.js"></script>

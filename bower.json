@@ -10,6 +10,7 @@
     "simplemde": "^1.11.2",
     "angular-permission": "^4.0.6",
     "angular-local-storage": "^0.5.2",
-    "google-code-prettify": "^1.0.5"
+    "google-code-prettify": "^1.0.5",
+    "masonry": "^4.1.1"
   }
 }

@@ -1,14 +1,9 @@
 body {
     padding: 0;
     margin: 0;
-    /*font-family: 'Fira Mono', monospace;*/
-    font-family: 'Noto Sans', sans-serif;
-
     font-size: 16px;
     font-weight: 300;
     color: #333;
-    /*letter-spacing: 2px;*/
-    /*word-spacing: 3px;*/
     background: #fafafa;
     overflow: hidden;
 }
@@ -25,7 +20,7 @@ a {
     text-decoration: none;
 }
 
-li {
+ul li {
     list-style: none !important;
 }
 
@@ -415,6 +410,7 @@ li {
 
 .btn {
     border: 2px solid #09B1CF;
+    border-radius: 30px;
     perspective: 200px;
     -webkit-perspective: 200px;
     transition: .4s;
@@ -454,7 +450,7 @@ li {
 #user-save {
     width: 200px;
     margin: 0 auto;
-    padding: 20px 0;
+    /*padding: 20px 0;*/
     font-size: 18px;
 }
 
@@ -664,7 +660,6 @@ div[role="comments"]>p:before {
     right: 0;
     height: 40px;
     background: rgba(34, 146, 228, 1);
-    border-radius: 30px;
     width: 120px;
     /*margin-left: -70px;*/
     /*padding-top: 8px;*/

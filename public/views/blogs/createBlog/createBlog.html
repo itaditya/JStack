@@ -1,6 +1,6 @@
 <pre-loader ng-hide="author"></pre-loader>
 <!-- Custom CSS-->
-<!-- <link rel="stylesheet" type="text/css" href="/assets/css/style.css"> -->
+<link rel="stylesheet" href="/assets/css/style.css">
 <script src="/vendor/simplemde/dist/simplemde.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css">
 <script src="/vendor/highlight/highlight.pack.js" type="text/javascript" charset="utf-8" async defer></script>
@@ -23,7 +23,7 @@
             <span class="icon-pencil"></span>
         </form>
     </div>
-    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/{{blog.coverImg}}')">
+    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/coverImg/{{blog.coverImg}}')">
         <div class="topic">
             <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide">
             <p><span class="author-name"> {{ author.name }}</span>

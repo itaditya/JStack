@@ -5,8 +5,12 @@ angular.module('JStack').factory('blogFactory', function($http) {
         get: function(id) {
             return $http.get(urlBase + "/" + id);
         },
-        getList: function() {
-            return $http.get(urlBase);
+        getList: function(query) {
+            if(query){
+                return $http.get(urlBase+"?"+query);
+            }else{
+                return $http.get(urlBase);
+            }
         },
         recent: function() {
             return $http.get("/api/recentBlogs");

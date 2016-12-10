@@ -7,8 +7,6 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
             $scope.blog = blog;
             $rootScope.d('.main').insertAdjacentHTML('beforeend', $scope.blog.content);
             var codeBlocks = $rootScope.dd('.main pre');
-            // $rootScope.d('.main pre').classList.add("prettyprint");
-            // $rootScope.d('.main img').parentNode.classList.add("support-image");
             var imgBlocks = $rootScope.dd('.main img');
             for (var i = codeBlocks.length - 1; i >= 0; i--) {
                 codeBlocks[i].classList.add("prettyprint");
@@ -23,7 +21,7 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
             userFactory.get($scope.blog.authorId).success(function(author) {
                 $scope.author = author;
             });
-            blogFactory.recent().success(function(recentBlogs) {
+            blogFactory.getList("len=3").success(function(recentBlogs) {
                 $scope.posts = recentBlogs;
                 $scope.postsLoaded = true;
                 console.log(recentBlogs);
@@ -43,19 +41,18 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
             for (var i = modalBtn.length - 1; i >= 0; i--) {
                 modalBtn[i].addEventListener('click', toggleCommentModal);
             };
+            $rootScope.d(".mainPage").addEventListener('scroll', function(e) {
+                sidebarFix();
+            });
         });
         $scope.subscribe = function(){
             blogFactory.subscribe($scope.emailId).success(function(message) {
                 console.log(message);
             });
         }
-        $rootScope.d(".page").addEventListener('scroll', function(e) {
-            sidebarFix(e);
-        }, false);
-
-        function sidebarFix(e) {
+        function sidebarFix() {
             var heroheight = $rootScope.d('.hero-banner').clientHeight;
-            var scrolled = $rootScope.d(".page").scrollTop;
+            var scrolled = $rootScope.d(".mainPage").scrollTop;
             var sidebar = $rootScope.d('.sidebar');
             if (scrolled >= heroheight) {
                 sidebar.style.position = 'fixed';
@@ -115,11 +112,4 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope, 
         /* _____________ */
     });
 });
-/*
-authorId
-date
-title
-content
-tags
-likes
-*/
+

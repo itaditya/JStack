@@ -1,6 +1,7 @@
  // app/routes.js
  // grab the nerd model we just created
 var Blog = require('./models/blog');
+var User = require('./models/user');
 var nodemailer = require('nodemailer');
 var mailSender = require('./../config/auth');
 var showdown  = require('showdown');
@@ -8,10 +9,42 @@ var converter = new showdown.Converter();
 
  module.exports = function(app) {
      app.get('/api/blogs', function(req, res) {
-             Blog.find(function(err, blogs) {
-                 if (err) res.send(err);
-                 res.json(blogs);
-             });
+            var blogList = [];
+            n = req.query.len;
+            console.log(req.query);
+            if(n === undefined){
+                Blog.find(function(err, blogs) {
+                    if (err) res.send(err);
+                    res.json(blogs);
+                });
+            }
+            else{
+                Blog.find(function(err, blogs) {
+                    var l = blogs.length;
+                    j = 0;
+                    //j is used to handle async User.findOne request
+                    if(n > l){
+                        n = l;
+                    }
+                    for(i = 0;i < n;i++){
+                        var authorName;
+                        User.findOne({ _id:  blogs[i].authorId }, function(err, user) {
+                            authorName = user.name;
+                            blogList.push({
+                                _id: blogs[j]._id,
+                                coverImg: blogs[j].coverImg,
+                                date: blogs[j].date,
+                                title: blogs[j].title,
+                                authorName: authorName
+                            });
+                            if(++j == n){
+                                j = 0;
+                                res.json(blogList);
+                            }
+                        });
+                    }
+                });
+            }
          })
          .get('/api/blogs/:id', function(req, res) {
              var blogId = req.params.id;

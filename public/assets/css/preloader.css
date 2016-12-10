@@ -1,7 +1,16 @@
+
+.page {
+    height: 100vh;
+    overflow: auto;
+    width: 100%;
+    background: #fafafa;
+    margin-right: -8px;
+    overflow-x: hidden;
+}
 .preloader-box {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center !important;
     height: 100%;
     /*background: #fafafa;*/
     width: 100%;
