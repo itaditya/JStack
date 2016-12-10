@@ -153,97 +153,15 @@
         </div>
         <div class="posts-list txt-orange">
             <!-- <h4 class="txt-orange"></h4> ng-repeat="category in categories" -->
-            <div class="post">
+            <div class="post" ng-repeat="category in ['Frontend','Design','Backend','Technical']">
                 <h5 class="txt-orange">
-                    {{ blog.categories[0].title }}
+                    {{ category }}
                 </h5>
                 <div class="tag-box">
                     <p>
-                        <span class="tags">
-                            css flexbox
-                        </span>
-                        <span class="tags">
-                            css triangles
-                        </span>
-                        <span class="tags">
-                            cross browser
-                        </span>
-                        <span class="tags">
-                            animations
-                        </span>
-                    </p>
-                </div>
-            </div>
-            <div class="post">
-                <h5 class="txt-orange">
-                    {{ blog.categories[1].title }}
-                </h5>
-                <div class="tag-box">
-                    <p>
-                        <span class="tags">
-                            github
-                        </span>
-                        <span class="tags">
-                            how a server works
-                        </span>
-                        <!-- <span class="tags">{{blog.categories[1].tags[1]}}</span> -->
-                        <span class="tags">
-                            getting started
-                        </span>
-                        <span class="tags">
-                            cross browser
-                        </span>
-                        <span class="tags">
-                            animations
-                        </span>
-                    </p>
-                </div>
-            </div>
-            <div class="post">
-                <h5 class="txt-orange">
-                    {{ blog.categories[2].title }}
-                </h5>
-                <div class="tag-box">
-                    <p>
-                        <span class="tags">
-                            css flexbox
-                        </span>
-                        <span class="tags">
-                            css triangles
-                        </span>
-                        <span class="tags">
-                            getting started
-                        </span>
-                        <span class="tags">
-                            cross browser
-                        </span>
-                        <span class="tags">
-                            animations
-                        </span>
-                    </p>
-                </div>
-            </div>
-            <div class="post">
-                <h5 class="txt-orange">
-                    {{ blog.categories[3].title }}
-                </h5>
-                <div class="tag-box">
-                    <p>
-                        <span class="tags">
-                            css flexbox
-                        </span>
-                        <span class="tags">
-                            css triangles
-                        </span>
-                        <span class="tags">
-                            getting started
-                        </span>
-                        <span class="tags">
-                            cross browser
-                        </span>
-                        <span class="tags">
-                            animations
-                        </span>
+                        <a class="tags" ng-repeat="tag in ['css flexbox','css triangles','cross browser','animations']">
+                            {{tag}}
+                        </a>
                     </p>
                 </div>
             </div>

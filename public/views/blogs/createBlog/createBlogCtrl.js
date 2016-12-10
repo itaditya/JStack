@@ -17,6 +17,11 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $rootScope
             $rootScope.d(".menu").addEventListener("click", function() {
                 document.querySelector(".sidebar").classList.toggle("sm-hide");
             });
+            $scope.categories = ['Frontend','Design','Backend','Technical'];
+            $scope.tags = ['css flexbox','css triangles','cross browser','animations'];
+            $scope.selectCategory = function(){
+                console.log($scope.category);
+            }
             var blog = localStorageService.get("blog");
             if(blog){
                 $scope.blog = blog;

@@ -141,7 +141,7 @@ ul li {
 }
 
 .input-field {
-    border: 3px solid #E57E31;
+    border: 2px solid #E57E31;
     border-radius: 20px;
     width: 200px;
     height: 36px;
@@ -730,12 +730,12 @@ div[role="comments"]>p:before {
     left: 0;
     width: 100%;
     text-align: center;
-    top: -30px;
+    top: -60px;
 }
 
 .post {
     width: 25%;
-    height: 200px;
+    height: 230px;
     background: rgba(0, 0, 0, 0.2);
     display: list-item;
     /*margin-right: -10px;*/
@@ -764,7 +764,7 @@ div[role="comments"]>p:before {
 
 .tag-box>p {
     line-height: 50px;
-    text-align: left;
+    text-align: center;
 }
 
 .tags {
@@ -776,7 +776,8 @@ div[role="comments"]>p:before {
     text-align: left;
     padding: 10px 15px;
     /*margin-top: 20px;*/
-    white-space: nowrap;
+    margin-right: 10px;
+    /*white-space: nowrap;*/
     /* used to not break words into differnt lines*/
     word-spacing: 5px;
 }
