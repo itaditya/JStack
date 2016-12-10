@@ -1,50 +1,196 @@
-<!-- <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
-  <div class="grid-item"></div>
-  <div class="grid-item"></div>
-  ...
-</div>
-<script src="/vendor/angular-local-storage/dist/angular-local-storage.min.js"></script> -->
+<!--
+    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
+        <div class="grid-item"></div>
+        <div class="grid-item"></div>
+        ...
+    </div>
+    <script src="/vendor/angular-local-storage/dist/angular-local-storage.min.js"></script>
+-->
 <pre-loader ng-hide="blogs"></pre-loader>
-<link rel="stylesheet" href="/assets/css/style.css">  
-<link rel="stylesheet" href="/assets/css/landing/custom.css">  
+<link rel="stylesheet" href="/assets/css/style.css"/>
+<link rel="stylesheet" href="/assets/css/landing/custom.css"/>
 <div class="page animated fadeIn mainPage" ng-show="blogs">
     <div info="nav" class="navbar">
-        <a href="#" class="brand-name">JStack </a>
+        <a href="#" class="brand-name">
+            JStack
+        </a>
         <div class="menu txt-orange" role="dropdown" tabindex="2"></div>
         <form action="#" class="search sm-hide" role="search articles">
-            <input type="text" class="has-icon input-field" ng-model="searchQuery" placeholder="Search Blogs">
+            <input type="text" class="has-icon input-field" ng-model="searchQuery" placeholder="Search Blogs"/>
             <span class="icon-pencil"></span>
         </form>
     </div>
-    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/l1.jpg')">
-        <!-- <input type="file" class="image-change" placeholder=""> -->
-    </div>
+    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/l1.jpg')"></div>
     <div class="container">
+        <p class="collectionTitle">Featured</p>
         <div class="cards">
             <article class="card" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in blogs">
-                <header class="card__header" style="background-image: url('/assets/img/coverImg/{{blog.coverImg}}');">
-                    <button class="card__main-action" type="button">In bookmarks</button>
+                <header class="card__header" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');">
+                    <button class="card__main-action" type="button">
+                        In bookmarks
+                    </button>
                 </header>
                 <div class="card__body">
                     <div class="card__content">
-                        <h3 class="card__title"><a ng-href="/#/blogs/{{blog._id}}" class="card__showmore">{{blog.title}}</a></h3>
+                        <h3 class="card__title">
+                            <a ng-href="/#/blogs/{{ blog._id }}" class="card__showmore">
+                                {{ blog.title }}
+                            </a>
+                        </h3>
                         <!-- target="_blank" -->
                     </div>
                     <footer class="card__footer">
-                        <span class="card__author">by <strong>{{blog.authorName}}</strong></span>
+                        <span class="card__author">
+                            by
+                            <strong>
+                                {{ blog.authorName }}
+                            </strong>
+                        </span>
                         <div class="card__meta">
                             <div class="card__meta-item">
                                 <i class="card__meta-icon card__meta-comments"></i>
-                                <span class="card__label">7 comments</span>
+                                <span class="card__label">
+                                    7 comments
+                                </span>
                             </div>
                             <div class="card__meta-item">
                                 <i class="card__meta-icon card__meta-likes"></i>
-                                <span class="card__label">19</span>
+                                <span class="card__label">
+                                    19
+                                </span>
                             </div>
                         </div>
                     </footer>
                 </div>
-            </article>      
+            </article>
         </div>
     </div>
-    </div>
+    <footer info="footer" class="footer bg-dk-purple">
+        <div class="brand-details">
+            <a href="http://hackncs.com/">
+                <h3>
+                    &copy;Nibble Computer Society
+                </h3>
+            </a>
+            <div class="social-bar">
+                <a href="#f">
+                    <span class=" icon-facebook"></span>
+                </a>
+                <a href="#g">
+                    <span class=" icon-google-plus"></span>
+                </a>
+                <a href="#e">
+                    <span class=" icon-github"></span>
+                </a>
+            </div>
+        </div>
+        <div class="subscribe">
+            <form action="">
+                <input type="email" placeholder="Never miss any updates ." ng-model="emailId"/>
+                <!-- Trick : use autofocus in input to scroll to that on reload -->
+                <div class="submit btn" ng-click="subscribe()">
+                    <h3>
+                        Subscribe
+                    </h3>
+                </div>
+            </form>
+        </div>
+        <div class="posts-list txt-orange">
+            <!-- <h4 class="txt-orange"></h4> ng-repeat="category in categories" -->
+            <div class="post">
+                <h5 class="txt-orange">
+                    {{ blog.categories[0].title }}
+                </h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">
+                            css flexbox
+                        </span>
+                        <span class="tags">
+                            css triangles
+                        </span>
+                        <span class="tags">
+                            cross browser
+                        </span>
+                        <span class="tags">
+                            animations
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="post">
+                <h5 class="txt-orange">
+                    {{ blog.categories[1].title }}
+                </h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">
+                            github
+                        </span>
+                        <span class="tags">
+                            how a server works
+                        </span>
+                        <!-- <span class="tags">{{blog.categories[1].tags[1]}}</span> -->
+                        <span class="tags">
+                            getting started
+                        </span>
+                        <span class="tags">
+                            cross browser
+                        </span>
+                        <span class="tags">
+                            animations
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="post">
+                <h5 class="txt-orange">
+                    {{ blog.categories[2].title }}
+                </h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">
+                            css flexbox
+                        </span>
+                        <span class="tags">
+                            css triangles
+                        </span>
+                        <span class="tags">
+                            getting started
+                        </span>
+                        <span class="tags">
+                            cross browser
+                        </span>
+                        <span class="tags">
+                            animations
+                        </span>
+                    </p>
+                </div>
+            </div>
+            <div class="post">
+                <h5 class="txt-orange">
+                    {{ blog.categories[3].title }}
+                </h5>
+                <div class="tag-box">
+                    <p>
+                        <span class="tags">
+                            css flexbox
+                        </span>
+                        <span class="tags">
+                            css triangles
+                        </span>
+                        <span class="tags">
+                            getting started
+                        </span>
+                        <span class="tags">
+                            cross browser
+                        </span>
+                        <span class="tags">
+                            animations
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</div>

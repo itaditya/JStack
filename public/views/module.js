@@ -22,10 +22,10 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs','dashboard','LocalStorageMo
     .setStorageType('sessionStorage');
 })
 .service('SessionService', function(localStorageService){
-    // localStorageService.set("userIsAuthenticated",false);
 
-    this.setUserAuthenticated = function(value){
+    this.setUserAuthenticated = function(value,allowEdit){
         localStorageService.set("userIsAuthenticated",value);
+        // localStorageService.set("allowedToEdit",allowEdit);
         // userIsAuthenticated = value;
     };
 

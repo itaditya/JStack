@@ -26,8 +26,7 @@ module.exports = mongoose.model('User', {
     default : ""
   },
   blogs : {
-    type: String,
-    default : ""
+    type: Array,
   },
   verified : {
     type: Boolean,

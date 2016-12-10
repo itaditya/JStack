@@ -41,6 +41,9 @@ angular.module('blogs',[])
     })
     .run(function($rootScope,$location,SessionService,blogRoutes){
         $rootScope.$on("$locationChangeStart", function(event, next, current) {
+            var location = $location.$$path;
+            var blogId = location.substring(location.lastIndexOf('/')+1);
+            console.log("a",blogId);
             for(var i in blogRoutes) {
                 var path = i.substring(0, i.lastIndexOf('/'));
                 if(next.indexOf(path) != -1) {
