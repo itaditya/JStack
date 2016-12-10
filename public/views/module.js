@@ -19,7 +19,7 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs','dashboard','LocalStorageMo
     localStorageServiceProvider
     .setPrefix('JStack')
     // .setStorageType('cookie');
-    .setStorageType('sessionStorage');
+    .setStorageType('localStorage');
 })
 .service('SessionService', function(localStorageService){
 
@@ -54,6 +54,11 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs','dashboard','LocalStorageMo
     $rootScope.dd = function(elem) {
         return document.querySelectorAll(elem);
     }
+    notification.configProfile( 'global', {
+        notification: {
+            position: [ 'right', 'top' ]
+        }
+    });
     /*
     PermRoleStore.defineManyRoles({
         'AUTHOR' : ['editBlog'],

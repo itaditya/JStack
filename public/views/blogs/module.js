@@ -50,7 +50,7 @@ angular.module('blogs', [])
                         // event.preventDefault();
                     } else {
                         if (blogRoutes[i].requireAuthor && !SessionService.getCanEditBlog(blogId)) {
-                            $location.path("/");
+                            $location.path("/blogs/"+blogId);
                         } else {
                             $rootScope.isAuthor = true;
                         }
