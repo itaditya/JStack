@@ -2,3 +2,4 @@
 /public/vendor
 npm-debug.log
 gitz.py
+/config/auth.js
