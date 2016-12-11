@@ -13,6 +13,7 @@
     "method-override": "~2.0.2",
     "mongoose": "~3.8.0",
     "nodemailer": "^2.6.4",
-    "showdown": "^1.5.1"
+    "showdown": "^1.5.1",
+    "xoauth2": "^1.2.0"
   }
 }

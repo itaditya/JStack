@@ -20,6 +20,10 @@
     z-index: 2;
     font-size: 32px;
 }
+
+.bg-dk-purple {
+    background: #053140;
+}
 /*
 .preloader {
     padding: 20px;

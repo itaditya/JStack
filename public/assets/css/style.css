@@ -39,8 +39,7 @@ ul li {
     justify-content: space-between;
 }
 
-.navbar,
-.footer {
+.navbar, .footer {
     width: 100%;
     height: 70px;
     /*flex:70%;*/
@@ -58,10 +57,10 @@ ul li {
 .sidebar {
     position: relative;
     /*To fix the scrolling bug I have to use JS
-	to find .hero-banner rendered height and
-	when the scroll position is less than height ,
-	the sidebar will be pos-rel , when the scroll
-	position is greater than hero height , sidebar will be pos-fixed
+    to find .hero-banner rendered height and
+    when the scroll position is less than height ,
+    the sidebar will be pos-rel , when the scroll
+    position is greater than hero height , sidebar will be pos-fixed
 */
     width: 25%;
     top: 0px;
@@ -96,9 +95,11 @@ ul li {
     text-align: center;
     margin-top: 12%;
 }
-.modal:focus{
+
+.modal:focus {
     /*background: #000;*/
 }
+
 .closeModal {
     background: transparent !important;
     position: absolute;
@@ -259,15 +260,13 @@ ul li {
     border-color: #fff;
 }
 
-*,
-*:hover,
-*:focus {
+*, *:hover, *:focus {
     outline: 0px;
 }
 
 .navbar {
     /*background: #fff;*/
-    background: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.5));
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
     position: relative;
     z-index: 2;
     /*border-bottom: 1px solid rgba(192,201,208,1);*/
@@ -315,16 +314,28 @@ ul li {
 }
 
 .logo {}
-
-.brand-name {
-    font-size: 26px;
-    font-family: 'handwriting';
-    margin-left: 20px;
-    color: #FBB913;
+.navbar-items {
+    width: 35%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar a{
     height: 70px;
+    font-size: 18px;
     vertical-align: middle;
+    padding: 0 25px;
     line-height: 70px;
     text-align: left;
+    color: #FBB913;
+}
+.navbar a:hover{
+    background: rgba(0,0,0,0.4);
+}
+.brand-name {
+    font-size: 26px !important;
+    font-family: 'handwriting';
+    /*margin-left: 20px;*/
 }
 
 .main {
@@ -338,7 +349,6 @@ ul li {
 .info-text {
     /*font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;*/
     font-family: 'Noto Sans', sans-serif;
-
     /*font-weight: 400;*/
     font-style: normal;
     line-height: 2;
@@ -436,6 +446,7 @@ ul li {
     padding: 20px 10px;
 }
 
+
 /*#user-widget>input {
     padding: 10px 0;
     padding-left: 10px;
@@ -446,16 +457,20 @@ ul li {
     width: 90%;
 }
 */
-#user-widget p{
+
+#user-widget p {
     margin-bottom: 30px;
 }
-#user-widget label{
+
+#user-widget label {
     line-height: 30px;
 }
+
 #user-widget input[type="radio"] {
     display: none;
 }
-#user-widget label>span{
+
+#user-widget label>span {
     padding: 16px;
     font-size: 20px;
     margin: 0;
@@ -463,10 +478,12 @@ ul li {
     border-radius: 100%;
     border: 2px solid #09B1CF;
 }
-#user-widget label>span:hover{
+
+#user-widget label>span:hover {
     background: #09b1cf !important;
     color: #fff;
 }
+
 #user-save {
     width: 200px;
     margin: 0 auto;
@@ -480,6 +497,8 @@ div[role="comments"]>p:before {
 
 
 /*blog content styling*/
+
+
 /*
 .hyperlink {
     font-weight: 600;
@@ -527,9 +546,11 @@ div[role="comments"]>p:before {
 
 .quoted-text {
     /*padding-top: 30px;*/
-    font-family: 'handwriting';
-    font-size: 22px;
-    position: relative;
+
+font-family: 'handwriting';
+font-size: 22px;
+position: relative;
+
 }
 
 .quoted-text>p {
@@ -539,8 +560,7 @@ div[role="comments"]>p:before {
     line-height: 40px;
 }
 
-.quoted-text>p:before,
-.quoted-text>p:after {
+.quoted-text>p:before, .quoted-text>p:after {
     content: "''";
     font-size: 60px;
 }
@@ -597,7 +617,7 @@ div[role="comments"]>p:before {
     display: flex;
     flex-direction: column;
     /*align-items: center;
-	justify-content:center;*/
+    justify-content:center;*/
     overflow-y: hidden;
     width: 100%;
     /*margin-bottom: -10px;*/
@@ -852,14 +872,12 @@ div[role="comments"]>p:before {
     /*color: #fff;*/
 }
 
-.support-image::-webkit-scrollbar,
-.codebox::-webkit-scrollbar {
+.support-image::-webkit-scrollbar, .codebox::-webkit-scrollbar {
     height: 8px;
     background: rgb(237, 238, 240);
 }
 
-.support-image::-webkit-scrollbar-thumb,
-.codebox::-webkit-scrollbar-thumb {
+.support-image::-webkit-scrollbar-thumb, .codebox::-webkit-scrollbar-thumb {
     height: 8px;
     background: #666;
 }
@@ -882,8 +900,7 @@ div[role="comments"]>p:before {
     font-style: normal;
 }
 
-[class^="icon-"],
-[class*=" icon-"] {
+[class^="icon-"], [class*=" icon-"] {
     /* use !important to prevent issues with browser extensions that change fonts */
     font-family: 'icomoon' !important;
     speak: none;
@@ -903,8 +920,7 @@ div[role="comments"]>p:before {
     -moz-osx-font-smoothing: grayscale;
 }
 
-[class^="icon-"]:hover,
-[class*=" icon-"]:hover {
+[class^="icon-"]:hover, [class*=" icon-"]:hover {
     color: #fff;
     background: rgba(0, 0, 0, 0.2);
 }
@@ -924,12 +940,15 @@ div[role="comments"]>p:before {
 .icon-cross:before {
     content: "\e920";
 }
+
 .icon-radio-checked:before {
     content: "\e921";
 }
+
 .icon-radio-unchecked:before {
     content: "\e920";
 }
+
 .search {
     position: relative;
     display: flex;
@@ -958,6 +977,8 @@ div[role="comments"]>p:before {
 .search:focus>.icon-pencil:before {
     content: "\e920";
 }
+
+
 /*Responsive Media queries */
 
 @media screen and (max-width: 1100px) {
@@ -1055,8 +1076,7 @@ div[role="comments"]>p:before {
         height: 200px;
         /*display: none;*/
     }
-    [class^="icon-"],
-    [class*="icon-"] {
+    [class^="icon-"], [class*="icon-"] {
         display: inline;
         text-align: center;
         font-size: 18px;
@@ -1109,6 +1129,7 @@ div[role="comments"]>p:before {
         width: 90px;
     }
 }
+
 @keyframes click {
     0% {
         transform: rotateX(0deg);

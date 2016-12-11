@@ -17,25 +17,21 @@ angular.module('blogs', [])
         for (var path in blogRoutes) {
             $routeProvider.when(path, blogRoutes[path]);
         };
-        $routeProvider.when('/blogs/create', {
+        $routeProvider
+            .when('/', {
+                templateUrl: 'views/blogs/blogs.html',
+                controller: 'blogsCtrl'
+            })
+            .when('/blogs/create', {
                 templateUrl: 'views/blogs/createBlog/createBlog.html',
                 controller: 'createBlogCtrl'
             })
-            /*
-            .when('/blogs/edit/:id', {
-                templateUrl: 'views/blogs/editBlog/editBlog.html',
-                controller: 'editBlogCtrl',
-                data: {
-                    permissions: {
-                        only: ['AUTHOR','ADMIN'],
-                        redirectTo: '/'
-                    }
-                }
-            })
-            */
             .when('/blogs/:id', {
                 templateUrl: 'views/blogs/viewBlog/viewBlog.html',
                 controller: 'viewBlogCtrl'
+            })
+            .otherwise({
+                redirectTo: '/'
             });
     }).run(function($rootScope, $location, SessionService, blogRoutes) {
         $rootScope.$on("$locationChangeStart", function(event, next, current) {
