@@ -47,11 +47,11 @@ module.exports = function(app) {
         }
     }).get('/api/blogs/:id', function(req, res) {
         var blogId = req.params.id;
-        Blog.find({
+        Blog.findOne({
             _id: blogId
         }, function(err, blog) {
             if (err) res.send(err);
-            res.json(blog[0]);
+            res.json(blog);
         });
     }).get('/api/recentBlogs', function(req, res) {
         var recentBlogs = [];

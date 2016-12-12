@@ -36,6 +36,10 @@ module.exports = mongoose.model('Blog', {
         type: Number,
         default: 0
     },
+    views: {
+        type: Number,
+        default: 0
+    },
     comments: {
         type: String,
         default: ""

@@ -40,6 +40,7 @@ app.use(express.static(__dirname + '/public'));
 
 // routes ==================================================
 require('./app/userRoutes')(app);
+require('./app/searchRoutes')(app);
 //Place blogRoutes in last as it has get(*) route 
 require('./app/blogRoutes')(app);
 // start app ===============================================
