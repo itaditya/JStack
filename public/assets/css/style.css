@@ -146,7 +146,7 @@ ul li {
     border-radius: 20px;
     width: 200px;
     height: 36px;
-    margin-right: 20px;
+    margin: 0 20px;
     /*font-size: 16px;*/
     padding-left: 20px;
     letter-spacing: 1px;
@@ -265,8 +265,8 @@ ul li {
 }
 
 .navbar {
-    /*background: #fff;*/
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    background: #000;
+    /*background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));*/
     position: relative;
     z-index: 2;
     /*border-bottom: 1px solid rgba(192,201,208,1);*/
@@ -311,28 +311,41 @@ ul li {
 .author-name {
     font-size: 16px;
     font-family: 'Noto Sans', sans-serif;
+    color: #E57E31;
 }
 
 .logo {}
+
 .navbar-items {
-    width: 35%;
+    /*width: 35%;*/
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-.navbar a{
+
+.navbar a {
     height: 70px;
-    font-size: 18px;
+    font-size: 16px;
     vertical-align: middle;
     padding: 0 25px;
     line-height: 70px;
     text-align: left;
-    color: #FBB913;
+    color: #E57E31;
+    transition: 0.6s;
 }
-.navbar a:hover{
-    background: rgba(0,0,0,0.4);
+
+.navbar a:hover {
+    /*background: rgba(0, 0, 0, 0.4);*/
+    background: rgba(5, 49, 64, 0.17);
+    color: #fff;
 }
+
+.navbar a.active {
+    border-bottom: 4px solid;
+}
+
 .brand-name {
+    color: #FBB913 !important;
     font-size: 26px !important;
     font-family: 'handwriting';
     /*margin-left: 20px;*/

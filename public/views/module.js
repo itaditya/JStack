@@ -23,13 +23,13 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
 }).directive('navBar', function() {
     return {
         scope: {
-            show: "@"
+            active: "@"
         },
         restrict: 'E',
         replace: 'true',
         templateUrl: '/views/partials/navbar.html',
-        controller: function($scope, $attrs) {
-            console.log(JSON.parse($attrs.show));
+        controller: function($scope,$rootScope, $attrs) {
+            $rootScope.d("#"+$attrs.active).classList.add("active");
         }
     };
 }).directive('navLink', function() {
