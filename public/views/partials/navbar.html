@@ -1,0 +1,18 @@
+<div info="nav" class="navbar">
+    <a href="/" class="brand-name">
+        JStack
+    </a>
+    <div class="navbar-items">
+        <a href="/" id="home">
+            Home
+        </a>
+        <nav-link showifuser href="/logout" text="Logout"></nav-link>
+        <nav-link showifuser href="/profile" text="Profile"></nav-link>
+        <nav-link hideifuser href="/login" text="Login"></nav-link>
+        <div class="menu txt-orange" role="dropdown" tabindex="2"></div>
+        <form action="#" class="search sm-hide" role="search articles">
+            <input type="text" class="has-icon input-field" ng-model="searchQuery" placeholder="Search Blogs"/>
+            <span class="icon-pencil"></span>
+        </form>
+    </div>
+</div>

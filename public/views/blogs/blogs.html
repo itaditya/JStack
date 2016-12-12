@@ -10,24 +10,7 @@
 <link rel="stylesheet" href="/assets/css/style.css"/>
 <link rel="stylesheet" href="/assets/css/landing/custom.css"/>
 <div class="page animated fadeIn mainPage" ng-show="blogs">
-    <div info="nav" class="navbar">
-        <a href="#" class="brand-name">
-            JStack
-        </a>
-        <div class="navbar-items">
-            <a href="#">
-                Home
-            </a>
-            <a href="/logout" ng-hide="">
-                Logout
-            </a>
-            <div class="menu txt-orange" role="dropdown" tabindex="2"></div>
-            <form action="#" class="search sm-hide" role="search articles">
-                <input type="text" class="has-icon input-field" ng-model="searchQuery" placeholder="Search Blogs"/>
-                <span class="icon-pencil"></span>
-            </form>   
-        </div>
-    </div>
+    <nav-bar show='["home","about"]'></nav-bar>
     <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/l1.jpg')"></div>
     <div class="container">
         <p class="collectionTitle">Featured</p>
