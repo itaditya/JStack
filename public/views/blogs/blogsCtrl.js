@@ -1,6 +1,6 @@
 angular.module('blogs').controller('blogsCtrl', function($scope, blogFactory,$routeParams) {
     blogFactory.getList("len=9").then(function(blogs) {
-        $scope.blogs = blogs;
+        $scope.blogs = blogs.data;
         $scope.postsLoaded = true;
         console.log(blogs);
         $scope.isBig = function(index){

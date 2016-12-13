@@ -1,7 +1,7 @@
 // app/routes.js
 // grab the nerd model we just created
 var Tag = require('./models/tag');
-async = require("async");
+var async = require("async");
 module.exports = function(app) {
     app.get('/api/tags', function(req, res) {
         var tagList = [];
@@ -34,6 +34,7 @@ module.exports = function(app) {
                         return res.send(err);
                     };
                     var end = tags.length - 1;
+                    var j = 0;
                     async.forEachOf(tags, function(tag, index, callback) {
                         if (err) return callback(err);
                         var categoryIndex = categories[tag.category];
@@ -41,7 +42,7 @@ module.exports = function(app) {
                             id: tag._id,
                             name: tag.name
                         });
-                        if (index == end) {
+                        if (++j == end) {
                             return callback(tagList);
                         }
                     }, function(tagList) {

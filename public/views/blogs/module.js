@@ -30,6 +30,10 @@ angular.module('blogs', [])
                 templateUrl: 'views/blogs/viewBlog/viewBlog.html',
                 controller: 'viewBlogCtrl'
             })
+            .when('/tagSearch/:id', {
+                templateUrl: 'views/blogs/listBlog/listBlog.html',
+                controller: 'listBlogCtrl'
+            })
             .otherwise({
                 redirectTo: '/'
             });

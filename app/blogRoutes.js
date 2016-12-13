@@ -2,60 +2,77 @@
 // grab the nerd model we just created
 var Blog = require('./models/blog');
 var User = require('./models/user');
+var Tag = require('./models/tag');
+var async = require("async");
 var nodemailer = require('nodemailer');
 var mailSender = require('./../config/auth');
 var showdown = require('showdown');
 var converter = new showdown.Converter();
+var colors = require('colors/safe');
 module.exports = function(app) {
     app.get('/api/blogs', function(req, res) {
         var blogList = [];
         n = req.query.len;
-        // console.log(req.query);
-        if (n === undefined) {
-            Blog.find(function(err, blogs) {
+        console.log(req.query);
+        Blog.find(function(err, blogs) {
+            if (n === undefined) {
                 if (err) res.send(err);
                 res.json(blogs);
-            });
-        } else {
-            Blog.find(function(err, blogs) {
+            } else {
                 var l = blogs.length;
-                j = 0;
-                //j is used to handle async User.findOne request
+                var j = 0;
                 if (n > l) {
                     n = l;
                 }
-                for (i = 0; i < n; i++) {
-                    var authorName;
-                    User.findOne({
-                        _id: blogs[i].authorId
-                    }, function(err, user) {
-                        authorName = user.name;
+                console.log(n);
+                async.forEachOfLimit(blogs, n, function(blog, i, callback) {
+                    if (err) return callback(err);
+                    User.findById(blog.authorId, function(err, user) {
+                        // console.log("omit",omit(blog, ['authorId','mdString','content','tags']),"--------------");
                         blogList.push({
-                            _id: blogs[j]._id,
-                            coverImg: blogs[j].coverImg,
-                            date: blogs[j].date,
-                            title: blogs[j].title,
-                            authorName: authorName
+                            _id: blog._id,
+                            coverImg: blog.coverImg,
+                            title: blog.title,
+                            likes: blog.likes,
+                            views: blog.views,
+                            description: blog.description,
+                            authorName: user.name
                         });
                         if (++j == n) {
-                            j = 0;
-                            res.json(blogList);
+                            return callback(blogList);
                         }
                     });
+                }, function(blogList) {
+                    // console.log(blogList);
+                    return res.json(blogList);
+                });
+            }
+        });
+    }).get('/api/blogs/:id', function(req, res) {
+        console.log(req.query);
+        var blogId = req.params.id;
+        Blog.findById(blogId, function(err, blog) {
+            if (err) res.send(err);
+            blog.views += 1;
+            // console.log(blog);
+            blog.save(function(err) {
+                if (err) res.send(err);
+                if (req.query.type === "short") {
+                    res.json({
+                        _id: blog._id,
+                        coverImg: blog.coverImg,
+                        title: blog.title,
+                        likes: blog.likes,
+                        views: blog.views,
+                        description: blog.description,
+                    });
+                } else {
+                    res.json(blog);
                 }
             });
-        }
-    }).get('/api/blogs/:id', function(req, res) {
-        var blogId = req.params.id;
-        Blog.findOne({
-            _id: blogId
-        }, function(err, blog) {
-            if (err) res.send(err);
-            res.json(blog);
         });
     }).get('/api/recentBlogs', function(req, res) {
         var recentBlogs = [];
-        // console.log(Blog.find().sort({ "date": -1 }).limit(1));
         Blog.find(function(err, blogs) {
             var l = blogs.length;
             for (var i = 1; i <= 3; i++) {
@@ -79,23 +96,31 @@ module.exports = function(app) {
         blog.title = req.body.title;
         blog.coverImg = req.body.coverImg;
         blog.mdString = req.body.content;
+        blog.description = req.body.description;
         blog.content = converter.makeHtml(blog.mdString);
         blog.tags = req.body.tags;
+        var category = req.body.category;
         // blog.likes = req.body.likes;
         // blog.comments = req.body.comments;
         blog.save(function(err) {
             if (err) res.send(err);
+            User.findById(blog.authorId, function(err, user) {
+                user.blogs.push(blog._id);
+                user.save();
+            });
+            async.forEachOf(blog.tags, function(tagId, index) {
+                if (err) return res.send(err);
+                Tag.findById(tagId, function(err, tag) {
+                    if (tag) {
+                        tag.category = category;
+                        tag.blogs.push(blog._id);
+                        tag.save();
+                    }
+                });
+            });
             res.json({
                 message: 'blog created!',
                 id: blog._id
-            });
-            User.findOne({
-                _id: blog.authorId
-            }, function(err, user) {
-                console.log(user.blogs);
-                user.blogs.push(blog._id);
-                console.log(user.blogs);
-                user.save();
             });
         });
     }).put('/api/blogs/:id', function(req, res) {
@@ -105,6 +130,7 @@ module.exports = function(app) {
                 blog.date = req.body.date || blog.date;
                 blog.title = req.body.title || blog.title;
                 blog.coverImg = req.body.coverImg || blog.coverImg;
+                blog.description = req.body.description || blog.description;
                 blog.mdString = req.body.content || blog.content;
                 blog.content = converter.makeHtml(blog.mdString);
                 blog.tags = req.body.tags || blog.tags;
@@ -150,12 +176,10 @@ module.exports = function(app) {
         });
     }).post('/api/blogs/userChoice/:id', function(req, res) {
         var blogId = req.params.id;
-        console.log(blogId);
         Blog.findOne({
             _id: blogId
         }, function(err, blog) {
             blog.likes += parseInt(req.body.value);
-            console.log(blog.likes);
             blog.save(function(err) {
                 if (err) res.send(err);
                 res.json({

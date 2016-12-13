@@ -20,6 +20,10 @@ module.exports = mongoose.model('Blog', {
         type: String,
         default: ""
     },
+    description: {
+        type: String,
+        default: ""
+    },
     mdString: {
         type: String,
         default: ""
@@ -29,8 +33,7 @@ module.exports = mongoose.model('Blog', {
         default: ""
     },
     tags: {
-        type: String,
-        default: ""
+        type: Array,
     },
     likes: {
         type: Number,

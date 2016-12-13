@@ -38,8 +38,8 @@ angular.module('JStack').directive('preLoader', function() {
     return {
         replace: true,
         templateUrl: '/views/partials/footer.html',
-        controller: function($scope, blogFactory,$timeout) {
-            $timeout(blogFactory.getTagList("design=category").then(function(categories) {
+        controller: function($scope, tagFactory,$timeout) {
+            $timeout(tagFactory.getTagList("design=category").then(function(categories) {
                 $scope.categories = categories.data;
             }), 0);
         }

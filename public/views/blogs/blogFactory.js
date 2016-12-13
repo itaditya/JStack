@@ -2,8 +2,13 @@ angular.module('JStack').factory('blogFactory', function($http) {
     var urlBase = '/api/blogs';
     return {
         // call to get all blogs
-        get: function(id) {
-            return $http.get(urlBase + "/" + id);
+        get: function(id,query) {
+            // return $http.get(urlBase + "/" + id);
+            if (query) {
+                return $http.get(urlBase + "/" + id + "?" + query);
+            } else {
+                return $http.get(urlBase + "/" + id);
+            }
         },
         getList: function(query) {
             if (query) {
@@ -25,7 +30,7 @@ angular.module('JStack').factory('blogFactory', function($http) {
                 emailId: email
             });
         },
-        userChoice: function(id,choice) {
+        userChoice: function(id, choice) {
             return $http.post(urlBase + "/userChoice/" + id, {
                 value: choice
             });
@@ -36,14 +41,6 @@ angular.module('JStack').factory('blogFactory', function($http) {
         // call to DELETE a blog
         delete: function(id) {
             return $http.delete(urlBase + "/" + id);
-        },
-        getTagList: function(query) {
-            var base = "/api/tags";
-            if (query) {
-                return $http.get(base + "?" + query);
-            } else {
-                return $http.get(base);
-            }
         }
     }
 });
