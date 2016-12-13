@@ -10,7 +10,7 @@ module.exports = function(app) {
     app.get('/api/blogs', function(req, res) {
         var blogList = [];
         n = req.query.len;
-        console.log(req.query);
+        // console.log(req.query);
         if (n === undefined) {
             Blog.find(function(err, blogs) {
                 if (err) res.send(err);

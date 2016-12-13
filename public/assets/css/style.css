@@ -806,13 +806,13 @@ position: relative;
     border-radius: 6px;
     color: #555;
     /*letter-spacing: 1px;*/
-    text-align: left;
+    text-align: center;
     padding: 10px 15px;
     /*margin-top: 20px;*/
     margin-right: 10px;
     /*white-space: nowrap;*/
     /* used to not break words into differnt lines*/
-    word-spacing: 5px;
+    /*word-spacing: 5px;*/
 }
 
 

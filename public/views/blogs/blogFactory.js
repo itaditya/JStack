@@ -36,6 +36,14 @@ angular.module('JStack').factory('blogFactory', function($http) {
         // call to DELETE a blog
         delete: function(id) {
             return $http.delete(urlBase + "/" + id);
+        },
+        getTagList: function(query) {
+            var base = "/api/tags";
+            if (query) {
+                return $http.get(base + "?" + query);
+            } else {
+                return $http.get(base);
+            }
         }
     }
 });

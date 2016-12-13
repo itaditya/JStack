@@ -1,0 +1,46 @@
+<footer info="footer" class="footer bg-dk-purple">
+    <div class="brand-details">
+        <a href="http://hackncs.com/">
+            <h3>
+                &copy;Nibble Computer Society
+            </h3>
+        </a>
+        <div class="social-bar">
+            <a href="#f">
+                <span class=" icon-facebook"></span>
+            </a>
+            <a href="#g">
+                <span class=" icon-google-plus"></span>
+            </a>
+            <a href="#e">
+                <span class=" icon-github"></span>
+            </a>
+        </div>
+    </div>
+    <div class="subscribe">
+        <form action="">
+            <input type="email" placeholder="Never miss any updates ." ng-model="emailId"/>
+            <!-- Trick : use autofocus in input to scroll to that on reload -->
+            <div class="submit btn" ng-click="subscribe()">
+                <h3>
+                    Subscribe
+                </h3>
+            </div>
+        </form>
+    </div>
+    <div class="posts-list txt-orange">
+        <!-- <h4 class="txt-orange"></h4> ng-repeat="category in categories" -->
+        <div class="post"  ng-repeat="category in categories">
+            <h5 class="txt-orange">
+                {{ category.category }}
+            </h5>
+            <div class="tag-box">
+                <p>
+                    <a class="tags" ng-repeat="tag in category.tags" ng-href="/tagSearch/{{tag.id}}">
+                    {{tag.name}}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>

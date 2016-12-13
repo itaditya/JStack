@@ -3,9 +3,9 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope,$
         $scope.postsLoaded = false;
         $scope.user = {};
         console.log($routeParams.id);
-        blogFactory.get($routeParams.id).success(function(blog) {
-            console.log(blog);
-            $scope.blog = blog;
+        blogFactory.get($routeParams.id).then(function(blog) {
+            // console.log("blog",blog);
+            $scope.blog = blog.data;
             $rootScope.d('.main').insertAdjacentHTML('beforeend', $scope.blog.content);
             var codeBlocks = $rootScope.dd('.main pre');
             var imgBlocks = $rootScope.dd('.main img');
@@ -19,11 +19,11 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope,$
             $rootScope.d(".menu").addEventListener("click", function() {
                 document.querySelector(".sidebar").classList.toggle("sm-hide");
             });
-            userFactory.get($scope.blog.authorId).success(function(author) {
-                $scope.author = author;
+            userFactory.get($scope.blog.authorId).then(function(author) {
+                $scope.author = author.data;
             });
-            blogFactory.getList("len=3").success(function(recentBlogs) {
-                $scope.posts = recentBlogs;
+            blogFactory.getList("len=3").then(function(recentBlogs) {
+                $scope.posts = recentBlogs.data;
                 $scope.postsLoaded = true;
                 console.log(recentBlogs);
             });
@@ -51,14 +51,14 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $rootScope,$
                 $timeout(function(){
                     $scope.endFade = true;
                 }, 2000);
-                blogFactory.userChoice($routeParams.id,$scope.user.choice).success(function(message) {
+                blogFactory.userChoice($routeParams.id,$scope.user.choice).then(function(message) {
                     notification.notify('success', 'Thank You');
                 });
             }
         });
         $scope.subscribe = function(){
-            blogFactory.subscribe($scope.emailId).success(function(message) {
-                console.log(message);
+            blogFactory.subscribe($scope.emailId).then(function(message) {
+                console.log(message.data);
             });
         }
         function sidebarFix() {

@@ -1,15 +1,15 @@
 angular.module('blogs').controller('editBlogCtrl', function($scope, $rootScope, blogFactory, $rootScope, userFactory, $routeParams, localStorageService) {
     $(document).ready(function() {
         console.log($rootScope.isAuthor);
-        userFactory.get(localStorageService.get("authorId")).success(function(author) {
+        userFactory.get(localStorageService.get("authorId")).then(function(author) {
             var simplemde = new SimpleMDE({
                 element: document.querySelector(".editor"),
                 promptURLs: true,
                 showIcons: ["code", "table"]
             });
-            $scope.author = author;
-            blogFactory.get($routeParams.id).success(function(blog) {
-                $scope.blog = blog;
+            $scope.author = author.data;
+            blogFactory.get($routeParams.id).then(function(blog) {
+                $scope.blog = blog.data;
                 simplemde.value($scope.blog.mdString);
                 $rootScope.d(".blog-title").innerHTML = $scope.blog.title;
             });
@@ -32,15 +32,15 @@ angular.module('blogs').controller('editBlogCtrl', function($scope, $rootScope, 
                 $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
                 $scope.blog.content = simplemde.value();
                 $scope.blog.authorId = localStorageService.get("authorId");
-                blogFactory.save($routeParams.id, $scope.blog).success(function(message) {
-                    $scope.postid = message.id;
+                blogFactory.save($routeParams.id, $scope.blog).then(function(message) {
+                    $scope.postid = message.data.id;
                     notification.notify('success', 'Save Successfull');
                 });
             }
             $scope.subscribe = function() {
-                blogFactory.subscribe($scope.emailId).success(function(message) {
+                blogFactory.subscribe($scope.emailId).then(function(message) {
                     notification.notify('success', 'Subscribed Successfully');
-                    console.log(message);
+                    console.log(message.data);
                 });
             }
             $rootScope.d(".page").addEventListener('scroll', function(e) {

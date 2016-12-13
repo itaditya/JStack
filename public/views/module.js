@@ -15,44 +15,7 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
         }
         return false;
     };
-}).directive('preLoader', function() {
-    return {
-        restrict: 'E',
-        template: '<div class="page bg-dk-purple"><div class="preloader-box"><img class="preloader" src="/assets/img/preloaderLg.svg" alt=""></div></div>'
-    }
-}).directive('navBar', function() {
-    return {
-        scope: {
-            active: "@"
-        },
-        restrict: 'E',
-        replace: 'true',
-        templateUrl: '/views/partials/navbar.html',
-        controller: function($scope,$rootScope, $attrs) {
-            $rootScope.d("#"+$attrs.active).classList.add("active");
-        }
-    };
-}).directive('navLink', function() {
-    return {
-        scope: {
-            showifuser: "@",
-            hideifuser: "@",
-            text: "@"
-        },
-        replace: true,
-        template: '<a ng-show="show">{{text}}</a>',
-        controller: function($scope, $attrs, SessionService) {
-            $scope.userIsAuthenticated = SessionService.getUserAuthenticated();
-            if (typeof $attrs.showifuser == "string") {
-                $scope.show = $scope.userIsAuthenticated;
-            }
-            if (typeof $attrs.hideifuser == "string") {
-                $scope.show = !$scope.userIsAuthenticated;
-            }
-        }
-    };
 }).run(function($rootScope) {
-    // ,PermRoleStore, PermPermissionStore
     $rootScope.d = function(elem) {
         elem = document.querySelector(elem);
         return (elem || document.querySelector(".null"));
@@ -65,17 +28,4 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
             position: ['right', 'top']
         }
     });
-    /*
-    PermRoleStore.defineManyRoles({
-        'AUTHOR' : ['editBlog'],
-        'ADMIN' : ['seeDashboard','editBlog']
-    });
-    PermPermissionStore.definePermission('seeDashboard', function() {
-        // return authorization.hasPermission();
-        return false;
-    })
-    PermPermissionStore.definePermission('editBlog', function() {
-        return true;
-    });
-    */
 });

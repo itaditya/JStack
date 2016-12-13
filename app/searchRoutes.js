@@ -1,45 +1,61 @@
 // app/routes.js
 // grab the nerd model we just created
 var Tag = require('./models/tag');
-var Category = require('./models/category');
+async = require("async");
 module.exports = function(app) {
     app.get('/api/tags', function(req, res) {
         var tagList = [];
-        n = req.query.len;
+        var n = req.query.len;
+        var design = req.query.design;
         console.log(req.query);
         if (n === undefined) {
-            Tag.find(function(err, tags) {
-                if (err) res.send(err);
-                res.json(tags);
-            });
-        } else {
-            Tag.find(function(err, tags) {
-                var l = tags.length;
-                j = 0;
-                //j is used to handle async User.findOne request
-                if (n > l) {
-                    n = l;
-                }
-                for (i = 0; i < n; i++) {
-                    var authorName;
-                    User.findOne({
-                        _id: tags[i].authorId
-                    }, function(err, user) {
-                        authorName = user.name;
-                        tagList.push({
-                            _id: tags[j]._id,
-                            coverImg: tags[j].coverImg,
-                            date: tags[j].date,
-                            title: tags[j].title,
-                            authorName: authorName
+            if (design === "category") {
+                tagList = [{
+                    category: "frontend",
+                    tags: []
+                }, {
+                    category: "backend",
+                    tags: []
+                }, {
+                    category: "design",
+                    tags: []
+                }, {
+                    category: "technical",
+                    tags: []
+                }];
+                var categories = {
+                    frontend: 0,
+                    backend: 1,
+                    design: 2,
+                    technical: 3
+                };
+                Tag.find(function(err, tags) {
+                    if (err) {
+                        return res.send(err);
+                    };
+                    var end = tags.length - 1;
+                    async.forEachOf(tags, function(tag, index, callback) {
+                        if (err) return callback(err);
+                        var categoryIndex = categories[tag.category];
+                        tagList[categoryIndex].tags.push({
+                            id: tag._id,
+                            name: tag.name
                         });
-                        if (++j == n) {
-                            j = 0;
-                            res.json(tagList);
+                        if (index == end) {
+                            return callback(tagList);
                         }
+                    }, function(tagList) {
+                        return res.json(tagList);
                     });
-                }
-            });
+                });
+            } else {
+                Tag.find(function(err, tags) {
+                    if (err) res.send(err);
+                    res.json(tags);
+                });
+            }
+        } else {
+            console.log('test');
         }
     }).get('/api/tags/:id', function(req, res) {
         var tagId = req.params.id;
@@ -52,7 +68,8 @@ module.exports = function(app) {
     }).post('/api/tags', function(req, res) {
         var tag = new Tag();
         tag.name = req.body.name;
-        tag.blogs.push(req.body.blogId);
+        tag.category = req.body.category;
+        // tag.blogs.push(req.body.blogId);
         tag.save(function(err) {
             if (err) res.send(err);
             res.json({
@@ -63,8 +80,12 @@ module.exports = function(app) {
     }).put('/api/tags/:id', function(req, res) {
         Tag.findById(req.params.id, function(err, tag) {
             if (typeof tag != "undefined") {
-                tag.blogs = req.body.blogs || tag.blogs;
+                var blogId = req.body.blogId;
+                if (blogId && tag.blogs.indexOf(blogId) === -1) {
+                    tag.blogs.push(blogId);
+                }
                 tag.name = req.body.name || tag.name;
+                tag.category = req.body.category || tag.category;
                 tag.save(function(err) {
                     if (err) res.send(err);
                     res.json({

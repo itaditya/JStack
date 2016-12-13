@@ -4,7 +4,6 @@
 <link rel="stylesheet" href="/vendor/google-code-prettify/bin/prettify.min.css"/>
 <link rel="stylesheet" type="text/css" href="/assets/css/themes/tranquil-heart.min.css"/>
 <script src="/vendor/google-code-prettify/bin/prettify.min.js"></script>
-<script src="/vendor/google-code-prettify/bin/run_prettify.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/assets/css/content.css"/>
 <div class="page animated fadeIn mainPage" ng-cloak ng-show="author">
     <nav-bar></nav-bar>
@@ -110,52 +109,7 @@
         </div>
         <!-- <input autofocus> -->
     </section>
-    <footer info="footer" class="footer bg-dk-purple">
-        <div class="brand-details">
-            <a href="http://hackncs.com/">
-                <h3>
-                    &copy;Nibble Computer Society
-                </h3>
-            </a>
-            <div class="social-bar">
-                <a href="#f">
-                    <span class=" icon-facebook"></span>
-                </a>
-                <a href="#g">
-                    <span class=" icon-google-plus"></span>
-                </a>
-                <a href="#e">
-                    <span class=" icon-github"></span>
-                </a>
-            </div>
-        </div>
-        <div class="subscribe">
-            <form action="">
-                <input type="email" placeholder="Never miss any updates ." ng-model="emailId"/>
-                <!-- Trick : use autofocus in input to scroll to that on reload -->
-                <div class="submit btn" ng-click="subscribe()">
-                    <h3>
-                        Subscribe
-                    </h3>
-                </div>
-            </form>
-        </div>
-        <div class="posts-list txt-orange">
-            <!-- <h4 class="txt-orange"></h4> ng-repeat="category in categories" -->
-            <div class="post" ng-repeat="category in ['Frontend','Design','Backend','Technical']">
-                <h5 class="txt-orange">
-                    {{ category }}
-                </h5>
-                <div class="tag-box">
-                    <p>
-                        <a class="tags" ng-repeat="tag in ['css flexbox','css triangles','cross browser','animations']">
-                            {{tag}}
-                        </a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <footer-bar></footer-bar>
     <div class="modal" tabindex="1" id="commentModal">
         <span class="closeModal icon-cross"></span>
         <!-- <h2>Fb Comments Coming Soon ..</h2> -->

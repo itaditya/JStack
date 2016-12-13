@@ -1,7 +1,7 @@
 angular.module('blogs').controller('createBlogCtrl', function($scope, $rootScope, $interval,localStorageService, blogFactory, userFactory, $routeParams) {
     $(document).ready(function() {
         localStorageService.set("authorId", "57fcdedcea223b1a2c8411cb");
-        userFactory.get(localStorageService.get("authorId")).success(function(author) {
+        userFactory.get(localStorageService.get("authorId")).then(function(author) {
             var simplemde = new SimpleMDE({
                 element: document.querySelector(".editor") ,
                 promptURLs: true,
@@ -12,7 +12,7 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $rootScope
                 },
                 hideIcons: ["fullscreen","side-by-side"]
             });
-            $scope.author = author;
+            $scope.author = author.data;
             var parent = $rootScope.d('.main');
             $rootScope.d(".menu").addEventListener("click", function() {
                 document.querySelector(".sidebar").classList.toggle("sm-hide");
@@ -54,14 +54,14 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $rootScope
                 $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
                 $scope.blog.content = simplemde.value();
                 $scope.blog.authorId = localStorageService.get("authorId");
-                blogFactory.create($scope.blog).success(function(message) {
-                    $scope.postid = message.id;
+                blogFactory.create($scope.blog).then(function(message) {
+                    $scope.postid = message.data.id;
                 });
 
             }
             $scope.subscribe = function(){
-                blogFactory.subscribe($scope.emailId).success(function(message) {
-                    console.log(message);
+                blogFactory.subscribe($scope.emailId).then(function(message) {
+                    console.log(message.data);
                 });
             }
             $rootScope.d(".page").addEventListener('scroll', function(e) {

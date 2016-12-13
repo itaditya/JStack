@@ -1,5 +1,5 @@
 angular.module('blogs').controller('blogsCtrl', function($scope, blogFactory,$routeParams) {
-    blogFactory.getList("len=9").success(function(blogs) {
+    blogFactory.getList("len=9").then(function(blogs) {
         $scope.blogs = blogs;
         $scope.postsLoaded = true;
         console.log(blogs);
