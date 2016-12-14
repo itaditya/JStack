@@ -7,8 +7,8 @@
     <nav-bar></nav-bar>
     <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(29,33,41,0.88),rgba(29,33,41,0.88)),url('/assets/img/coverImg/hero2.jpg')"></div>
     <section class="container" role="blog content">
-        <main class="main z-depth border">
-            <div class="card" ng-repeat="blog in blogs | orderBy:'-views'">
+        <main class="main z-depth ">
+            <div class="card border" ng-repeat="blog in blogs | orderBy:'-views'">
                 <div class="card-img" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');"></div>
                 <div class="card-body">
                     <h2>
