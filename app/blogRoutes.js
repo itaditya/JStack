@@ -193,7 +193,8 @@ module.exports = function(app) {
             service: 'Mailgun',
             auth: {
                 domain: mailSender.mailer.auth.domain,
-                pass: mailSender.mailer.auth.pass,
+                api_key: mailSender.mailer.auth.api_key
+                // pass: mailSender.mailer.auth.pass,
             }
         });
         console.log(mailSender.mailer.auth);

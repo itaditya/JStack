@@ -28,12 +28,12 @@
     </div>
     <section class="container" role="blog content">
         <main class="main z-depth border animated fadeIn" style="font-size: 14px;">
-            <select name="" ng-options="category as category for category in categories" ng-model="category" ng-change="selectCategory()">
+            <select name="" ng-options="cat as cat for cat in categories" ng-model="category" ng-change="selectCategory()">
                 <option value="">--Select--</option>
             </select>
-            <select name="" ng-options="tag as tag for tag in tags" ng-model="tag" ng-change="selectTag()">
-                <option value="">--Select--</option>
-            </select>
+            <ul>
+                <li ng-repeat="tag in tags"><label> <input type="checkbox" value="$index" name="tags" ng-model="blogTag" ng-click="selectTag(tag)"> {{tag.name}}</label> {{tag.checked}}</li>
+            </ul>
             <textarea class="editor"></textarea>
             <button ng-click="saveBlog()">Save</button>
             <button ng-click="uploadBlog()">Upload</button>

@@ -46,7 +46,14 @@ module.exports = function(app) {
                             return callback(tagList);
                         }
                     }, function(tagList) {
-                        return res.json(tagList);
+                        var category = req.query.category;
+                        if (category) {
+                            console.log(category);
+                            var categoryIndex = categories[category];
+                            res.json(tagList[categoryIndex].tags);
+                        } else {
+                            return res.json(tagList);
+                        }
                     });
                 });
             } else {
