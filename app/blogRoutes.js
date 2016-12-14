@@ -190,12 +190,13 @@ module.exports = function(app) {
     }).post('/api/subscribe', function(req, res) {
         var emailId = req.body.emailId;
         var transporter = nodemailer.createTransport({
-            service: 'Gmail',
+            service: 'Mailgun',
             auth: {
-                user: mailSender.mailer.auth.user,
+                domain: mailSender.mailer.auth.domain,
                 pass: mailSender.mailer.auth.pass,
             }
         });
+        console.log(mailSender.mailer.auth);
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: '"Jstack Team" <adityaa803@gmail.com>', // sender address
