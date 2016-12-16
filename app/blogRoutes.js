@@ -53,23 +53,25 @@ module.exports = function(app) {
         var blogId = req.params.id;
         Blog.findById(blogId, function(err, blog) {
             if (err) res.send(err);
-            blog.views += 1;
-            // console.log(blog);
-            blog.save(function(err) {
-                if (err) res.send(err);
-                if (req.query.type === "short") {
-                    res.json({
-                        _id: blog._id,
-                        coverImg: blog.coverImg,
-                        title: blog.title,
-                        likes: blog.likes,
-                        views: blog.views,
-                        description: blog.description,
-                    });
-                } else {
-                    res.json(blog);
-                }
-            });
+            if (blog) {
+                blog.views += 1;
+                // console.log(blog);
+                blog.save(function(err) {
+                    if (err) res.send(err);
+                    if (req.query.type === "short") {
+                        res.json({
+                            _id: blog._id,
+                            coverImg: blog.coverImg,
+                            title: blog.title,
+                            likes: blog.likes,
+                            views: blog.views,
+                            description: blog.description,
+                        });
+                    } else {
+                        res.json(blog);
+                    }
+                });
+            }
         });
     }).get('/api/recentBlogs', function(req, res) {
         var recentBlogs = [];
@@ -100,6 +102,7 @@ module.exports = function(app) {
         blog.content = converter.makeHtml(blog.mdString);
         blog.tags = req.body.tags;
         var category = req.body.category;
+        console.log("cat", category);
         // blog.likes = req.body.likes;
         // blog.comments = req.body.comments;
         blog.save(function(err) {
@@ -194,7 +197,7 @@ module.exports = function(app) {
             auth: {
                 domain: mailSender.mailer.auth.domain,
                 api_key: mailSender.mailer.auth.api_key
-                // pass: mailSender.mailer.auth.pass,
+                    // pass: mailSender.mailer.auth.pass,
             }
         });
         console.log(mailSender.mailer.auth);

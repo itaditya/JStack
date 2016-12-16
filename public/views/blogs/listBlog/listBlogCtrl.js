@@ -1,4 +1,4 @@
-angular.module('blogs').controller('listBlogCtrl', function($scope, $rootScope, $timeout, tagFactory, blogFactory, userFactory, $routeParams) {
+angular.module('blogs').controller('listBlogCtrl', function($scope, $rootScope,$sce, $timeout, tagFactory, blogFactory, userFactory, $routeParams) {
     $(document).ready(function() {
         $scope.postsLoaded = false;
         $scope.user = {};
@@ -7,6 +7,7 @@ angular.module('blogs').controller('listBlogCtrl', function($scope, $rootScope, 
             // console.log("blog",blog);
             var blogs = tag.data.blogs;
             $scope.blogs = [];
+            $scope.trustAsHtml = $sce.trustAsHtml;
             for (var i = blogs.length - 1; i >= 0; i--) {
                 blogFactory.get(blogs[i]).then(function(blog){
                     $scope.blogs.push(blog.data);

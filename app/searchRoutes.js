@@ -2,12 +2,13 @@
 // grab the nerd model we just created
 var Tag = require('./models/tag');
 var async = require("async");
+var console = require('better-console');
 module.exports = function(app) {
     app.get('/api/tags', function(req, res) {
         var tagList = [];
         var n = req.query.len;
         var design = req.query.design;
-        console.log(req.query);
+        // console.log(req.query);
         if (n === undefined) {
             if (design === "category") {
                 tagList = [{
@@ -38,20 +39,24 @@ module.exports = function(app) {
                     async.forEachOf(tags, function(tag, index, callback) {
                         if (err) return callback(err);
                         var categoryIndex = categories[tag.category];
-                        tagList[categoryIndex].tags.push({
-                            id: tag._id,
-                            name: tag.name
-                        });
-                        if (++j == end) {
-                            return callback(tagList);
+                        if (parseInt(categoryIndex) >= 0) {
+                            tagList[categoryIndex].tags.push({
+                                id: tag._id,
+                                name: tag.name
+                            });
+                            // console.log(j,"a",tagList[categoryIndex]);
+                            if (j++ == end) {
+                                return callback(tagList);
+                            }
                         }
                     }, function(tagList) {
                         var category = req.query.category;
                         if (category) {
-                            console.log(category);
                             var categoryIndex = categories[category];
                             res.json(tagList[categoryIndex].tags);
                         } else {
+                            console.table(tagList);
+                            console.log(tagList[0].tags);
                             return res.json(tagList);
                         }
                     });

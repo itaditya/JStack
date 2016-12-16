@@ -15,8 +15,8 @@
                     {{ author.name }}
                 </span>
             </p>
-            <h3>
-                {{ blog.title }}
+            <h3 ng-bind-html="trustAsHtml(blog.title)">
+                <!-- {{ blog.title }} -->
             </h3>
         </div>
     </div>

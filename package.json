@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "async": "^2.1.4",
+    "better-console": "^0.2.4",
     "body-parser": "~1.4.2",
     "bower": "1.8.0",
     "colors": "^1.1.2",
@@ -15,8 +16,6 @@
     "method-override": "~2.0.2",
     "mongoose": "~3.8.0",
     "nodemailer": "^2.6.4",
-    "object.omit": "^2.0.1",
-    "omit-keys": "^0.1.0",
     "showdown": "^1.5.1",
     "xoauth2": "^1.2.0"
   }

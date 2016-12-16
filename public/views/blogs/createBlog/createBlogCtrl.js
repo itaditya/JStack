@@ -17,7 +17,7 @@ angular.module('blogs').controller('createBlogCtrl', function($scope,$filter, $r
             $rootScope.d(".menu").addEventListener("click", function() {
                 document.querySelector(".sidebar").classList.toggle("sm-hide");
             });
-            $scope.categories = ['frontend', 'design', 'backend', 'technical'];
+            $scope.cats = ['frontend', 'design', 'backend', 'technical'];
             // $scope.tags = ['css flexbox', 'css triangles', 'cross browser', 'animations'];
             $scope.selectCategory = function() {
                 var category = $scope.category;
@@ -67,6 +67,16 @@ angular.module('blogs').controller('createBlogCtrl', function($scope,$filter, $r
                 }
                 // $interval($scope.saveBlog(), 300000);
             $scope.uploadBlog = function() {
+                // = $filter("filter")($scope.tags,{checked:true});
+                var tags = [];
+                for (var i = $scope.tags.length - 1; i >= 0; i--) {
+                    if($scope.tags[i].checked){
+                        tags.push($scope.tags[i].id);
+                    }
+                }
+                // console.log(tags);
+                $scope.blog.tags = tags;
+                $scope.blog.category = $scope.category;
                 $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
                 $scope.blog.content = simplemde.value();
                 $scope.blog.authorId = localStorageService.get("authorId");

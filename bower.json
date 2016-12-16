@@ -13,6 +13,7 @@
     "google-code-prettify": "^1.0.5",
     "masonry": "^4.1.1",
     "notification-js": "^1.1.1",
-    "ngSmoothScroll": "^2.0.0"
+    "ngSmoothScroll": "^2.0.0",
+    "ftscroller": "^0.7.0"
   }
 }

@@ -14,8 +14,8 @@
     /*background: #000;*/
 }   
 </style>
-<div class="page animated fadeIn" ng-cloak ng-show="author">
-    <nav-bar></nav-bar>
+<div class="page animated fadeIn" ng-cloak ng-show="author" id="mainPage">
+    <nav-bar active="create"></nav-bar>
     <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/coverImg/{{blog.coverImg}}')">
         <div class="topic">
             <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide">
@@ -28,11 +28,11 @@
     </div>
     <section class="container" role="blog content">
         <main class="main z-depth border animated fadeIn" style="font-size: 14px;">
-            <select name="" ng-options="cat as cat for cat in categories" ng-model="category" ng-change="selectCategory()">
+            <select name="" ng-options="cat as cat for cat in cats" ng-model="category" ng-change="selectCategory()">
                 <option value="">--Select--</option>
             </select>
             <ul>
-                <li ng-repeat="tag in tags"><label> <input type="checkbox" value="$index" name="tags" ng-model="blogTag" ng-click="selectTag(tag)"> {{tag.name}}</label> {{tag.checked}}</li>
+                <li ng-repeat="tag in tags"><label> <input type="checkbox" value="$index" name="tags" ng-model="blogTag" ng-click="selectTag(tag)"> {{tag.name}}</label></li>
             </ul>
             <textarea class="editor"></textarea>
             <button ng-click="saveBlog()">Save</button>

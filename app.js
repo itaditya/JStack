@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var mongoose = require('mongoose');
 var nodemailer = require('nodemailer');
+var console = require('better-console');
 
 // configuration ===========================================
 

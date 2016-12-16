@@ -12,8 +12,8 @@
                 <div class="card-img" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');"></div>
                 <div class="card-body">
                     <h2>
-                        <a ng-href="/blogs/{{ blog._id }}">
-                            {{ blog.title }}
+                        <a ng-href="/blogs/{{ blog._id }}" ng-bind-html="trustAsHtml(blog.title)">
+                            <!-- {{ blog.title }} -->
                         </a>
                     </h2>
                     <div>
