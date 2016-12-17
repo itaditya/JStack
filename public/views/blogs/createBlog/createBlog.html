@@ -1,4 +1,6 @@
-<!-- <link rel="stylesheet" type="text/css" href="/vendor/choices.js/assets/styles/css/base.min.css"/> -->
+<!--
+    <link rel="stylesheet" type="text/css" href="/vendor/choices.js/assets/styles/css/base.min.css"/>
+-->
 <link rel="stylesheet" type="text/css" href="/vendor/choices.js/assets/styles/css/choices.min.css"/>
 <pre-loader ng-hide="author"></pre-loader>
 <!-- Custom CSS-->
@@ -44,15 +46,18 @@
                 <select multiple class="tag-choice"></select>
             </div>
             <textarea class="editor"></textarea>
-            <button ng-click="saveBlog()">
-                Save
-            </button>
-            <button ng-click="uploadBlog()">
-                Upload
-            </button>
-            <a ng-show="postid" ng-href="/blogs/{{ postid }}" target="_blank" style="color:#000;float: right;">
-                View Blog
-            </a>
+            <div class="btn-container">
+                <button class="btn" ng-click="saveBlog()">
+                    Save
+                </button>
+                <button class="btn" ng-hide="postid" ng-click="uploadBlog()">
+                    Upload
+                </button>
+                <a ng-show="postid" class="btn" ng-href="/blogs/{{ postid }}" target="_blank" style=" line-height: 16px;">
+                    View Blog
+                    <!-- style="color:#000;float: right;" -->
+                </a>
+            </div>
         </main>
         <!-- End of Main -->
         <!-- sidebar starts -->

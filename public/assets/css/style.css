@@ -420,8 +420,6 @@ ul li {
     background: #fff;
     margin: 20px 40px;
     height: 150px !important;
-    /*border-left: 4px solid #09B1CF !important;*/
-    /*border-left: 4px solid rgba(229,126,49,1) !important;*/
     text-align: center;
 }
 
@@ -429,7 +427,18 @@ ul li {
     font-size: 14px;
     padding: 10px 0;
 }
-
+.btn-container{
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+.btn-container .btn{
+    font-size: 14px;
+    background: #fff;
+    color: #333;
+    padding: 10px 30px;
+    margin: 5px 8px;
+}
 .btn {
     border: 2px solid #09B1CF;
     border-radius: 30px;
@@ -440,9 +449,6 @@ ul li {
 }
 
 .btn:hover {
-    /*border: 2px solid  rgba(0,182,72,1);*/
-    /*border: 2px solid #09B1CF;*/
-    /*background: rgba(0,182,72,1);*/
     background: #09B1CF;
     color: #fff;
 }
@@ -452,7 +458,6 @@ ul li {
     -o-animation: click .8s ease-in;
     animation: click .8s ease-in;
 }
-
 #user-widget {
     /*min-height: 320px;*/
     text-align: center;

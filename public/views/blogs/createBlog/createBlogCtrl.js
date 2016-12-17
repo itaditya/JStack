@@ -1,4 +1,4 @@
-angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $rootScope, $interval, localStorageService, blogFactory, tagFactory, userFactory, $routeParams) {
+angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $rootScope, $interval, $timeout,localStorageService, blogFactory, tagFactory, userFactory, $routeParams) {
     $(document).ready(function() {
         localStorageService.set("authorId", "57fcdedcea223b1a2c8411cb");
         userFactory.get(localStorageService.get("authorId")).then(function(author) {
@@ -45,7 +45,7 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $
             for (var i = btnList.length - 1; i >= 0; i--) {
                 btnList[i].addEventListener("click", function() {
                     this.classList.add("btn-click");
-                    setTimeout(function() {
+                    $timeout(function() {
                         if ($rootScope.d('.btn-click')) {
                             $rootScope.d('.btn-click').classList.remove("btn-click");
                         }
@@ -67,6 +67,10 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $
                     $scope.postid = message.data.id;
                     notification.notify('success', 'Blog Created');
                 });
+                $timeout(function(){
+                    console.log($scope.postid);
+                    $scope.postid = undefined;
+                },10000);
             }
             $scope.subscribe = function() {
                 blogFactory.subscribe($scope.emailId).then(function(message) {
