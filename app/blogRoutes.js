@@ -159,13 +159,23 @@ module.exports = function(app) {
                         user.blogs.splice(index, 1);
                         user.save();
                     }
-                });
-                Blog.remove({
-                    _id: blogId
-                }, function(err) {
-                    if (err) res.send(err);
-                    res.json({
-                        message: 'blog deleted!'
+                    Blog.remove({
+                        _id: blogId
+                    }, function(err) {
+                        if (err) res.send(err);
+                        res.json({
+                            message: 'blog deleted!'
+                        });
+                    });
+                    async.forEachOf(blog.tags, function(tagId, index) {
+                        if (err) return res.send(err);
+                        Tag.findById(tagId, function(err, tag) {
+                            if (tag) {
+                                var index = tag.blogs.indexOf(blogId);
+                                tag.blogs.splice(index, 1);
+                                tag.save();
+                            }
+                        });
                     });
                 });
             }
