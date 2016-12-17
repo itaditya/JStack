@@ -8,14 +8,15 @@ angular.module('auth').controller('loginCtrl', function($scope, $location, authF
             $scope.isValidating = true;
             if (form.$valid) {
                 console.log($scope.user);
-                authFactory.loginUser($scope.user).success(function(data) {
-                    console.log(data);
-                    data.type = "author";
-                    // authorization.loadDashboard(data);
-                    if (data.status === "1") {
+                authFactory.loginUser($scope.user).then(function(data) {
+                    // data = data.data;
+                    console.log(data.data);
+                    data.data.type = "author";
+                    // authorization.loadDashboard(data.data);
+                    if (data.data.status === "1") {
                         notification.notify('success', 'Login Successfull');
-                        localStorageService.set("authorId", data.id);
-                        localStorageService.cookie.set("editBlogs", data.blogs);
+                        localStorageService.set("authorId", data.data.id);
+                        localStorageService.cookie.set("editBlogs", data.data.blogs);
                         SessionService.setUserAuthenticated(true);
                         $location.path("/profile");
                     } else {

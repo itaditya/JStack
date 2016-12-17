@@ -61,6 +61,54 @@ module.exports = function(app) {
                         }
                     });
                 });
+            } else if (design === "tags") {
+                tagList = [{
+                    label: "Frontend",
+                    id: 0,
+                    choices: []
+                }, {
+                    label: "Backend",
+                    id: 1,
+                    choices: []
+                }, {
+                    label: "Design",
+                    id: 2,
+                    choices: []
+                }, {
+                    label: "Technical",
+                    id: 3,
+                    choices: []
+                }];
+                var categories = {
+                    frontend: 0,
+                    backend: 1,
+                    design: 2,
+                    technical: 3
+                };
+                Tag.find(function(err, tags) {
+                    if (err) {
+                        return res.send(err);
+                    };
+                    var end = tags.length - 1;
+                    var j = 0;
+                    async.forEachOf(tags, function(tag, index, callback) {
+                        if (err) return callback(err);
+                        var categoryIndex = categories[tag.category];
+                        if (parseInt(categoryIndex) >= 0) {
+                            tagList[categoryIndex].choices.push({
+                                label: tag.name,
+                                value: tag._id
+                            });
+                            // console.log(j,"a",tagList[categoryIndex]);
+                            if (j++ == end) {
+                                return callback(tagList);
+                            }
+                        }
+                    }, function(tagList) {
+                        console.table(tagList);
+                        return res.json(tagList);
+                    });
+                });
             } else {
                 Tag.find(function(err, tags) {
                     if (err) res.send(err);

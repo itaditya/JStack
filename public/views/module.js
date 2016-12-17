@@ -1,4 +1,4 @@
-angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorageModule','smoothScroll']).config(function(localStorageServiceProvider, $locationProvider) {
+angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorageModule']).config(function(localStorageServiceProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     localStorageServiceProvider.setPrefix('JStack').setStorageType('localStorage');
 }).service('SessionService', function(localStorageService) {

@@ -1,4 +1,4 @@
-angular.module('blogs').controller('createBlogCtrl', function($scope,$filter, $rootScope, $interval, localStorageService, blogFactory, tagFactory, userFactory, $routeParams) {
+angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $rootScope, $interval, localStorageService, blogFactory, tagFactory, userFactory, $routeParams) {
     $(document).ready(function() {
         localStorageService.set("authorId", "57fcdedcea223b1a2c8411cb");
         userFactory.get(localStorageService.get("authorId")).then(function(author) {
@@ -17,35 +17,30 @@ angular.module('blogs').controller('createBlogCtrl', function($scope,$filter, $r
             $rootScope.d(".menu").addEventListener("click", function() {
                 document.querySelector(".sidebar").classList.toggle("sm-hide");
             });
-            $scope.cats = ['frontend', 'design', 'backend', 'technical'];
-            // $scope.tags = ['css flexbox', 'css triangles', 'cross browser', 'animations'];
-            $scope.selectCategory = function() {
-                var category = $scope.category;
-                console.log(category);
-                if (typeof category === "string") {
-                    var query = "design=category" + "&category=" + category;
-                    console.log(query);
-                    tagFactory.getTagList(query).then(function(categories) {
-                        $scope.tags = categories.data;
-                        // console.log($scope.tags);
-                    })
-                }
-            }
-            $scope.selectTag = function(tag) {
-                console.log(tag);
-                // tag.checked = true;
-                tag.checked = !tag.checked;
-            }
             var blog = localStorageService.get("blog");
             if (blog) {
                 $scope.blog = blog;
+                $scope.blog.tags = $scope.blog.tags || [];
                 simplemde.value($scope.blog.content);
             } else {
                 $scope.blog = {
                     coverImg: "hero.jpg",
-                    title: "Write Title Here"
+                    title: "Write Title Here",
+                    tags: []
                 }
             }
+            console.log($scope.blog.tags);
+            const tagSelect = new Choices('.tag-choice', {
+                items: ["ada","svf"],
+                removeItems: true,
+                removeItemButton: true,
+                flip: false,
+                placeholderValue: "Select Tags",
+                duplicateItems: false
+            });
+            tagFactory.getTagList("design=tags").then(function(categories) {
+                tagSelect.setChoices(categories.data, 'value', 'label', false);
+            });
             var btnList = $rootScope.dd('.btn');
             for (var i = btnList.length - 1; i >= 0; i--) {
                 btnList[i].addEventListener("click", function() {
@@ -58,25 +53,13 @@ angular.module('blogs').controller('createBlogCtrl', function($scope,$filter, $r
                 });
             }
             $scope.saveBlog = function() {
-                    $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
-                    $scope.blog.content = simplemde.value();
-                    // localStorageService.set("blog", $scope.blog);
-                    var applytags = $filter("filter")($scope.tags,{checked:true});
-                    console.log(applytags);
-                    // console.log($scope.blog.title);
-                }
-                // $interval($scope.saveBlog(), 300000);
+                $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
+                $scope.blog.content = simplemde.value();
+                $scope.blog.tags = tagSelect.getValue();
+                localStorageService.set("blog", $scope.blog);
+            }
             $scope.uploadBlog = function() {
-                // = $filter("filter")($scope.tags,{checked:true});
-                var tags = [];
-                for (var i = $scope.tags.length - 1; i >= 0; i--) {
-                    if($scope.tags[i].checked){
-                        tags.push($scope.tags[i].id);
-                    }
-                }
-                // console.log(tags);
-                $scope.blog.tags = tags;
-                $scope.blog.category = $scope.category;
+                $scope.blog.tags = tagSelect.getValue(true);
                 $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
                 $scope.blog.content = simplemde.value();
                 $scope.blog.authorId = localStorageService.get("authorId");

@@ -43,7 +43,6 @@ module.exports = function(app) {
                         }
                     });
                 }, function(blogList) {
-                    // console.log(blogList);
                     return res.json(blogList);
                 });
             }
@@ -55,7 +54,6 @@ module.exports = function(app) {
             if (err) res.send(err);
             if (blog) {
                 blog.views += 1;
-                // console.log(blog);
                 blog.save(function(err) {
                     if (err) res.send(err);
                     if (req.query.type === "short") {
@@ -101,10 +99,6 @@ module.exports = function(app) {
         blog.description = req.body.description;
         blog.content = converter.makeHtml(blog.mdString);
         blog.tags = req.body.tags;
-        var category = req.body.category;
-        console.log("cat", category);
-        // blog.likes = req.body.likes;
-        // blog.comments = req.body.comments;
         blog.save(function(err) {
             if (err) res.send(err);
             User.findById(blog.authorId, function(err, user) {
@@ -115,7 +109,6 @@ module.exports = function(app) {
                 if (err) return res.send(err);
                 Tag.findById(tagId, function(err, tag) {
                     if (tag) {
-                        tag.category = category;
                         tag.blogs.push(blog._id);
                         tag.save();
                     }

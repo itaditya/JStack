@@ -1,10 +1,14 @@
+<!-- <link rel="stylesheet" type="text/css" href="/vendor/choices.js/assets/styles/css/base.min.css"/> -->
+<link rel="stylesheet" type="text/css" href="/vendor/choices.js/assets/styles/css/choices.min.css"/>
 <pre-loader ng-hide="author"></pre-loader>
 <!-- Custom CSS-->
-<link rel="stylesheet" href="/assets/css/style.css">
+<link rel="stylesheet" href="/assets/css/style.css"/>
 <script src="/vendor/simplemde/dist/simplemde.min.js"></script>
-<link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css">
+<link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css"/>
 <script src="/vendor/highlight/highlight.pack.js" type="text/javascript" charset="utf-8" async defer></script>
-<link rel="stylesheet" href="/vendor/highlight/styles/default.css">
+<link rel="stylesheet" href="/vendor/highlight/styles/default.css"/>
+<script src="/vendor/choices.js/assets/scripts/dist/choices.min.js"></script>
+<!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css"/> -->
 <style>
 .image-change{
     position: absolute;
@@ -13,39 +17,54 @@
     padding: 7px 4px;
     /*background: #000;*/
 }   
+.choices__list--multiple .choices__item{
+    border-radius: 3px;
+}
 </style>
 <div class="page animated fadeIn" ng-cloak ng-show="author" id="mainPage">
     <nav-bar active="create"></nav-bar>
-    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/coverImg/{{blog.coverImg}}')">
+    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/coverImg/{{ blog.coverImg }}')">
         <div class="topic">
-            <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide">
-            <p><span class="author-name"> {{ author.name }}</span>
-                <br>on</p>
+            <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide"/>
+            <p>
+                <span class="author-name">
+                    {{ author.name }}
+                </span>
+                <br/>
+                on
+            </p>
             <h3 class="blog-title" contenteditable="true" ng-bind="blog.title"></h3>
         </div>
-        <input type="text"  placeholder="Image Name" class="image-change" ng-model="blog.coverImg">
+        <input type="text"  placeholder="Image Name" class="image-change" ng-model="blog.coverImg"/>
         <!-- <input type="file" class="image-change" placeholder=""> -->
     </div>
     <section class="container" role="blog content">
         <main class="main z-depth border animated fadeIn" style="font-size: 14px;">
-            <select name="" ng-options="cat as cat for cat in cats" ng-model="category" ng-change="selectCategory()">
-                <option value="">--Select--</option>
-            </select>
-            <ul>
-                <li ng-repeat="tag in tags"><label> <input type="checkbox" value="$index" name="tags" ng-model="blogTag" ng-click="selectTag(tag)"> {{tag.name}}</label></li>
-            </ul>
+            <div style="width: 100%;padding:20px 0;position: relative;z-index: 30000;">
+                <select multiple class="tag-choice"></select>
+            </div>
             <textarea class="editor"></textarea>
-            <button ng-click="saveBlog()">Save</button>
-            <button ng-click="uploadBlog()">Upload</button>
-            <a ng-show="postid" ng-href="/blogs/{{postid}}" target="_blank" style="color:#000;float: right;">View Blog</a>
+            <button ng-click="saveBlog()">
+                Save
+            </button>
+            <button ng-click="uploadBlog()">
+                Upload
+            </button>
+            <a ng-show="postid" ng-href="/blogs/{{ postid }}" target="_blank" style="color:#000;float: right;">
+                View Blog
+            </a>
         </main>
         <!-- End of Main -->
         <!-- sidebar starts -->
         <aside class="sidebar sm-hide">
             <div>
                 <div class="border widget-sm">
-                    <p>Ads</p>
-                    <div class="btn modalBtn" data-toggle-id="adModal">Link To Ad</div>
+                    <p>
+                        Ads
+                    </p>
+                    <div class="btn modalBtn" data-toggle-id="adModal">
+                        Link To Ad
+                    </div>
                 </div>
             </div>
         </aside>
@@ -53,7 +72,9 @@
     <footer-bar></footer-bar>
     <div class="modal" tabindex="1" id="adModal">
         <span class="closeModal icon-cross"></span>
-        <h2>Ads Not Coming Soon ..</h2>
+        <h2>
+            Ads Not Coming Soon ..
+        </h2>
     </div>
 </div>
 <!-- <div class="page" ng-hide="author">
