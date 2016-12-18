@@ -22,7 +22,7 @@ module.exports = mongoose.model('Blog', {
     },
     description: {
         type: String,
-        default: ""
+        default: "An aweome tutorial on how to get your hands dirty with coding"
     },
     mdString: {
         type: String,

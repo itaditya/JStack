@@ -4,7 +4,8 @@
   "version": "6.9.1",
   "scripts": {
     "postinstall": "bower install",
-    "start": "nodemon app.js"
+    "nodemon": "nodemon app.js",
+    "start": "heroku local -p 8080"
   },
   "dependencies": {
     "async": "^2.1.4",

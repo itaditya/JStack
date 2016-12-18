@@ -23,7 +23,7 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $rootS
             userFactory.get($scope.blog.authorId).then(function(author) {
                 $scope.author = author.data;
             });
-            blogFactory.getList("len=3").then(function(recentBlogs) {
+            blogFactory.getList("limit=3").then(function(recentBlogs) {
                 $scope.posts = recentBlogs.data;
                 $scope.postsLoaded = true;
                 console.log(recentBlogs);

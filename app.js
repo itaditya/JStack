@@ -14,14 +14,11 @@ var console = require('better-console');
 // config files
 var db = require('./config/db');
  
-mongoose.connect('mongodb://itaditya:itaditya@ds011734.mlab.com:11734/jstackdb');
 
 // set our port
 var port = process.env.PORT || 8080;
 
-// connect to our mongoDB database 
-// (uncomment after you enter in your own credentials in config/db.js)
-// mongoose.connect(db.url); 
+mongoose.connect(db.url);
 
 // get all data/stuff of the body (POST) parameters
 // parse application/json 
@@ -45,7 +42,7 @@ require('./app/searchRoutes')(app);
 //Place blogRoutes in last as it has get(*) route 
 require('./app/blogRoutes')(app);
 // start app ===============================================
-// startup our app at http://localhost:8080
+// startup app at http://localhost:8080
 app.listen(port);
 
 // shoutout to the user                     

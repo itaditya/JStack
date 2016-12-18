@@ -9,26 +9,35 @@ var mailSender = require('./../config/auth');
 var showdown = require('showdown');
 var converter = new showdown.Converter();
 var colors = require('colors/safe');
+var blogQuery = function(req, res, limitParam, sortParam, callback) {
+    var sortList = ["-views", "-likes", "date", "-date"]
+    if (sortList.indexOf(sortParam) != -1) {
+        Blog.find().limit(limitParam).sort(sortParam).exec(function(err, blogs) {
+            if (err) res.send(err);
+            callback(req, res, err, blogs)
+        });
+    } else {
+        res.json({
+            message: 'Undefined Sort Query'
+        });
+    }
+};
 module.exports = function(app) {
     app.get('/api/blogs', function(req, res) {
         var blogList = [];
-        n = req.query.len;
         console.log(req.query);
-        Blog.find(function(err, blogs) {
-            if (n === undefined) {
-                if (err) res.send(err);
-                res.json(blogs);
-            } else {
-                var l = blogs.length;
-                var j = 0;
-                if (n > l) {
-                    n = l;
-                }
-                console.log(n);
+        var limit = req.query.limit;
+        var sort = req.query.sort || "-views";
+        var design = req.query.design;
+        if (limit < 0) {
+            limit = 0;
+        }
+        blogQuery(req, res, limit, sort, function(req, res, err, blogs) {
+            if (err) res.send(err);
+            if (design === "short") {
                 async.forEachOfLimit(blogs, n, function(blog, i, callback) {
                     if (err) return callback(err);
                     User.findById(blog.authorId, function(err, user) {
-                        // console.log("omit",omit(blog, ['authorId','mdString','content','tags']),"--------------");
                         blogList.push({
                             _id: blog._id,
                             coverImg: blog.coverImg,
@@ -38,15 +47,17 @@ module.exports = function(app) {
                             description: blog.description,
                             authorName: user.name
                         });
-                        if (++j == n) {
+                        if (j++ == n) {
                             return callback(blogList);
                         }
                     });
                 }, function(blogList) {
                     return res.json(blogList);
                 });
+            } else {
+                res.json(blogs);
             }
-        });
+        })
     }).get('/api/blogs/:id', function(req, res) {
         console.log(req.query);
         var blogId = req.params.id;
@@ -70,24 +81,6 @@ module.exports = function(app) {
                     }
                 });
             }
-        });
-    }).get('/api/recentBlogs', function(req, res) {
-        var recentBlogs = [];
-        Blog.find(function(err, blogs) {
-            var l = blogs.length;
-            for (var i = 1; i <= 3; i++) {
-                var a = l - i;
-                if (a >= 0) {
-                    var stripBlog = {
-                        _id: blogs[a]._id,
-                        coverImg: blogs[a].coverImg,
-                        date: blogs[a].date,
-                        title: blogs[a].title
-                    }
-                    recentBlogs.push(stripBlog);
-                }
-            }
-            res.json(recentBlogs);
         });
     }).post('/api/blogs', function(req, res) {
         var blog = new Blog();
@@ -213,17 +206,20 @@ module.exports = function(app) {
             text: 'We are happy that you subscribed us!', // plaintext body
             html: '<b>We are happy that you subscribed us!</b>' // html body
         };
-        // send mail with defined transport object
-        transporter.sendMail(mailOptions, function(error, info) {
-            if (error) {
-                return console.log(error);
-            }
-            console.log('Message sent: ' + info.response);
-            res.json({
-                message: 'User Subscribed!'
-            });
+        res.json({
+            message: 'blog liked!'
         });
+        // send mail with defined transport object
+        // transporter.sendMail(mailOptions, function(error, info) {
+        //     if (error) {
+        //         return console.log(error);
+        //     }
+        //     console.log('Message sent: ' + info.response);
+        //     res.json({
+        //         message: 'User Subscribed!'
+        //     });
+        // });
     }).get('*', function(req, res) {
         res.sendfile('./public/views/index.html'); // load our public/index.html file
-    });
+    })
 };
