@@ -35,7 +35,9 @@ module.exports = function(app) {
         blogQuery(req, res, limit, sort, function(req, res, err, blogs) {
             if (err) res.send(err);
             if (design === "short") {
-                async.forEachOfLimit(blogs, n, function(blog, i, callback) {
+                // async.forEachOfLimit(blogs, n, function(blog, i, callback) {
+                var j = 0;
+                async.forEachOf(blogs, function(blog, i, callback) {
                     if (err) return callback(err);
                     User.findById(blog.authorId, function(err, user) {
                         blogList.push({
@@ -47,7 +49,7 @@ module.exports = function(app) {
                             description: blog.description,
                             authorName: user.name
                         });
-                        if (j++ == n) {
+                        if (++j === parseInt(limit)) {
                             return callback(blogList);
                         }
                     });

@@ -1,6 +1,7 @@
 angular.module('JStack').directive('preLoader', function() {
     return {
         restrict: 'E',
+        replace: 'true',
         template: '<div class="page bg-dk-purple"><div class="preloader-box"><img class="preloader" src="/assets/img/preloaderLg.svg" alt=""></div></div>'
     }
 }).directive('navBar', function() {

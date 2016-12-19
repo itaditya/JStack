@@ -1,15 +1,19 @@
-<!--
-    <div class="grid" data-masonry='{ "itemSelector": ".grid-item", "columnWidth": 200 }'>
-        <div class="grid-item"></div>
-        <div class="grid-item"></div>
-        ...
-    </div>
-    <script src="/vendor/angular-local-storage/dist/angular-local-storage.min.js"></script>
--->
-<pre-loader ng-hide="blogs"></pre-loader>
+<script src="/vendor/scrollreveal/dist/scrollreveal.min.js"></script>
+<pre-loader ng-hide="postsLoaded"></pre-loader>
 <link rel="stylesheet" href="/assets/css/style.css"/>
 <link rel="stylesheet" href="/assets/css/landing/custom.css"/>
-<div class="page animated fadeIn mainPage" ng-show="blogs">
+<style type="text/css" media="screen">
+.invisible {
+    transition: opacity 0.5s ease;
+    opacity: 0.0;
+}
+
+.visible {
+    transition: opacity 0.5s ease;
+    opacity: 1.0;
+}   
+</style>
+<div class="page animated fadeIn mainPage" ng-show="postsLoaded">
     <nav-bar active="home"></nav-bar>
     <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/coverImg/html.png')"></div>
     <div class="container">
@@ -17,7 +21,7 @@
             Featured
         </p>
         <div class="cards">
-            <article class="card" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in blogs | orderBy:'-views'">
+            <article class="card" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in featuredBlogs | orderBy:'-views'">
                 <header class="card__header" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');">
                     <button class="card__main-action" type="button">
                         In bookmarks
@@ -26,11 +30,57 @@
                 <div class="card__body">
                     <div class="card__content">
                         <h3 class="card__title">
-                            <a ng-href="/blogs/{{ blog._id }}" class="card__showmore">
-                                {{ blog.title }}
-                            </a>
+                            <a ng-href="/blogs/{{ blog._id }}" class="card__showmore" ng-bind-html="trustAsHtml(blog.title)"></a>
                         </h3>
-                        <div class="card__body">{{ blog.description }}</div>
+                        <div class="card__body">
+                            {{ blog.description }}
+                        </div>
+                    </div>
+                    <footer class="card__footer">
+                        <span class="card__author">
+                            by
+                            <strong>
+                                {{ blog.authorName }}
+                            </strong>
+                        </span>
+                        <div class="card__meta">
+                            <div class="card__meta-item">
+                                <i class="card__meta-icon card__meta-comments"></i>
+                                <span class="card__label">
+                                    7 comments
+                                </span>
+                            </div>
+                            <div class="card__meta-item">
+                                <i class="card__meta-icon card__meta-likes"></i>
+                                <span class="card__label">
+                                    {{ blog.likes }}
+                                </span>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </article>
+        </div>
+    </div>
+    <div class="container">
+        <p class="collectionTitle">
+            Most Recent
+        </p>
+        <div class="cards ">
+            <article class="card scrollThis" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in recentBlogs | orderBy:'-views'">
+                <header class="card__header" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');">
+                    <button class="card__main-action" type="button">
+                        In bookmarks
+                    </button>
+                </header>
+                <div class="card__body">
+                    <div class="card__content">
+                        <h3 class="card__title">
+                            <a ng-href="/blogs/{{ blog._id }}" class="card__showmore" ng-bind-html="trustAsHtml(blog.title)"></a>
+                        </h3>
+                        <div class="card__body">
+                            {{ blog.description }}
+                        </div>
                     </div>
                     <footer class="card__footer">
                         <span class="card__author">

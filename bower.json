@@ -16,7 +16,6 @@
     "ngSmoothScroll": "^2.0.0",
     "ftscroller": "^0.7.0",
     "choices.js": "^2.5.1",
-    "angular-ui-select": "^0.19.6",
     "angular-sanitize": "^1.6.0"
   }
 }
