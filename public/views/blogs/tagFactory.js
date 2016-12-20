@@ -12,14 +12,15 @@ angular.module('JStack').factory('tagFactory', function($http) {
             }
         }
     }
-}).service('tagsService', function() {
+}).service('tagsService', function($rootScope) {
     var tagsList;
     return {
         setTags: function(data) {
             tagsList = data;
-        };
+            // $rootScope.$emit('tagsSet');
+        },
         getTags: function() {
             return tagsList;
-        };
+        }
     };
 });

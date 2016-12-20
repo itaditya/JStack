@@ -7,7 +7,7 @@
 <link rel="stylesheet" type="text/css" href="/assets/css/content.css"/>
 <div class="page animated fadeIn mainPage" ng-cloak ng-show="author" id="mainPage">
     <nav-bar></nav-bar>
-    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(29,33,41,0.88),rgba(29,33,41,0.88)),url('/assets/img/coverImg/{{ blog.coverImg }}')">
+    <div class="hero-banner" style="background-image: linear-gradient(rgba(29,33,41,0.88),rgba(29,33,41,0.88)),url('/assets/img/coverImg/{{ blog.coverImg }}')">
         <div class="topic">
             <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide"/>
             <p>
@@ -35,6 +35,15 @@
                     </li>
                 </ul>
             </div>
+            <div class="border widget-sm widget-tag-box">
+                <p>
+                    Popular tags </br>
+                    <a class="tags" ng-repeat="tag in tags" ng-href="/tagSearch/{{tag.id}}" target="_blank">
+                    {{tag.name}}
+                    </a>
+                    <a class="tags" id="moreTag" ng-click="scrollTo('tag-container')" href="">More</a>
+                </p>
+            </div>
             <div class="sm-hide">
                 <div class="border widget-sm animated" id="user-widget"  ng-hide="endFade" ng-class="{fadeOut: startFade}">
                 <!-- ng-hide="endFade" -->
@@ -50,16 +59,6 @@
                         <input type="radio" name="userChoice" ng-model="user.choice" value="-1" ng-change="userChoice()"/>
                         <span class="icon-radio-unchecked"></span>
                     </label>
-                </div>
-                <div class="border widget-sm widget-tag-box">
-                    <p>
-                        Popular tags </br>
-                        <a class="tags" ng-repeat="tag in tags" ng-href="/tagSearch/{{tag.id}}" target="_blank">
-                        {{tag.name}}
-                        </a>
-                        <a class="tags" id="moreTag" ng-click="scrollTo('tag-container')" href="">More</a>
-                        <!-- href="tag-container"  target="_self"-->
-                    </p>
                 </div>
                 <div class="border widget-sm" role="comments">
                     <p data-num="89">

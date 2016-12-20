@@ -43,7 +43,6 @@ angular.module('JStack').directive('preLoader', function() {
             $timeout(tagFactory.getTagList("design=category").then(function(categories) {
                 $scope.categories = categories.data;
                 tagsService.setTags(categories.data);
-                $scope.$broadcast('tags.set');
                 // console.log(categories.data);
             }), 0);
         }

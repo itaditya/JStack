@@ -432,6 +432,7 @@ ul li {
     background: #09b1cf;
     color: #fff;
     padding: 8px 15px;
+    /*background: #053140;*/
 }
 
 .widget-tag-box>p {
@@ -440,7 +441,7 @@ ul li {
 }
 
 .widget-tag-box .tags {
-    background: #eeeeee;
+    background: #eee;
     font-size: 12px;
     padding: 8px 6px;
     margin-right: 6px;

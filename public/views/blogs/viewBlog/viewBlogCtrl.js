@@ -1,23 +1,7 @@
-angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $location, $rootScope, $anchorScroll, $timeout, blogFactory, tagsService,userFactory, $routeParams) {
+angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $location, $rootScope, $anchorScroll, $timeout, blogFactory, tagsService, userFactory, $routeParams) {
     $(document).ready(function() {
         $scope.postsLoaded = false;
         $scope.user = {};
-        $scope.tags = [{
-            id: 12,
-            name: "frontend"
-        }, {
-            id: 12,
-            name: "frontend"
-        }, {
-            id: 12,
-            name: "frontend"
-        }, {
-            id: 12,
-            name: "frontend"
-        }, {
-            id: 2,
-            name: "backend"
-        }];
         console.log($routeParams.id);
         $scope.scrollTo = function(id) {
             var old = $location.hash();
@@ -28,7 +12,6 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
         };
         $scope.trustAsHtml = $sce.trustAsHtml;
         blogFactory.get($routeParams.id).then(function(blog) {
-            // console.log("blog",blog);
             $scope.blog = blog.data;
             $rootScope.d('.main').insertAdjacentHTML('beforeend', $scope.blog.content);
             var codeBlocks = $rootScope.dd('.main pre');
@@ -49,11 +32,15 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
             blogFactory.getList("limit=3&sort=-date").then(function(recentBlogs) {
                 $scope.posts = recentBlogs.data;
                 $scope.postsLoaded = true;
-                console.log(recentBlogs);
             });
-            $scope.$on('tags.set', function() {
-                console.log(tagsService.getTags());
+            // $rootScope.$on('tagsSet', function() {
+            $scope.$watch("$viewContentLoaded", function() {
+                var footerTags = tagsService.getTags()
+                $scope.tags = footerTags[3].tags;
+                console.log("t",$scope.tags);
             });
+                // console.log(tagsService.getTags());
+
             var btnList = $rootScope.dd('.btn');
             for (var i = btnList.length - 1; i >= 0; i--) {
                 btnList[i].addEventListener("click", function() {
