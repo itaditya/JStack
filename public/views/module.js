@@ -23,6 +23,20 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
     $rootScope.dd = function(elem) {
         return document.querySelectorAll(elem);
     }
+    $rootScope.debounce = function(func, wait, immediate) {
+        var timeout;
+        return function() {
+            var context = this, args = arguments;
+            var later = function() {
+                timeout = null;
+                if (!immediate) func.apply(context, args);
+            };
+            var callNow = immediate && !timeout;
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+            if (callNow) func.apply(context, args);
+        };
+    };
     notification.configProfile('global', {
         notification: {
             position: ['right', 'top']

@@ -1,4 +1,4 @@
-angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce,$location, $rootScope,$anchorScroll , $timeout, blogFactory, userFactory, $routeParams) {
+angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $location, $rootScope, $anchorScroll, $timeout, blogFactory, tagsService,userFactory, $routeParams) {
     $(document).ready(function() {
         $scope.postsLoaded = false;
         $scope.user = {};
@@ -20,11 +20,11 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce,$locati
         }];
         console.log($routeParams.id);
         $scope.scrollTo = function(id) {
-          var old = $location.hash();
-          $location.hash(id);
-          $anchorScroll();
-          //reset to old to keep any additional routing logic from kicking in
-          $location.hash(old);
+            var old = $location.hash();
+            $location.hash(id);
+            $anchorScroll();
+            //reset to old to keep any additional routing logic from kicking in
+            $location.hash(old);
         };
         $scope.trustAsHtml = $sce.trustAsHtml;
         blogFactory.get($routeParams.id).then(function(blog) {
@@ -51,6 +51,9 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce,$locati
                 $scope.postsLoaded = true;
                 console.log(recentBlogs);
             });
+            $scope.$on('tags.set', function() {
+                console.log(tagsService.getTags());
+            });
             var btnList = $rootScope.dd('.btn');
             for (var i = btnList.length - 1; i >= 0; i--) {
                 btnList[i].addEventListener("click", function() {
@@ -66,13 +69,6 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce,$locati
             for (var i = modalBtn.length - 1; i >= 0; i--) {
                 modalBtn[i].addEventListener('click', toggleCommentModal);
             };
-            // $rootScope.d(".mainPage").addEventListener('scroll', function(e) {
-            //     sidebarFix();
-            // });
-            document.addEventListener('scroll', function(e) {
-                sidebarFix();
-                console.log('test');
-            });
             $scope.userChoice = function() {
                 console.log($scope.user.choice);
                 $scope.startFade = true;
@@ -85,25 +81,12 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce,$locati
             }
         });
         $scope.subscribe = function() {
-            blogFactory.subscribe($scope.emailId).then(function(message) {
-                console.log(message.data);
-            });
-        }
-
-        function sidebarFix() {
-            var heroheight = $rootScope.d('.hero-banner').clientHeight;
-            // var scrolled = $rootScope.d(".mainPage").scrollTop;
-            var scrolled = $rootScope.d("body").scrollTop;
-            // console.log();
-            var sidebar = $rootScope.d('.sidebar');
-            if (scrolled >= heroheight) {
-                sidebar.style.position = 'fixed';
-            } else {
-                sidebar.style.position = 'relative';
+                blogFactory.subscribe($scope.emailId).then(function(message) {
+                    console.log(message.data);
+                });
             }
-        }
-        // ----------------
-        // Modal toggling ------------------
+            // ----------------
+            // Modal toggling ------------------
         function toggleCommentModal() {
             var comModal = toggler(this);
             var that = this;

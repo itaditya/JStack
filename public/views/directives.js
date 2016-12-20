@@ -39,11 +39,32 @@ angular.module('JStack').directive('preLoader', function() {
     return {
         replace: true,
         templateUrl: '/views/partials/footer.html',
-        controller: function($scope, tagFactory,$timeout) {
+        controller: function($scope, tagFactory, $timeout,tagsService) {
             $timeout(tagFactory.getTagList("design=category").then(function(categories) {
                 $scope.categories = categories.data;
-                console.log(categories.data);
+                tagsService.setTags(categories.data);
+                $scope.$broadcast('tags.set');
+                // console.log(categories.data);
             }), 0);
         }
+    };
+}).directive('sideBar', function() {
+    return {
+        restrict: 'A',
+        controller: function($scope, $element, $attrs, $rootScope) {
+                function sidebarFix() {
+                    var sidebar = $element[0];
+                    var sidebarTop = sidebar.getBoundingClientRect().top;
+                    var bannerBottom = $rootScope.d(".hero-banner").getBoundingClientRect().bottom;
+                    if (sidebarTop <= 0 && bannerBottom <= 0) {
+                        sidebar.style.position = 'fixed';
+                    } else {
+                        sidebar.style.position = 'relative';
+                    }
+                }
+                angular.element(document).bind("scroll", function() {
+                    sidebarFix();
+                });
+            }
     };
 });

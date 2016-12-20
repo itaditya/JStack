@@ -3,7 +3,6 @@ angular.module('JStack').factory('tagFactory', function($http) {
     return {
         getBlogs: function(id) {
             return $http.get(urlBase + "/" + id);
-
         },
         getTagList: function(query) {
             if (query) {
@@ -13,4 +12,14 @@ angular.module('JStack').factory('tagFactory', function($http) {
             }
         }
     }
+}).service('tagsService', function() {
+    var tagsList;
+    return {
+        setTags: function(data) {
+            tagsList = data;
+        };
+        getTags: function() {
+            return tagsList;
+        };
+    };
 });
