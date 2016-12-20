@@ -21,7 +21,7 @@
             Featured
         </p>
         <div class="cards">
-            <article class="card" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in featuredBlogs | orderBy:'-views'">
+            <article class="card animateFeaturedBlogs" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in featuredBlogs | orderBy:'-views'">
                 <header class="card__header" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');">
                     <button class="card__main-action" type="button">
                         In bookmarks
@@ -67,7 +67,7 @@
             Most Recent
         </p>
         <div class="cards ">
-            <article class="card scrollThis" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in recentBlogs | orderBy:'-views'">
+            <article class="card animateRecentBlogs" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in recentBlogs | orderBy:'-views'">
                 <header class="card__header" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');">
                     <button class="card__main-action" type="button">
                         In bookmarks

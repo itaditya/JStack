@@ -4,20 +4,28 @@ angular.module('blogs').controller('blogsCtrl', function($scope, $sce, $timeout,
         $scope.postsLoaded = true;
         $scope.trustAsHtml = $sce.trustAsHtml;
         window.sr = ScrollReveal({});
+        $scope.$watch("$viewContentLoaded", function() {
+            console.log('test1');
+            // sr.sync();
+            sr.reveal($rootScope.dd('.animateFeaturedBlogs'), {
+                // container: ".mainPage",
+                viewFactor: 0.6,
+                easing   : 'ease-in-out',
+                // opacity: 0.3,
+                duration: 1000
+            });
+        });
         blogFactory.getList("limit=3&design=short&sort=-date").then(function(blogs) {
             $scope.recentBlogs = blogs.data;
-            // console.log($rootScope.d(".mainPage"));
             $scope.$watch("$viewContentLoaded", function() {
-                console.log('test');
-                sr.reveal(document.querySelectorAll('.scrollThis'), {
-                    container: ".mainPage",
-                    origin: 'top',
-                    reset: true,
-                    // opacity: 0.3,
-                    duration: 1000
-                }, 200);
-                // sr.sync();
+                console.log('test2');
+                sr.reveal($rootScope.dd('.animateRecentBlogs'), {
+                    // container: ".mainPage",
+                    // reset: true,
+                    duration: 800
+                }, 150);
             });
+            // console.log($rootScope.d(".mainPage"));
         });
         $scope.isBig = function(index) {
             index = index % 9;

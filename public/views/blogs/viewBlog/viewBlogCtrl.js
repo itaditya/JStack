@@ -1,8 +1,31 @@
-angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $rootScope, $timeout, blogFactory, userFactory, $routeParams) {
+angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce,$location, $rootScope,$anchorScroll , $timeout, blogFactory, userFactory, $routeParams) {
     $(document).ready(function() {
         $scope.postsLoaded = false;
         $scope.user = {};
+        $scope.tags = [{
+            id: 12,
+            name: "frontend"
+        }, {
+            id: 12,
+            name: "frontend"
+        }, {
+            id: 12,
+            name: "frontend"
+        }, {
+            id: 12,
+            name: "frontend"
+        }, {
+            id: 2,
+            name: "backend"
+        }];
         console.log($routeParams.id);
+        $scope.scrollTo = function(id) {
+          var old = $location.hash();
+          $location.hash(id);
+          $anchorScroll();
+          //reset to old to keep any additional routing logic from kicking in
+          $location.hash(old);
+        };
         $scope.trustAsHtml = $sce.trustAsHtml;
         blogFactory.get($routeParams.id).then(function(blog) {
             // console.log("blog",blog);
@@ -43,8 +66,12 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $rootS
             for (var i = modalBtn.length - 1; i >= 0; i--) {
                 modalBtn[i].addEventListener('click', toggleCommentModal);
             };
-            $rootScope.d(".mainPage").addEventListener('scroll', function(e) {
+            // $rootScope.d(".mainPage").addEventListener('scroll', function(e) {
+            //     sidebarFix();
+            // });
+            document.addEventListener('scroll', function(e) {
                 sidebarFix();
+                console.log('test');
             });
             $scope.userChoice = function() {
                 console.log($scope.user.choice);
@@ -65,7 +92,9 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $rootS
 
         function sidebarFix() {
             var heroheight = $rootScope.d('.hero-banner').clientHeight;
-            var scrolled = $rootScope.d(".mainPage").scrollTop;
+            // var scrolled = $rootScope.d(".mainPage").scrollTop;
+            var scrolled = $rootScope.d("body").scrollTop;
+            // console.log();
             var sidebar = $rootScope.d('.sidebar');
             if (scrolled >= heroheight) {
                 sidebar.style.position = 'fixed';

@@ -5,7 +5,7 @@
 <link rel="stylesheet" type="text/css" href="/assets/css/themes/tranquil-heart.min.css"/>
 <script src="/vendor/google-code-prettify/bin/prettify.min.js"></script>
 <link rel="stylesheet" type="text/css" href="/assets/css/content.css"/>
-<div class="page animated fadeIn mainPage" ng-cloak ng-show="author">
+<div class="page animated fadeIn mainPage" ng-cloak ng-show="author" id="mainPage">
     <nav-bar></nav-bar>
     <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(29,33,41,0.88),rgba(29,33,41,0.88)),url('/assets/img/coverImg/{{ blog.coverImg }}')">
         <div class="topic">
@@ -36,30 +36,6 @@
                 </ul>
             </div>
             <div info="sidebar" class="sm-hide">
-                <div class="border widget-sm" role="comments">
-                    <p data-num="89">
-                        comments
-                    </p>
-                    <div class="btn modalBtn" data-toggle-id="commentModal">
-                        View Comments
-                    </div>
-                </div>
-                <div class="border widget-sm">
-                    <p>
-                        Ads
-                    </p>
-                    <div class="btn modalBtn" data-toggle-id="adModal">
-                        Link To Ad
-                    </div>
-                </div>
-                <div class="border widget-sm">
-                    <p>
-                        Quiz of Today
-                    </p>
-                    <div class="btn modalBtn" data-toggle-id="quizModal">
-                        View Quiz
-                    </div>
-                </div>
                 <div class="border widget-sm animated" id="user-widget"  ng-hide="endFade" ng-class="{fadeOut: startFade}">
                 <!-- ng-hide="endFade" -->
                     <p>
@@ -75,6 +51,40 @@
                         <span class="icon-radio-unchecked"></span>
                     </label>
                 </div>
+                <div class="border widget-sm widget-tag-box">
+                    <p>
+                        Popular tags </br>
+                        <a class="tags" ng-repeat="tag in tags" ng-href="/tagSearch/{{tag.id}}" target="_blank">
+                        {{tag.name}}
+                        </a>
+                        <a class="tags" id="moreTag" ng-click="scrollTo('tag-container')" href="">More</a>
+                        <!-- href="tag-container"  target="_self"-->
+                    </p>
+                </div>
+                <div class="border widget-sm" role="comments">
+                    <p data-num="89">
+                        comments
+                    </p>
+                    <button class="btn modalBtn" data-toggle-id="commentModal">
+                        View Comments
+                    </button>
+                </div>
+                <div class="border widget-sm">
+                    <p>
+                        Quiz of Today
+                    </p>
+                    <button class="btn modalBtn" data-toggle-id="quizModal">
+                        View Quiz
+                    </button>
+                </div>
+                <div class="border widget-sm">
+                    <p>
+                        Ads
+                    </p>
+                    <button class="btn modalBtn" data-toggle-id="adModal">
+                        Link To Ad
+                    </button>
+                </div>
                 <!-- <div class="border widget-sm" id="user-widget">
                     <p>Hey tell us more about you !</p>
                     <input type="text" id="user-name" placeholder="Name">
@@ -84,7 +94,7 @@
             </div>
         </aside>
     </section>
-    <section class="posts-card border">
+    <section class="posts-card border" id="tagtainer" smooth-scroll container-id="mainPage">
         <div class="preloader-box" ng-hide="postsLoaded">
             <div class="preloader"></div>
         </div>

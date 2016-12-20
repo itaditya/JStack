@@ -2,7 +2,7 @@ angular.module('JStack').directive('preLoader', function() {
     return {
         restrict: 'E',
         replace: 'true',
-        template: '<div class="page bg-dk-purple"><div class="preloader-box"><img class="preloader" src="/assets/img/preloaderLg.svg" alt=""></div></div>'
+        template: '<div class="preloaderPage bg-dk-purple"><div class="preloader-box"><img class="preloader" src="/assets/img/preloaderLg.svg" alt=""></div></div>'
     }
 }).directive('navBar', function() {
     return {
@@ -42,6 +42,7 @@ angular.module('JStack').directive('preLoader', function() {
         controller: function($scope, tagFactory,$timeout) {
             $timeout(tagFactory.getTagList("design=category").then(function(categories) {
                 $scope.categories = categories.data;
+                console.log(categories.data);
             }), 0);
         }
     };

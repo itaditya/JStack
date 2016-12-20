@@ -5,7 +5,7 @@ body {
     font-weight: 300;
     color: #333;
     background: #fafafa;
-    overflow: hidden;
+    /*overflow: hidden;*/
 }
 
 
@@ -25,8 +25,8 @@ ul li {
 }
 
 .page {
-    height: 100vh;
-    overflow: auto;
+    /*height: 100vh;*/
+    /*overflow: auto;*/
     width: 100%;
     background: #fafafa;
     margin-right: -8px;
@@ -419,26 +419,43 @@ ul li {
     padding: 20px 30px;
     background: #fff;
     margin: 20px 40px;
-    height: 150px !important;
+    min-height: 150px !important;
     text-align: center;
 }
 
 .widget-sm .btn {
     font-size: 14px;
-    padding: 10px 0;
+    /*padding: 10px 0;*/
 }
-.btn-container{
+
+#moreTag {
+    background: #09b1cf;
+    color: #fff;
+    padding: 8px 15px;
+}
+
+.widget-tag-box>p {
+    line-height: 45px;
+    text-align: left;
+}
+
+.widget-tag-box .tags {
+    background: #eeeeee;
+    font-size: 12px;
+    padding: 8px 6px;
+    margin-right: 6px;
+}
+
+.btn-container {
     display: flex;
     align-items: center;
     justify-content: flex-end;
 }
-.btn-container .btn{
-    font-size: 14px;
-    background: #fff;
-    color: #333;
-    padding: 10px 30px;
+
+.btn-container .btn {
     margin: 5px 8px;
 }
+
 .btn {
     border: 2px solid #09B1CF;
     border-radius: 30px;
@@ -446,6 +463,10 @@ ul li {
     -webkit-perspective: 200px;
     transition: .4s;
     cursor: pointer;
+    font-size: 14px;
+    background: #fff;
+    color: #333;
+    padding: 10px 30px;
 }
 
 .btn:hover {
@@ -453,11 +474,22 @@ ul li {
     color: #fff;
 }
 
-.btn-click {
+
+/*.btn-click {
     -webkit-animation: click .8s ease-in;
     -o-animation: click .8s ease-in;
     animation: click .8s ease-in;
+}*/
+
+.btn:active {
+    -webkit-transition: none;
+    -moz-transition: none;
+    -ms-transition: none;
+    -o-transition: none;
+    transition: none;
+    transform: scale(0.94);
 }
+
 #user-widget {
     /*min-height: 320px;*/
     text-align: center;

@@ -16,7 +16,7 @@ angular.module('blogs').controller('listBlogCtrl', function($scope, $rootScope,$
             $rootScope.d(".menu").addEventListener("click", function() {
                 document.querySelector(".sidebar").classList.toggle("sm-hide");
             });
-            blogFactory.getList("len=3").then(function(recentBlogs) {
+            blogFactory.getList("limit=3").then(function(recentBlogs) {
                 $scope.posts = recentBlogs.data;
                 $scope.postsLoaded = true;
             });
