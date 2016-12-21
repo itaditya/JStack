@@ -1,6 +1,12 @@
 angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorageModule']).config(function(localStorageServiceProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     localStorageServiceProvider.setPrefix('JStack').setStorageType('localStorage');
+    notification.configProfile('global', {
+        notification: {
+            position: ['right', 'top'],
+            autoHide: 1
+        }
+    });
 }).service('SessionService', function(localStorageService) {
     this.setUserAuthenticated = function(value, allowEdit) {
         localStorageService.set("userIsAuthenticated", value);
@@ -26,7 +32,8 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
     $rootScope.debounce = function(func, wait, immediate) {
         var timeout;
         return function() {
-            var context = this, args = arguments;
+            var context = this,
+                args = arguments;
             var later = function() {
                 timeout = null;
                 if (!immediate) func.apply(context, args);
@@ -37,9 +44,4 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
             if (callNow) func.apply(context, args);
         };
     };
-    notification.configProfile('global', {
-        notification: {
-            position: ['right', 'top']
-        }
-    });
 });

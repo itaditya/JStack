@@ -22,6 +22,7 @@ angular.module('auth').controller('loginCtrl', function($scope, $location, authF
                         $location.path("/profile");
                     } else {
                         notification.notify('error', 'Incorrect Username or Password');
+                        $scope.isValidating = false;
                     }
                 });
             } else {
