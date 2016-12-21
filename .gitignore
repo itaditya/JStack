@@ -3,3 +3,4 @@
 npm-debug.log
 gitz.py
 .env 
+.env.local

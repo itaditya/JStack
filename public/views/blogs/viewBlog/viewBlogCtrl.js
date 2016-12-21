@@ -29,18 +29,20 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
             userFactory.get($scope.blog.authorId).then(function(author) {
                 $scope.author = author.data;
             });
+            blogFactory.getList("limit=4&design=links").then(function(popularLinks) {
+                $scope.popularLinks = popularLinks.data;
+            });
             blogFactory.getList("limit=3&sort=-date").then(function(recentBlogs) {
-                $scope.posts = recentBlogs.data;
+                $scope.topics = $scope.posts;
                 $scope.postsLoaded = true;
             });
             // $rootScope.$on('tagsSet', function() {
             $scope.$watch("$viewContentLoaded", function() {
                 var footerTags = tagsService.getTags()
                 $scope.tags = footerTags[3].tags;
-                console.log("t",$scope.tags);
+                console.log("t", $scope.tags);
             });
-                // console.log(tagsService.getTags());
-
+            // console.log(tagsService.getTags());
             var btnList = $rootScope.dd('.btn');
             for (var i = btnList.length - 1; i >= 0; i--) {
                 btnList[i].addEventListener("click", function() {
@@ -52,10 +54,10 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
                     }, 600);
                 });
             }
-            var modalBtn = $rootScope.dd('.modalBtn');
-            for (var i = modalBtn.length - 1; i >= 0; i--) {
-                modalBtn[i].addEventListener('click', toggleCommentModal);
-            };
+            // var modalBtn = $rootScope.dd('.modalBtn');
+            // for (var i = modalBtn.length - 1; i >= 0; i--) {
+            //     modalBtn[i].addEventListener('click', toggleCommentModal);
+            // };
             $scope.userChoice = function() {
                 console.log($scope.user.choice);
                 $scope.startFade = true;
@@ -74,40 +76,40 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
             }
             // ----------------
             // Modal toggling ------------------
-        function toggleCommentModal() {
-            var comModal = toggler(this);
-            var that = this;
-            comModal.querySelector(".closeModal").addEventListener('click', function() {
-                that.click();
-            });
-            // comModal.addEventListener('blur', function() {
-            //     that.click();
-            // });
-            function escKeyQuit(event) {
-                var evt = event || window.event;
-                if (evt.keyCode == 27) {
-                    evt.preventDefault();
-                    that.click();
-                }
-            }
-            document.addEventListener('keydown', escKeyQuit);
-        }
+        // function toggleCommentModal() {
+        //     var comModal = toggler(this);
+        //     var that = this;
+        //     comModal.querySelector(".closeModal").addEventListener('click', function() {
+        //         that.click();
+        //     });
+        //     // comModal.addEventListener('blur', function() {
+        //     //     that.click();
+        //     // });
+        //     function escKeyQuit(event) {
+        //         var evt = event || window.event;
+        //         if (evt.keyCode == 27) {
+        //             evt.preventDefault();
+        //             that.click();
+        //         }
+        //     }
+        //     document.addEventListener('keydown', escKeyQuit);
+        // }
 
-        function toggler(elem) {
-            var comModal = elem.dataset.toggleId;
-            comModal = document.getElementById(comModal);
-            setTimeout(function() {
-                comModal.focus();
-            }, 0);
-            if (comModal.style.display == 'block') {
-                comModal.style.display = 'none';
-            } else {
-                comModal.style.display = 'block';
-                comModal.classList.add('animated');
-                comModal.classList.add('fadeIn');
-            }
-            return comModal;
-        }
+        // function toggler(elem) {
+        //     var comModal = elem.dataset.toggleId;
+        //     comModal = document.getElementById(comModal);
+        //     setTimeout(function() {
+        //         comModal.focus();
+        //     }, 0);
+        //     if (comModal.style.display == 'block') {
+        //         comModal.style.display = 'none';
+        //     } else {
+        //         comModal.style.display = 'block';
+        //         comModal.classList.add('animated');
+        //         comModal.classList.add('fadeIn');
+        //     }
+        //     return comModal;
+        // }
         // Logic
         // Target all .modalBtn and attach click event
         // toggleCommentModal fnction is to instrct toggler fn to toggle what.
@@ -117,3 +119,6 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
         /* _____________ */
     });
 });
+// .progress(function(evt) {
+//             console.info(evt.loaded, "/", evt.total);
+//         })

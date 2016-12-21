@@ -29,6 +29,7 @@
     <section class="container" role="blog content">
         <main class="main z-depth border animated fadeIn" style="font-size: 14px;">
             <textarea class="editor"></textarea>
+            <textarea name="description" ng-model="blog.description"></textarea>
             <button ng-click="saveBlog()">Save</button>
             <a ng-show="postid" ng-href="/blogs/{{postid}}" target="_blank" style="color:#000;">View Blog</a>
         </main>

@@ -1,6 +1,6 @@
 angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $rootScope, $interval, $timeout,localStorageService, blogFactory, tagFactory, userFactory, $routeParams) {
     $(document).ready(function() {
-        localStorageService.set("authorId", "57fcdedcea223b1a2c8411cb");
+        // localStorageService.set("authorId", "57fcdedcea223b1a2c8411cb");
         userFactory.get(localStorageService.get("authorId")).then(function(author) {
             var simplemde = new SimpleMDE({
                 element: document.querySelector(".editor"),

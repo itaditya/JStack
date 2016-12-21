@@ -66,4 +66,54 @@ angular.module('JStack').directive('preLoader', function() {
                 });
             }
     };
+}).directive('modalPane', function() {
+    return {
+        // scope: {
+        //     modalId: "@"
+        // },
+        restrict: 'A',
+        controller: function($scope, $attrs,$element) {
+            console.log($attrs.modalId);
+            $element.bind("click",function(a){
+                // console.info(this);
+                toggleCommentModal();
+            })
+            function toggleCommentModal() {
+                var comModal = toggler();
+                // var that = this;
+                var that = $element[0];
+                comModal.querySelector(".closeModal").addEventListener('click', function() {
+                    that.click();
+                });
+                // comModal.addEventListener('blur', function() {
+                //     that.click();
+                // });
+                function escKeyQuit(event) {
+                    var evt = event || window.event;
+                    if (evt.keyCode == 27) {
+                        evt.preventDefault();
+                        that.click();
+                    }
+                }
+                document.addEventListener('keydown', escKeyQuit);
+            }
+
+            function toggler(elem) {
+                var comModal = $attrs.modalId;
+                comModal = document.getElementById(comModal);
+                setTimeout(function() {
+                    comModal.focus();
+                }, 0);
+                if (comModal.style.display == 'block') {
+                    comModal.style.display = 'none';
+                } else {
+                    comModal.style.display = 'block';
+                    comModal.classList.add('animated');
+                    comModal.classList.add('fadeIn');
+                }
+                return comModal;
+            }
+            // $rootScope.d("#" + $attrs.active).classList.add("active");
+        }
+    };
 });

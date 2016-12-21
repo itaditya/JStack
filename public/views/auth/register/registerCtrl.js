@@ -1,4 +1,4 @@
-angular.module('auth').controller('registerCtrl', function($scope, authFactory) {
+angular.module('auth').controller('registerCtrl', function($scope,$location, authFactory) {
     $(document).ready(function() {
         $scope.isLoaded = true;
         $scope.isValidating = false;

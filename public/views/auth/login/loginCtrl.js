@@ -1,5 +1,6 @@
 angular.module('auth').controller('loginCtrl', function($scope, $location, authFactory, localStorageService, $routeParams, SessionService) {
     SessionService.setUserAuthenticated(false);
+    localStorageService.clearAll();
     $(document).ready(function() {
         // console.log(notification.getProfile('global'));
         $scope.isLoaded = true;

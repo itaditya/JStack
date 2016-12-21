@@ -16,7 +16,7 @@ body {
 }
 
 a {
-    color: #fff;
+    /*color: #fff;*/
     text-decoration: none;
 }
 
@@ -201,12 +201,15 @@ ul li {
 
 .img-container {
     position: relative;
+    overflow: hidden;
 }
 
 .img-container>img {
     width: 100%;
     height: 150px;
     object-fit: cover;
+    /*transform: scale(1.1);*/
+    transition: 0.6s;
 }
 
 .overlay {
@@ -244,7 +247,9 @@ ul li {
     z-index: 2;
     opacity: 1;
 }
-
+/*.img-container:hover>img{
+    transform: scale(1);
+}*/
 .card-details>p {
     padding: 5px 12px;
     margin: 0;
@@ -377,7 +382,7 @@ ul li {
 }
 
 .widget p {
-    color: #000;
+    /*color: #000;*/
     text-align: center;
 }
 
@@ -392,16 +397,18 @@ ul li {
     transition: .3s;
     letter-spacing: 1px;
     border-bottom: 1px solid #E8DADA;
-    font-size: 16px;
-    color: #888;
+    font-size: 14px;
+    /*color: #888;*/
 }
-
+.index-list li a{
+    color: #333;
+}
 .index-list li:hover {
     background: rgba(0, 0, 0, 0.1);
     padding-left: 18px;
     /*border-left: 2px solid  rgba(41,169,93,.67);*/
     border-left: 2px solid rgba(229, 126, 49, 1);
-    color: #333;
+    /*color: #333;*/
 }
 
 .widget {
@@ -409,7 +416,7 @@ ul li {
     padding: 20px 30px;
     background: #fff;
     margin: 20px 40px;
-    min-height: 300px;
+    min-height: 200px;
     /*max-height: 400px;*/
     /*border-left: 4px solid rgba(229,126,49,1) !important;*/
     overflow-y: auto;
@@ -431,7 +438,7 @@ ul li {
 #moreTag {
     background: #09b1cf;
     color: #fff;
-    padding: 8px 15px;
+    padding: 8px 20px;
     /*background: #053140;*/
 }
 

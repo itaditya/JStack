@@ -37,8 +37,13 @@ module.exports = function(app) {
             if (design === "short") {
                 // async.forEachOfLimit(blogs, n, function(blog, i, callback) {
                 var j = 0;
+                var l = blogs.length;
+                if(limit > l){
+                    limit = l;
+                }
                 async.forEachOf(blogs, function(blog, i, callback) {
                     if (err) return callback(err);
+                    // console.info(blog.authorId);
                     User.findById(blog.authorId, function(err, user) {
                         blogList.push({
                             _id: blog._id,
@@ -53,6 +58,20 @@ module.exports = function(app) {
                             return callback(blogList);
                         }
                     });
+                }, function(blogList) {
+                    return res.json(blogList);
+                });
+            } else if (design === "links") {
+                var j = 0;
+                async.forEachOf(blogs, function(blog, i, callback) {
+                    if (err) return callback(err);
+                    blogList.push({
+                        _id: blog._id,
+                        title: blog.title
+                    });
+                    if (++j === parseInt(limit)) {
+                        return callback(blogList);
+                    }
                 }, function(blogList) {
                     return res.json(blogList);
                 });

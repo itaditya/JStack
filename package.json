@@ -5,7 +5,7 @@
   "scripts": {
     "postinstall": "bower install",
     "nodemon": "nodemon app.js",
-    "start": "heroku local -p 8080"
+    "start": "heroku local -p 8080 -e .env.local"
   },
   "dependencies": {
     "async": "^2.1.4",

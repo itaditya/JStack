@@ -37,122 +37,128 @@
             </div>
             <div class="border widget-sm widget-tag-box">
                 <p>
-                    Popular tags </br>
-                    <a class="tags" ng-repeat="tag in tags" ng-href="/tagSearch/{{tag.id}}" target="_blank">
-                    {{tag.name}}
-                    </a>
-                    <a class="tags" id="moreTag" ng-click="scrollTo('tag-container')" href="">More</a>
-                </p>
-            </div>
-            <div class="sm-hide">
-                <div class="border widget-sm animated" id="user-widget"  ng-hide="endFade" ng-class="{fadeOut: startFade}">
-                <!-- ng-hide="endFade" -->
-                    <p>
-                        Was This Helpfull ?
-                    </p>
-                    <label>
-                        <input type="radio" name="userChoice" ng-model="user.choice" value="1" ng-change="userChoice()"/>
-                        <span class="icon-radio-checked"></span>
-                    </label>
-                    <span style="padding-left: 18px;"></span>
-                    <label>
-                        <input type="radio" name="userChoice" ng-model="user.choice" value="-1" ng-change="userChoice()"/>
-                        <span class="icon-radio-unchecked"></span>
-                    </label>
-                </div>
-                <div class="border widget-sm" role="comments">
-                    <p data-num="89">
-                        comments
-                    </p>
-                    <button class="btn modalBtn" data-toggle-id="commentModal">
-                        View Comments
-                    </button>
-                </div>
-                <div class="border widget-sm">
-                    <p>
-                        Quiz of Today
-                    </p>
-                    <button class="btn modalBtn" data-toggle-id="quizModal">
-                        View Quiz
-                    </button>
-                </div>
-                <div class="border widget-sm">
-                    <p>
-                        Ads
-                    </p>
-                    <button class="btn modalBtn" data-toggle-id="adModal">
-                        Link To Ad
-                    </button>
-                </div>
-                <!-- <div class="border widget-sm" id="user-widget">
-                    <p>Hey tell us more about you !</p>
-                    <input type="text" id="user-name" placeholder="Name">
-                    <input type="text" id="user-domain" placeholder="Domain">
-                    <div class="btn" id="user-save">Save Details</div>
-                </div> -->
-            </div>
-        </aside>
-    </section>
-    <section class="posts-card border" id="tagtainer" smooth-scroll container-id="mainPage">
-        <div class="preloader-box" ng-hide="postsLoaded">
-            <div class="preloader"></div>
-        </div>
-        <div class="card-details border" ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded">
-            <!-- ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded" -->
-            <div class="img-container">
-                <img ng-src="/assets/img/coverImg/{{ post.coverImg }} "/>
-                <div class="overlay">
-                    <div class="caption">
-                        <a ng-href="/blogs/{{ post._id }}" class="btn" target="_blank">
-                            View
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <p>
-                {{ post.title }}
+                    Popular tags
+                </br>
+                <a class="tags" ng-repeat="tag in tags" ng-href="/tagSearch/{{ tag.id }}" target="_blank">
+                    {{ tag.name }}
+                </a>
+                <a class="tags" id="moreTag" ng-click="scrollTo('tag-container')" href="">
+                    More
+                </a>
             </p>
-            <span class="post-date">
-                {{ post.date | date }}
-            </span>
         </div>
-        <!-- <input autofocus> -->
-    </section>
-    <footer-bar></footer-bar>
-    <div class="modal" tabindex="1" id="commentModal">
-        <span class="closeModal icon-cross"></span>
-        <!-- <h2>Fb Comments Coming Soon ..</h2> -->
-        <div id="fb-root"></div>
-        <script>
-        (function(d, s, id) {
-            console.log(d, s, id);
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s);
-            js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1149863308401381";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
-        </script>
-        <div class="fb-comments" data-href="http://localhost:8080/#/blogs/{{ blog._id }}" data-order-by="reverse_time" data-width="800" data-numposts="5"></div>
+        <div class="widget border">
+            <p>
+                You may also like
+            </p>
+            <ul class="index-list">
+                <li data-ng-repeat="link in popularLinks">
+                    <a ng-href="/blogs/{{link._id}}" ng-bind-html="trustAsHtml(link.title)">
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div class="sm-hide">
+            <div class="border widget-sm animated" id="user-widget"  ng-hide="endFade" ng-class="{fadeOut: startFade}">
+                <!-- ng-hide="endFade" -->
+                <p>
+                    Was This Blog Helpfull ?
+                </p>
+                <label>
+                    <input type="radio" name="userChoice" ng-model="user.choice" value="1" ng-change="userChoice()"/>
+                    <span class="icon-radio-checked"></span>
+                </label>
+                <span style="padding-left: 18px;"></span>
+                <label>
+                    <input type="radio" name="userChoice" ng-model="user.choice" value="-1" ng-change="userChoice()"/>
+                    <span class="icon-radio-unchecked"></span>
+                </label>
+            </div>
+            <div class="border widget-sm" role="comments">
+                <p data-num="89">
+                    comments
+                </p>
+                <button class="btn modalBtn" data-toggle-id="commentModal" modal-pane modal-id="commentModal">
+                    View Comments
+                </button>
+            </div>
+            <div class="border widget-sm">
+                <p>
+                    Quiz of Today
+                </p>
+                <button class="btn modalBtn" data-toggle-id="quizModal">
+                    View Quiz
+                </button>
+            </div>
+            <div class="border widget-sm">
+                <p>
+                    Ads
+                </p>
+                <button class="btn modalBtn" data-toggle-id="adModal">
+                    Link To Ad
+                </button>
+            </div>
+            <!-- <div class="border widget-sm" id="user-widget">
+                <p>Hey tell us more about you !</p>
+                <input type="text" id="user-name" placeholder="Name">
+                <input type="text" id="user-domain" placeholder="Domain">
+                <div class="btn" id="user-save">Save Details</div>
+            </div> -->
+        </div>
+    </aside>
+</section>
+<section class="posts-card border">
+    <div class="preloader-box" ng-hide="postsLoaded">
+        <div class="preloader"></div>
     </div>
-    <div class="modal" tabindex="1" id="quizModal">
-        <span class="closeModal icon-cross"></span>
-        <h2>
-            Quiz Coming Soon ..
-        </h2>
+    <div class="card-details border" ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded">
+        <div class="img-container">
+            <img ng-src="/assets/img/coverImg/{{ post.coverImg }} "/>
+            <div class="overlay">
+                <div class="caption">
+                    <a ng-href="/blogs/{{ post._id }}" class="btn" target="_blank">
+                        View
+                    </a>
+                </div>
+            </div>
+        </div>
+        <p>
+            {{ post.title }}
+        </p>
+        <span class="post-date">
+            {{ post.date | date }}
+        </span>
     </div>
-    <div class="modal" tabindex="1" id="adModal">
-        <span class="closeModal icon-cross"></span>
-        <h2>
-            Ads Not Coming Soon ..
-        </h2>
-    </div>
+    <!-- <input autofocus> -->
+</section>
+<footer-bar></footer-bar>
+<div class="modal" tabindex="1" id="commentModal">
+    <span class="closeModal icon-cross"></span>
+    <!-- <h2>Fb Comments Coming Soon ..</h2> -->
+<!--     <div id="fb-root"></div>
+    <script>
+    (function(d, s, id) {
+        console.log(d, s, id);
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1149863308401381";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+    </script>
+    <div class="fb-comments" data-href="http://localhost:8080/#/blogs/{{ blog._id }}" data-order-by="reverse_time" data-width="800" data-numposts="5"></div> -->
 </div>
-<!-- <div class="page bg-dk-purple" ng-hide="author">
-<div class="preloader-box">
-    <div class="preloader"></div>
-    <img class="preloader" src="/assets/img/preloaderLg.svg" alt="">
+<div class="modal" tabindex="1" id="quizModal">
+    <span class="closeModal icon-cross"></span>
+    <h2>
+        Quiz Coming Soon ..
+    </h2>
 </div>
-</div> -->
-<!-- style="background: #2c3e50;" -->
+<div class="modal" tabindex="1" id="adModal">
+    <span class="closeModal icon-cross"></span>
+    <h2>
+        Ads Not Coming Soon ..
+    </h2>
+</div>
+</div>
