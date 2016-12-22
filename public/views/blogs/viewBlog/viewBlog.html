@@ -16,12 +16,15 @@
                 </span>
             </p>
             <h3 ng-bind-html="trustAsHtml(blog.title)">
-                <!-- {{ blog.title }} -->
             </h3>
         </div>
     </div>
     <section class="container" role="blog content">
-        <main class="main z-depth border"></main>
+        <main class="main z-depth border">
+            <a ng-show="isAuthor" class="btn" ng-href="/blogs/edit/{{ blog._id }}" target="_blank" style=" line-height: 16px;">
+                View Blog
+            </a>
+        </main>
         <!-- End of Main -->
         <!-- sidebar starts -->
         <aside class="sidebar sm-hide" side-bar>
@@ -53,8 +56,7 @@
             </p>
             <ul class="index-list">
                 <li data-ng-repeat="link in popularLinks">
-                    <a ng-href="/blogs/{{link._id}}" ng-bind-html="trustAsHtml(link.title)">
-                    </a>
+                    <a ng-href="/blogs/{{ link._id }}" ng-bind-html="trustAsHtml(link.title)"></a>
                 </li>
             </ul>
         </div>
@@ -78,7 +80,7 @@
                 <p data-num="89">
                     comments
                 </p>
-                <button class="btn modalBtn" data-toggle-id="commentModal" modal-pane modal-id="commentModal">
+                <button class="btn modalBtn" modal-pane modal-id="commentModal">
                     View Comments
                 </button>
             </div>
@@ -86,7 +88,7 @@
                 <p>
                     Quiz of Today
                 </p>
-                <button class="btn modalBtn" data-toggle-id="quizModal">
+                <button class="btn modalBtn" modal-pane modal-id="quizModal">
                     View Quiz
                 </button>
             </div>
@@ -94,7 +96,7 @@
                 <p>
                     Ads
                 </p>
-                <button class="btn modalBtn" data-toggle-id="adModal">
+                <button class="btn modalBtn" modal-pane modal-id="adModal">
                     Link To Ad
                 </button>
             </div>
@@ -135,19 +137,19 @@
 <div class="modal" tabindex="1" id="commentModal">
     <span class="closeModal icon-cross"></span>
     <!-- <h2>Fb Comments Coming Soon ..</h2> -->
-<!--     <div id="fb-root"></div>
-    <script>
-    (function(d, s, id) {
-        console.log(d, s, id);
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1149863308401381";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <div class="fb-comments" data-href="http://localhost:8080/#/blogs/{{ blog._id }}" data-order-by="reverse_time" data-width="800" data-numposts="5"></div> -->
+    <!--     <div id="fb-root"></div>
+        <script>
+        (function(d, s, id) {
+            console.log(d, s, id);
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1149863308401381";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        </script>
+        <div class="fb-comments" data-href="http://localhost:8080/#/blogs/{{ blog._id }}" data-order-by="reverse_time" data-width="800" data-numposts="5"></div> -->
 </div>
 <div class="modal" tabindex="1" id="quizModal">
     <span class="closeModal icon-cross"></span>

@@ -1,4 +1,4 @@
-angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorageModule']).config(function(localStorageServiceProvider, $locationProvider) {
+angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorageModule','ngFileUpload']).config(function(localStorageServiceProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     localStorageServiceProvider.setPrefix('JStack').setStorageType('localStorage');
     notification.configProfile('global', {
@@ -8,11 +8,18 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
         }
     });
 }).service('SessionService', function(localStorageService) {
+    // var userType;
     this.setUserAuthenticated = function(value, allowEdit) {
-        localStorageService.set("userIsAuthenticated", value);
+        localStorageService.cookie.set("userIsAuthenticated", value);
     };
     this.getUserAuthenticated = function() {
-        return localStorageService.get("userIsAuthenticated");
+        return localStorageService.cookie.get("userIsAuthenticated");
+    };
+    this.setUserType = function(value) {
+        localStorageService.cookie.set("userType", value);
+    };
+    this.getUserType = function() {
+        return localStorageService.cookie.get("userType");
     };
     this.getCanEditBlog = function(blogId) {
         var blogs = localStorageService.cookie.get("editBlogs");
@@ -21,7 +28,8 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
         }
         return false;
     };
-}).run(function($rootScope) {
+}).run(function($rootScope,$route, $templateCache, $http) {
+    // $templateCache.removeAll()
     $rootScope.d = function(elem) {
         elem = document.querySelector(elem);
         return (elem || document.querySelector(".null"));
@@ -43,5 +51,5 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
             timeout = setTimeout(later, wait);
             if (callNow) func.apply(context, args);
         };
-    };
+    }
 });

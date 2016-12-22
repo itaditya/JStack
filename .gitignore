@@ -1,5 +1,9 @@
 /node_modules
 /public/vendor
+/public/paths.txt
+/public/manifest.appcache
+/public/views/offline.js
+/public/assets/fonts/Noto_Sans
 npm-debug.log
 gitz.py
 .env 

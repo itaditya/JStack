@@ -1,8 +1,7 @@
-angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $location, $rootScope, $anchorScroll, $timeout, blogFactory, tagsService, userFactory, $routeParams) {
+angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $location,SessionService, $rootScope, $anchorScroll, $timeout, blogFactory, tagsService, userFactory, $routeParams) {
     $(document).ready(function() {
         $scope.postsLoaded = false;
         $scope.user = {};
-        console.log($routeParams.id);
         $scope.scrollTo = function(id) {
             var old = $location.hash();
             $location.hash(id);
@@ -11,6 +10,7 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
             $location.hash(old);
         };
         $scope.trustAsHtml = $sce.trustAsHtml;
+        $scope.isAuthor = SessionService.getCanEditBlog($routeParams.id);
         blogFactory.get($routeParams.id).then(function(blog) {
             $scope.blog = blog.data;
             $rootScope.d('.main').insertAdjacentHTML('beforeend', $scope.blog.content);
@@ -54,10 +54,6 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
                     }, 600);
                 });
             }
-            // var modalBtn = $rootScope.dd('.modalBtn');
-            // for (var i = modalBtn.length - 1; i >= 0; i--) {
-            //     modalBtn[i].addEventListener('click', toggleCommentModal);
-            // };
             $scope.userChoice = function() {
                 console.log($scope.user.choice);
                 $scope.startFade = true;
@@ -74,49 +70,6 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
                     console.log(message.data);
                 });
             }
-            // ----------------
-            // Modal toggling ------------------
-        // function toggleCommentModal() {
-        //     var comModal = toggler(this);
-        //     var that = this;
-        //     comModal.querySelector(".closeModal").addEventListener('click', function() {
-        //         that.click();
-        //     });
-        //     // comModal.addEventListener('blur', function() {
-        //     //     that.click();
-        //     // });
-        //     function escKeyQuit(event) {
-        //         var evt = event || window.event;
-        //         if (evt.keyCode == 27) {
-        //             evt.preventDefault();
-        //             that.click();
-        //         }
-        //     }
-        //     document.addEventListener('keydown', escKeyQuit);
-        // }
-
-        // function toggler(elem) {
-        //     var comModal = elem.dataset.toggleId;
-        //     comModal = document.getElementById(comModal);
-        //     setTimeout(function() {
-        //         comModal.focus();
-        //     }, 0);
-        //     if (comModal.style.display == 'block') {
-        //         comModal.style.display = 'none';
-        //     } else {
-        //         comModal.style.display = 'block';
-        //         comModal.classList.add('animated');
-        //         comModal.classList.add('fadeIn');
-        //     }
-        //     return comModal;
-        // }
-        // Logic
-        // Target all .modalBtn and attach click event
-        // toggleCommentModal fnction is to instrct toggler fn to toggle what.
-        // toggler returns the close btn element of the crrently opened modal only.
-        // that holds the reference to the respective .modalBtn only .
-        // Now on clicking the .modalBtn again that modal will be toggled .
-        /* _____________ */
     });
 });
 // .progress(function(evt) {

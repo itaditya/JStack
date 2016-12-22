@@ -29,7 +29,7 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $
                     tags: []
                 }
             }
-            console.log($scope.blog.tags);
+            // console.log($scope.blog.tags);
             const tagSelect = new Choices('.tag-choice', {
                 items: ["ada","svf"],
                 removeItems: true,
@@ -41,22 +41,23 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $
             tagFactory.getTagList("design=tags").then(function(categories) {
                 tagSelect.setChoices(categories.data, 'value', 'label', false);
             });
-            var btnList = $rootScope.dd('.btn');
-            for (var i = btnList.length - 1; i >= 0; i--) {
-                btnList[i].addEventListener("click", function() {
-                    this.classList.add("btn-click");
-                    $timeout(function() {
-                        if ($rootScope.d('.btn-click')) {
-                            $rootScope.d('.btn-click').classList.remove("btn-click");
-                        }
-                    }, 600);
-                });
-            }
+            // var btnList = $rootScope.dd('.btn');
+            // for (var i = btnList.length - 1; i >= 0; i--) {
+            //     btnList[i].addEventListener("click", function() {
+            //         this.classList.add("btn-click");
+            //         $timeout(function() {
+            //             if ($rootScope.d('.btn-click')) {
+            //                 $rootScope.d('.btn-click').classList.remove("btn-click");
+            //             }
+            //         }, 600);
+            //     });
+            // }
             $scope.saveBlog = function() {
                 $scope.blog.title = $rootScope.d(".blog-title").innerHTML;
                 $scope.blog.content = simplemde.value();
                 $scope.blog.tags = tagSelect.getValue();
-                localStorageService.set("blog", $scope.blog);
+                // localStorageService.set("blog", $scope.blog);
+                console.log($scope.blog.coverImage);
             }
             $scope.uploadBlog = function() {
                 $scope.blog.tags = tagSelect.getValue(true);

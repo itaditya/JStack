@@ -1,6 +1,6 @@
-angular.module('blogs').controller('editBlogCtrl', function($scope, $rootScope, blogFactory, $rootScope, userFactory, $routeParams, localStorageService) {
+angular.module('blogs').controller('editBlogCtrl', function($scope, $rootScope, blogFactory, $rootScope, userFactory, $routeParams, localStorageService,SessionService) {
     $(document).ready(function() {
-        console.log($rootScope.isAuthor);
+        console.log(SessionService.getUserType());
         userFactory.get(localStorageService.get("authorId")).then(function(author) {
             var simplemde = new SimpleMDE({
                 element: document.querySelector(".editor"),

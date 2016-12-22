@@ -42,21 +42,20 @@ module.exports = function(app) {
             email: req.body.email
         }, function(err, user) {
             if (err) res.send(err);
-            if(user){
+            if (user) {
                 if (req.body.password === user.password) {
                     res.json({
                         status: '1',
                         id: user._id,
+                        role: user.role,
                         blogs: user.blogs
                     });
-                }
-                else {
+                } else {
                     res.json({
                         status: '0'
                     });
                 }
-            }
-            else {
+            } else {
                 res.json({
                     status: '-1'
                 });
