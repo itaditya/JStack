@@ -603,14 +603,27 @@ div[role="comments"]>p:before {
 }
 
 .quoted-text {
-    /*padding-top: 30px;*/
+    /*padding-top: 30px;
 
 font-family: 'handwriting';
 font-size: 22px;
 position: relative;
 
 }
-
+*/
+.editor-toolbar{
+    background: rgb(249, 249, 249);
+}
+.descriptionBox{
+    background: rgb(249, 249, 249);
+    border-color: rgb(221, 221, 221);
+    width: 50%;
+    height: 80px;
+    font-family: 'Noto Sans', sans-serif;
+    font-size: 16px;
+    padding: 10px;
+    color: #888;
+}
 .quoted-text>p {
     /*width: 80%;*/
     margin: 0px;

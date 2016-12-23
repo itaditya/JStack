@@ -1,15 +1,46 @@
+<link rel="stylesheet" type="text/css" href="/vendor/choices.js/assets/styles/css/choices.min.css"/>
+
 <link rel="stylesheet" href="/assets/css/style.css"/>
+<script src="/vendor/choices.js/assets/scripts/dist/choices.min.js"></script>
+
+<style>
+.drop-box {
+    background: #F8F8F8;
+    border: 5px dashed #DDD;
+    width: 200px;
+    height: 65px;
+    text-align: center;
+    padding-top: 25px;
+    margin: 10px;
+}
+.dragover {
+    border: 5px dashed blue;
+}
+.choices{
+    width: 100%;
+}
+.choices__list--multiple .choices__item{
+    border-radius: 3px;
+}
+.progressBox{
+    width: 400px;
+    height: 40px;
+    background: #ddd;
+}
+.progress{
+    height: 40px;
+    background: green;
+}
+</style>
 <!-- <pre-loader ng-hide="blogs"></pre-loader> -->
 <div class="page animated fadeIn mainPage">
     <nav-bar active="profile"></nav-bar>
     <br/>
     <br/>
     <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
-    <br/>
+    <div style="width: 30%;padding:20px 0;position: relative;z-index: 30000;">
+        <select multiple class="tag-choice"></select>
+    </div>
     <div>
         Upload Image From Computer
         <form name="form">
@@ -26,6 +57,9 @@
                 submit
             </button>
         </form>
+        <div class="progressBox" style="width: 300px;">
+            <div class="progress" style="width: {{progress}}%"></div>
+        </div>
         Image thumbnail:
         <!-- <img ngf-thumbnail="coverImage || '/assets/img/coverImg/hero.jpg'"/> -->
         <div class="" style="width: 268px;height: 185px;background: url('{{ coverImage.$ngfBlobUrl }}');background-position: center;background-size: cover;"></div>

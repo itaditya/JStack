@@ -1,6 +1,3 @@
-<!--
-    <link rel="stylesheet" type="text/css" href="/vendor/choices.js/assets/styles/css/base.min.css"/>
--->
 <link rel="stylesheet" type="text/css" href="/vendor/choices.js/assets/styles/css/choices.min.css"/>
 <pre-loader ng-hide="author"></pre-loader>
 <!-- Custom CSS-->
@@ -10,7 +7,6 @@
 <script src="/vendor/highlight/highlight.pack.js" type="text/javascript" charset="utf-8" async defer></script>
 <link rel="stylesheet" href="/vendor/highlight/styles/default.css"/>
 <script src="/vendor/choices.js/assets/scripts/dist/choices.min.js"></script>
-<!-- <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/select2/3.4.5/select2.css"/> -->
 <style>
 .image-change{
     position: absolute;
@@ -61,7 +57,7 @@
                 <select multiple class="tag-choice"></select>
             </div>
             <textarea class="editor"></textarea>
-            <textarea name="description" ng-model="blog.description" placeholder="Description"></textarea>
+            <textarea name="description" ng-model="blog.description" placeholder="Description" class="descriptionBox"></textarea>
             <div class="btn-container">
                 <button class="btn" ng-click="saveBlog()">
                     Save

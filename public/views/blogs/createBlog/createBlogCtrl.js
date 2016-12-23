@@ -31,7 +31,7 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $
             }
             // console.log($scope.blog.tags);
             const tagSelect = new Choices('.tag-choice', {
-                items: ["ada","svf"],
+                // items: ["ada","svf"],
                 removeItems: true,
                 removeItemButton: true,
                 flip: false,
