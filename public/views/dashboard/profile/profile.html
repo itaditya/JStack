@@ -2,4 +2,44 @@
 <!-- <pre-loader ng-hide="blogs"></pre-loader> -->
 <div class="page animated fadeIn mainPage">
     <nav-bar active="profile"></nav-bar>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div>
+        Upload Image From Computer
+        <form name="form">
+            <button class="button" ngf-select ng-model="coverImage" name="coverImage" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"  ngf-capture="'camera'">
+                <!-- ngf-dimensions="$width > 1000 || $height > 400" -->
+                Select
+            </button>
+            <!-- ngf-resize="{width: 100, height: 100}" -->
+            Drop files:
+            <div ngf-drop ng-model="coverImage" class="drop-box">
+                Drop
+            </div>
+            <button type="submit" ng-click="uploadImg()">
+                submit
+            </button>
+        </form>
+        Image thumbnail:
+        <!-- <img ngf-thumbnail="coverImage || '/assets/img/coverImg/hero.jpg'"/> -->
+        <div class="" style="width: 268px;height: 185px;background: url('{{ coverImage.$ngfBlobUrl }}');background-position: center;background-size: cover;"></div>
+    </div>
+    <div>
+        Upload Image From Url
+        <form name="form">
+            <input type="text" placeholder="url" ng-model="fileUrl"/>
+            <input type="text" placeholder="name" ng-model="fileName"/>
+            <button type="submit" ng-click="uploadUrl()">
+                submit
+            </button>
+        </form>
+        Image thumbnail:
+        <div class="" style="width: 268px;height: 185px;background: url('http://{{fileUrl}}');background-position: center;background-size: cover;"></div>
+    </div>
 </div>

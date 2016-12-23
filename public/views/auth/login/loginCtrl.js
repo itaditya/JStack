@@ -1,6 +1,6 @@
 angular.module('auth').controller('loginCtrl', function($scope, $location, authFactory, localStorageService, $routeParams, SessionService) {
     if (SessionService.getUserAuthenticated()) {
-        notification.notify('warning', 'You Are Logged Out');
+        notification.notify('info', 'You Are Logged Out');
     }
     SessionService.setUserAuthenticated(false);
     localStorageService.clearAll();
