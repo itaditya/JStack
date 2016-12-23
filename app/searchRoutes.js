@@ -127,8 +127,18 @@ module.exports = function(app) {
         Tag.findById(req.params.id, function(err, tag) {
             if (typeof tag != "undefined") {
                 var blogId = req.body.blogId;
-                if (blogId && tag.blogs.indexOf(blogId) === -1) {
-                    tag.blogs.push(blogId);
+                if (blogId) {
+                    if (typeof blogId === "string" && tag.blogs.indexOf(blogId) === -1) {
+                        //only one blog's id is passed
+                        tag.blogs.push(blogId);
+                    }
+                    if (blogId === "object" && blogId.length != "undefined") {
+                        //an array must be passed
+                        tag.blogs = blogId;
+                    }
+                    // if (blogId && tag.blogs.indexOf(blogId) === -1) {
+                    //     tag.blogs.push(blogId);
+                    // }
                 }
                 tag.name = req.body.name || tag.name;
                 tag.category = req.body.category || tag.category;
@@ -151,14 +161,15 @@ module.exports = function(app) {
         }, function(err, tag) {
             if (err) res.send(err);
             if (tag) {
-                User.findOne({
-                    _id: tag.authorId
-                }, function(err, user) {
-                    if (user) {
-                        var index = user.tags.indexOf(tagId);
-                        user.tags.splice(index, 1);
-                        user.save();
-                    }
+                async.forEachOf(tag.blogs, function(blogId, index) {
+                    if (err) return res.send(err);
+                    Blog.findById(blogId, function(err, blog) {
+                        if (blog) {
+                            var index = blog.tags.indexOf(tagId);
+                            blog.tags.splice(index, 1);
+                            blog.save();
+                        }
+                    });
                 });
                 Tag.remove({
                     _id: tagId

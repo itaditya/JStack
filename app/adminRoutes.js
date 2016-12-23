@@ -12,45 +12,55 @@ module.exports = function(app) {
     app.post('/api/images', multipartMiddleware, function(req, res) {
         var fileName;
         var method = parseInt(req.query.method);
-        // console.log(req);
         var tagList = req.body.tags;
-        console.log(tagList);
         if(method === 0){
             var file = req.files.file;
-            fileName = file.name;
-            var newPath = "./public/assets/img/coverImg/" + file.name;
-            fs.readFile(file.path, function(err, data) {
-                fs.writeFile(newPath, data, function(err) { // write file in uploads folder
-                    if (err) {
-                        res.json({
-                            message: 'image not saved!',
-                        });
-                    } else {
-                        res.json({
-                            message: 'image saved!',
-                        });
-                    }
+            if(file){
+                fileName = file.name;
+                var newPath = "./public/assets/img/coverImg/" + file.name;
+                fs.readFile(file.path, function(err, data) {
+                    fs.writeFile(newPath, data, function(err) {
+                        if (err) {
+                            res.json({
+                                message: 'image not saved!',
+                            });
+                        } else {
+                            res.json({
+                                message: 'image saved!',
+                            });
+                        }
+                    });
                 });
-            });
+            }
         }
         else if(method === 1){
-            var fileUrl = "http://" + req.body.url;
-            fileName = req.body.name || fileUrl.substring(fileUrl.lastIndexOf('/')+1);
-            var newPath = "./public/assets/img/coverImg/" + fileName;
-            var f = fs.createWriteStream(newPath);
-            var request = http.get(fileUrl, function(response) {
-                response.pipe(f);
-                f.on('finish', function() {
-                    f.close(); // close() is async, call cb after close completes.
+            if(req.body.url){
+                var fileUrl = "http://" + req.body.url;
+                fileName = req.body.name || fileUrl.substring(fileUrl.lastIndexOf('/')+1);
+                var newPath = "./public/assets/img/coverImg/" + fileName;
+                var f = fs.createWriteStream(newPath);
+                var request = http.get(fileUrl, function(response) {
+                    response.pipe(f);
+                    f.on('finish', function() {
+                        f.close(); // close() is async, call cb after close completes.
+                    });
                 });
-            });
-            res.json({
-                message: 'image saved!',
-            });
+                res.json({
+                    message: 'image saved!',
+                });
+            }
         }else{
             res.json({
                 message: 'unknown method',
             });
         }
+        async.forEachOf(tagList, function(tagId, index) {
+            Tag.findById(tagId, function(err, tag) {
+                if (tag) {
+                    tag.coverImages.push(fileName);
+                    tag.save();
+                }
+            });
+        });
     });
 };

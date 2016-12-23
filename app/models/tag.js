@@ -8,5 +8,8 @@ module.exports = mongoose.model('Tag', {
   },
   blogs: {
     type: Array
+  },
+  coverImages: {
+    type: Array
   }
 });
