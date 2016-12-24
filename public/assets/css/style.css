@@ -96,17 +96,14 @@ ul li {
     margin-top: 12%;
 }
 
-.modal:focus {
-    /*background: #000;*/
-}
-
 .closeModal {
     background: transparent !important;
     position: absolute;
     right: 12px;
     font-size: 20px !important;
     top: -16px;
-    color: #777 !important;
+    z-index: 1;
+    color: rgba(0,0,0,0.7) !important;
 }
 
 .closeModal:hover {
@@ -846,6 +843,7 @@ position: relative;
 .post>h5 {
     font-size: 20px;
     letter-spacing: 0px;
+    text-transform: capitalize;
 }
 
 .tag-box {

@@ -1,6 +1,7 @@
 // app/routes.js
 // grab the nerd model we just created
 var Tag = require('./models/tag');
+var Blog = require('./models/blog');
 var async = require("async");
 var console = require('better-console');
 var tagQuery = function(req, res, limitParam, callback) {
@@ -96,7 +97,6 @@ module.exports = function(app) {
                         }
                     }
                 }, function(tagList) {
-                    // console.table(tagList);
                     return res.json(tagList);
                 });
             } else {
@@ -136,9 +136,17 @@ module.exports = function(app) {
                         //an array must be passed
                         tag.blogs = blogId;
                     }
-                    // if (blogId && tag.blogs.indexOf(blogId) === -1) {
-                    //     tag.blogs.push(blogId);
-                    // }
+                }
+                var imgName = req.body.imgName;
+                if (imgName) {
+                    if (typeof imgName === "string" && tag.coverImages.indexOf(imgName) === -1) {
+                        //only one coverImage's name is passed
+                        tag.coverImages.push(imgName);
+                    }
+                    if (imgName === "object" && imgName.length != "undefined") {
+                        //an array must be passed
+                        tag.coverImages = imgName;
+                    }
                 }
                 tag.name = req.body.name || tag.name;
                 tag.category = req.body.category || tag.category;

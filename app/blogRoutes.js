@@ -1,5 +1,3 @@
-// app/routes.js
-// grab the nerd model we just created
 var Blog = require('./models/blog');
 var User = require('./models/user');
 var Tag = require('./models/tag');
@@ -33,14 +31,14 @@ module.exports = function(app) {
             limit = 0;
         }
         blogQuery(req, res, limit, sort, function(req, res, err, blogs) {
+            var l = blogs.length;
+            if(limit > l){
+                limit = l;
+            }
             if (err) res.send(err);
             if (design === "short") {
                 // async.forEachOfLimit(blogs, n, function(blog, i, callback) {
                 var j = 0;
-                var l = blogs.length;
-                if(limit > l){
-                    limit = l;
-                }
                 async.forEachOf(blogs, function(blog, i, callback) {
                     if (err) return callback(err);
                     // console.info(blog.authorId);

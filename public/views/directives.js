@@ -39,11 +39,16 @@ angular.module('JStack').directive('preLoader', function() {
     return {
         replace: true,
         templateUrl: '/views/partials/footer.html',
-        controller: function($scope, tagFactory, $timeout,tagsService) {
+        controller: function($scope, tagFactory,blogFactory, $timeout,tagsService) {
+            $scope.subscribe = function() {
+                console.log('test');
+                blogFactory.subscribe($scope.emailId).then(function(message) {
+                    console.log(message.data);
+                });
+            }
             $timeout(tagFactory.getTagList("design=category").then(function(categories) {
                 $scope.categories = categories.data;
                 tagsService.setTags(categories.data);
-                // console.log(categories.data);
             }), 0);
         }
     };

@@ -1,7 +1,7 @@
 angular.module('JStack').factory('tagFactory', function($http) {
     var urlBase = '/api/tags';
     return {
-        getBlogs: function(id) {
+        getTag: function(id) {
             return $http.get(urlBase + "/" + id);
         },
         getTagList: function(query) {
@@ -17,6 +17,7 @@ angular.module('JStack').factory('tagFactory', function($http) {
     return {
         setTags: function(data) {
             tagsList = data;
+            $rootScope.$broadcast('tagsSet');
             // $rootScope.$emit('tagsSet');
         },
         getTags: function() {

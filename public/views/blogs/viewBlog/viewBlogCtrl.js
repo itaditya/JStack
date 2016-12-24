@@ -1,4 +1,4 @@
-angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $location,SessionService, $rootScope, $anchorScroll, $timeout, blogFactory, tagsService, userFactory, $routeParams) {
+angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $location, SessionService, $rootScope, $anchorScroll, $timeout, blogFactory, tagsService, userFactory, $routeParams) {
     $(document).ready(function() {
         $scope.postsLoaded = false;
         $scope.user = {};
@@ -36,24 +36,15 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
                 $scope.topics = $scope.posts;
                 $scope.postsLoaded = true;
             });
-            // $rootScope.$on('tagsSet', function() {
-            $scope.$watch("$viewContentLoaded", function() {
-                var footerTags = tagsService.getTags()
-                $scope.tags = footerTags[3].tags;
-                console.log("t", $scope.tags);
+            $scope.$on('tagsSet', function() {
+                // $scope.$watch("$viewContentLoaded", function() {
+                var min = 0,
+                    max = 3;
+                var rIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+                console.log(rIndex);
+                var footerTags = tagsService.getTags();
+                $scope.tags = footerTags[rIndex].tags;
             });
-            // console.log(tagsService.getTags());
-            var btnList = $rootScope.dd('.btn');
-            for (var i = btnList.length - 1; i >= 0; i--) {
-                btnList[i].addEventListener("click", function() {
-                    this.classList.add("btn-click");
-                    setTimeout(function() {
-                        if ($rootScope.d('.btn-click')) {
-                            $rootScope.d('.btn-click').classList.remove("btn-click");
-                        }
-                    }, 600);
-                });
-            }
             $scope.userChoice = function() {
                 console.log($scope.user.choice);
                 $scope.startFade = true;
@@ -65,13 +56,5 @@ angular.module('blogs').controller('viewBlogCtrl', function($scope, $sce, $locat
                 });
             }
         });
-        $scope.subscribe = function() {
-                blogFactory.subscribe($scope.emailId).then(function(message) {
-                    console.log(message.data);
-                });
-            }
     });
 });
-// .progress(function(evt) {
-//             console.info(evt.loaded, "/", evt.total);
-//         })

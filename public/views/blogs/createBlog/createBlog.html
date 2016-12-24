@@ -7,6 +7,8 @@
 <script src="/vendor/highlight/highlight.pack.js" type="text/javascript" charset="utf-8" async defer></script>
 <link rel="stylesheet" href="/vendor/highlight/styles/default.css"/>
 <script src="/vendor/choices.js/assets/scripts/dist/choices.min.js"></script>
+<link type="text/css" rel="stylesheet" href="/vendor/carousel/css/carousel.css"/>
+<script type="text/javascript" src="/vendor/carousel/js/carousel.js"></script>
 <style>
 .image-change{
     position: absolute;
@@ -30,6 +32,61 @@
 .dragover {
     border: 5px dashed blue;
 }
+.imageColsContainer{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    width: 100%;
+    height: 100%;
+}
+.cols{
+    background: #ddd;
+    width: 20%;
+    height: 100%;
+}
+.imageCols{
+    width: 80%;
+    background: green;
+}
+.imageCols .carousel-view {
+    width: 100%;
+}
+.imageCols .carousel-images {
+    height: 80vh;
+}
+/*.imageCols ul{
+    height: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}*/
+/*.imageCols li{
+    width: 200px;
+    height: 80px;
+    background-size: cover;
+    background-position: center;
+}*/
+.carousel-btn-container{
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    width: 100%;
+    height: 50px;
+    background: rgba(0,0,0,0.5);
+    justify-content: space-around;
+    align-items: center;
+}
+.carousel-btn{
+    background: rgba(0,0,0,0.27);/*rgba(0,0,0,0.5)*/
+    transition: 0.6s;
+    border:none;
+    border-radius: 4px;
+    padding: 10px 20px;
+    color: #eee;
+}
+.carousel-btn:hover{
+    background: rgba(0,0,0,0.5);
+}
 </style>
 <div class="page animated fadeIn" ng-cloak ng-show="author" id="mainPage">
     <nav-bar active="create"></nav-bar>
@@ -46,9 +103,9 @@
             <h3 class="blog-title" contenteditable="true" ng-bind="blog.title"></h3>
         </div>
         <input type="text"  placeholder="Image Name" class="image-change" ng-model="blog.coverImg"/>
-        <button class="btn image-change" modal-pane modal-id="imgModal">
+        <!-- <button class="btn image-change" modal-pane modal-id="imgModal" ng-click="getTags()">
             Select Cover
-        </button>
+        </button> -->
         <!-- <input type="file" class="image-change" placeholder=""> -->
     </div>
     <section class="container" role="blog content">
@@ -56,6 +113,10 @@
             <div style="width: 30%;padding:20px 0;position: relative;z-index: 30000;">
                 <select multiple class="tag-choice"></select>
             </div>
+            <button class="btn" modal-pane modal-id="imgModal" ng-click="getTags()">
+                Select Cover
+            </button>
+            <!-- {{selectedTags}} -->
             <textarea class="editor"></textarea>
             <textarea name="description" ng-model="blog.description" placeholder="Description" class="descriptionBox"></textarea>
             <div class="btn-container">
@@ -95,24 +156,39 @@
     </div>
     <div class="modal" tabindex="1" id="imgModal">
         <span class="closeModal icon-cross"></span>
-        <form name="form">
-            Single Image with validations
-            <button class="button" ngf-select ng-model="blog.coverImage" name="blog.coverImage" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"  ngf-capture="'camera'" ngf-dimensions="$width > 1000 || $height > 400">
-                Select
-            </button>
-            <!-- ngf-resize="{width: 100, height: 100}" -->
-            Drop files:
-            <div ngf-drop ng-model="blog.coverImage" class="drop-box">
-                Drop
+        <div class="imageColsContainer">
+            <div class="cols">
+                <ul>
+                    <li ng-repeat="tag in blog.tags" ng-click="chooseCoverTag(tag)">
+                        {{ tag.label }}
+                    </li>
+                </ul>
             </div>
-        </form>
-        Image thumbnail:
-        <!-- <img ngf-thumbnail="blog.coverImage || '/assets/img/coverImg/hero.jpg'"/> -->
-        <div class="" style="width: 268px;height: 185px;background: url('{{blog.coverImage.$ngfBlobUrl}}');background-position: center;background-size: cover;"></div>
+            <div class="cols imageCols">
+                <div class="carousel-container carousel-1">
+                    <div class="carousel-view">
+                        <ul class="carousel-images">
+                            <li ng-repeat="image in coverImages" ng-click="chooseCoverImage(image)" data-isrc="/assets/img/coverImg/{{ image }}"></li>
+                        </ul>
+                    </div>
+                    <div class="carousel-btn-container">
+                        <button class="carousel-btn" id="cprev">
+                            Prev
+                        </button>
+                        <button class="carousel-btn" ng-click="chooseCoverImage()">
+                            Choose
+                        </button>
+                        <button class="carousel-btn" id="cnext">
+                            Next
+                        </button>
+                    </div>
+                </div>
+                <!-- <ul>
+                    <li ng-repeat="image in coverImages" ng-click="chooseCoverImage(image)" style="background-image: url('/assets/img/coverImg/{{ image }}')">
+                        {{ image }}
+                    </li>
+                </ul> -->
+            </div>
+        </div>
     </div>
 </div>
-<!-- <div class="page" ng-hide="author">
-<div class="preloader-box">
-    <div class="preloader"></div>
-</div>
-</div> -->
