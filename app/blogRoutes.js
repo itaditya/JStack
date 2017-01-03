@@ -6,7 +6,7 @@ var nodemailer = require('nodemailer');
 var mailSender = require('./../config/auth');
 var showdown = require('showdown');
 var converter = new showdown.Converter();
-var colors = require('colors/safe');
+// var colors = require('colors/safe');
 var blogQuery = function(req, res, limitParam, sortParam, callback) {
     var sortList = ["-views", "-likes", "date", "-date"]
     if (sortList.indexOf(sortParam) != -1) {
@@ -22,9 +22,8 @@ var blogQuery = function(req, res, limitParam, sortParam, callback) {
 };
 module.exports = function(app) {
     app.get('/api/blogs', function(req, res) {
-        var blogList = [];
-        console.log(req.query);
-        var limit = req.query.limit;
+        console.dir(req.query);
+        var limit = parseInt(req.query.limit);
         var sort = req.query.sort || "-views";
         var design = req.query.design;
         if (limit < 0) {
@@ -32,42 +31,39 @@ module.exports = function(app) {
         }
         blogQuery(req, res, limit, sort, function(req, res, err, blogs) {
             var l = blogs.length;
-            if(limit > l){
+            var blogList = [];
+            var j = 0;
+            if (!limit || limit > l) {
                 limit = l;
             }
             if (err) res.send(err);
             if (design === "short") {
                 // async.forEachOfLimit(blogs, n, function(blog, i, callback) {
-                var j = 0;
                 async.forEachOf(blogs, function(blog, i, callback) {
                     if (err) return callback(err);
-                    // console.info(blog.authorId);
-                    User.findById(blog.authorId, function(err, user) {
-                        blogList.push({
-                            _id: blog._id,
-                            coverImg: blog.coverImg,
-                            title: blog.title,
-                            likes: blog.likes,
-                            views: blog.views,
-                            description: blog.description,
-                            authorName: user.name
-                        });
-                        if (++j === parseInt(limit)) {
-                            return callback(blogList);
-                        }
+                    blogList.push({
+                        _id: blog._id,
+                        coverImg: blog.coverImg,
+                        title: blog.title,
+                        likes: blog.likes,
+                        views: blog.views,
+                        description: blog.description,
+                        authorName: blog.authorName
                     });
+                    if (++j === limit) {
+                        return callback(blogList);
+                    }
                 }, function(blogList) {
                     return res.json(blogList);
                 });
             } else if (design === "links") {
-                var j = 0;
                 async.forEachOf(blogs, function(blog, i, callback) {
                     if (err) return callback(err);
                     blogList.push({
                         _id: blog._id,
                         title: blog.title
                     });
-                    if (++j === parseInt(limit)) {
+                    if (++j === limit) {
                         return callback(blogList);
                     }
                 }, function(blogList) {
@@ -94,6 +90,7 @@ module.exports = function(app) {
                             likes: blog.likes,
                             views: blog.views,
                             description: blog.description,
+                            authorName: blog.authorName
                         });
                     } else {
                         res.json(blog);
@@ -104,13 +101,23 @@ module.exports = function(app) {
     }).post('/api/blogs', function(req, res) {
         var blog = new Blog();
         blog.authorId = req.body.authorId;
+        blog.authorName = req.body.authorName;
         blog.date = Date.now();
         blog.title = req.body.title;
         blog.coverImg = req.body.coverImg;
         blog.mdString = req.body.content;
         blog.description = req.body.description;
         blog.content = converter.makeHtml(blog.mdString);
-        blog.tags = req.body.tags;
+        var tags = req.body.tags;
+        blog.tagsData = req.body.tagsData;
+        blog.tags = [];
+        if (tags) {
+            blog.tags = tags;
+        } else {
+            async.forEachOf(blog.tagsData, function(tag, index) {
+                blog.tags.push(tag.value);
+            });
+        }
         blog.save(function(err) {
             if (err) res.send(err);
             User.findById(blog.authorId, function(err, user) {
@@ -135,6 +142,7 @@ module.exports = function(app) {
         Blog.findById(req.params.id, function(err, blog) {
             if (typeof blog != "undefined") {
                 blog.authorId = req.body.authorId || blog.authorId;
+                blog.authorName = req.body.authorName || blog.authorName;
                 blog.date = req.body.date || blog.date;
                 blog.title = req.body.title || blog.title;
                 blog.coverImg = req.body.coverImg || blog.coverImg;
@@ -142,6 +150,7 @@ module.exports = function(app) {
                 blog.mdString = req.body.content || blog.content;
                 blog.content = converter.makeHtml(blog.mdString);
                 blog.tags = req.body.tags || blog.tags;
+                blog.tagsData = req.body.tagsData || blog.tagsData;
                 blog.likes = req.body.likes || blog.likes;
                 blog.comments = req.body.comments || blog.comments;
                 blog.save(function(err) {

@@ -5,6 +5,7 @@
   "scripts": {
     "postinstall": "bower install",
     "nodemon": "nodemon app.js",
+    "mongo":"mongod --storageEngine=mmapv1 --dbpath f:/data",
     "start": "heroku local -p 8080 -e .env.local"
   },
   "dependencies": {

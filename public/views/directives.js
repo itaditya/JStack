@@ -39,7 +39,7 @@ angular.module('JStack').directive('preLoader', function() {
     return {
         replace: true,
         templateUrl: '/views/partials/footer.html',
-        controller: function($scope, tagFactory,blogFactory, $timeout,tagsService) {
+        controller: function($scope, tagFactory, blogFactory, $timeout, tagsService) {
             $scope.subscribe = function() {
                 console.log('test');
                 blogFactory.subscribe($scope.emailId).then(function(message) {
@@ -52,24 +52,100 @@ angular.module('JStack').directive('preLoader', function() {
             }), 0);
         }
     };
+}).directive('tagWidget', function() {
+    return {
+        replace: true,
+        templateUrl: '/views/partials/tagWidget.html',
+        controller: function($scope, tagsService) {
+            $scope.$on('tagsSet', function() {
+                var min = 0,
+                    max = 3;
+                var rIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+                var footerTags = tagsService.getTags();
+                $scope.tags = footerTags[rIndex].tags;
+            });
+        }
+    };
+}).directive('quizWidget', function() {
+    return {
+        replace: true,
+        templateUrl: '/views/partials/quizWidget.html'
+    };
+}).directive('commentsWidget', function() {
+    return {
+        replace: true,
+        templateUrl: '/views/partials/commentsWidget.html'
+    };
+}).directive('adWidget', function() {
+    return {
+        replace: true,
+        templateUrl: '/views/partials/adWidget.html'
+    };
+}).directive('likeWidget', function() {
+    return {
+        replace: true,
+        templateUrl: '/views/partials/likeWidget.html',
+        controller: function($scope, blogFactory, $timeout, $attrs) {
+            $scope.userChoice = function() {
+                $scope.startFade = true;
+                $timeout(function() {
+                    $scope.endFade = true;
+                }, 2000);
+                blogFactory.userChoice($attrs.blogId, $scope.user.choice).then(function(message) {
+                    notification.notify('success', 'Thank You');
+                });
+            }
+        }
+    };
+}).directive('detailWidget', function() {
+    return {
+        replace: true,
+        templateUrl: '/views/partials/detailWidget.html'
+    };
+}).directive('linkWidget', function() {
+    return {
+        replace: true,
+        templateUrl: '/views/partials/linkWidget.html',
+        controller: function($scope, blogFactory) {
+            blogFactory.getList("limit=4&design=links").then(function(popularLinks) {
+                $scope.popularLinks = popularLinks.data;
+            });
+        }
+    };
 }).directive('sideBar', function() {
     return {
         restrict: 'A',
         controller: function($scope, $element, $attrs, $rootScope) {
-                function sidebarFix() {
-                    var sidebar = $element[0];
-                    var sidebarTop = sidebar.getBoundingClientRect().top;
-                    var bannerBottom = $rootScope.d(".hero-banner").getBoundingClientRect().bottom;
-                    if (sidebarTop <= 0 && bannerBottom <= 0) {
-                        sidebar.style.position = 'fixed';
-                    } else {
-                        sidebar.style.position = 'relative';
-                    }
+            function sidebarFix() {
+                var sidebar = $element[0];
+                var sidebarTop = sidebar.getBoundingClientRect().top;
+                var bannerBottom = $rootScope.d(".hero-banner").getBoundingClientRect().bottom;
+                if (sidebarTop <= 0 && bannerBottom <= 0) {
+                    sidebar.style.position = 'fixed';
+                    // sidebar.scrollTop = 0;
+                } else {
+                    sidebar.style.position = 'relative';
                 }
-                angular.element(document).bind("scroll", function() {
-                    sidebarFix();
-                });
             }
+            angular.element(document).bind("scroll", function() {
+                sidebarFix();
+            });
+        }
+    };
+}).directive('scroller', function() {
+    return {
+        restrict: 'A',
+        controller: function($scope, $location, $anchorScroll, $element, $attrs) {
+            var scroll = function() {
+                var old = $location.hash();
+                $location.hash($attrs.scrollTo);
+                $anchorScroll();
+                $location.hash(old);
+            }
+            $element.bind("click", function() {
+                scroll();
+            });
+        }
     };
 }).directive('modalPane', function() {
     return {
@@ -77,12 +153,21 @@ angular.module('JStack').directive('preLoader', function() {
         //     modalId: "@"
         // },
         restrict: 'A',
-        controller: function($scope, $attrs,$element) {
-            console.log($attrs.modalId);
-            $element.bind("click",function(a){
-                // console.info(this);
+        controller: function($scope, $attrs, $element) {
+            $element.bind("click", function(a) {
+                var condition = $attrs.modalCondition;
                 toggleCommentModal();
+                console.log(condition);
+                // if (condition) {
+                //     if (parseInt(condition)) {
+                //         toggleCommentModal();
+                //     }
+                // } else {
+                //     console.log('test');
+                //     toggleCommentModal();
+                // }
             })
+
             function toggleCommentModal() {
                 var comModal = toggler();
                 // var that = this;

@@ -1,10 +1,15 @@
 <pre-loader ng-hide="author"></pre-loader>
 <!-- Custom CSS-->
-<link rel="stylesheet" type="text/css" href="/assets/css/style.css">
+<link rel="stylesheet" type="text/css" href="/vendor/choices.js/assets/styles/css/choices.min.css"/>
+<script src="/vendor/choices.js/assets/scripts/dist/choices.min.js"></script>
+
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
 <script src="/vendor/simplemde/dist/simplemde.min.js "></script>
-<link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css">
+<link rel="stylesheet" type="text/css" href="/vendor/simplemde/dist/simplemde.min.css"/>
 <script src="/vendor/highlight/highlight.pack.js" type="text/javascript" charset="utf-8" async defer></script>
-<link rel="stylesheet" href="/vendor/highlight/styles/default.css">
+<link rel="stylesheet" href="/vendor/highlight/styles/default.css"/>
+<link type="text/css" rel="stylesheet" href="/views/blogs/createBlog/createBlog.css"/>
+
 <style>
 .image-change{
     position: absolute;
@@ -16,30 +21,51 @@
 </style>
 <div class="page animated fadeIn" ng-cloak ng-show="author">
     <nav-bar></nav-bar>
-    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/coverImg/{{blog.coverImg}}')">
+    <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),url('/assets/img/coverImg/{{ blog.coverImg }}')">
         <div class="topic">
-            <img ng-src="/assets/img/{{ author.image }}" class="author-pic sm-hide">
-            <p><span class="author-name"> {{ author.name }}</span>
-                <br>on</p>
-            <h3 class="blog-title" contenteditable="true"> Write Title Here </h3>
+            <img ng-src="/assets/img/userImg/{{ author.image }}" class="author-pic sm-hide"/>
+            <p>
+                <span class="author-name">
+                    {{ author.name }}
+                </span>
+                <br/>
+                on
+            </p>
+            <h3 class="blog-title" contenteditable="true">
+                Write Title Here
+            </h3>
         </div>
-        <input type="text"  placeholder="Image Name" class="image-change" ng-model="blog.coverImg">
+        <input type="text"  placeholder="Image Name" class="image-change" ng-model="blog.coverImg"/>
         <!-- <input type="file" class="image-change" placeholder=""> -->
     </div>
     <section class="container" role="blog content">
         <main class="main z-depth border animated fadeIn" style="font-size: 14px;">
+            <div style="width: 30%;padding:20px 0;position: relative;z-index: 30000;">
+                <select multiple class="tag-edit-choice"></select>
+            </div>
             <textarea class="editor"></textarea>
-            <textarea name="description" ng-model="blog.description"></textarea>
-            <button ng-click="saveBlog()">Save</button>
-            <a ng-show="postid" ng-href="/blogs/{{postid}}" target="_blank" style="color:#000;">View Blog</a>
+            <textarea name="description" ng-model="blog.description" placeholder="Description" class="descriptionBox"></textarea>
+            <div class="btn-container">
+                <button class="btn" ng-click="saveBlog()">
+                    Save
+                </button>
+                <a ng-show="postid" class="btn" ng-href="/blogs/{{ postid }}" target="_blank" style=" line-height: 16px;">
+                    View Blog
+                    <!-- style="color:#000;float: right;" -->
+                </a>
+            </div>
         </main>
         <!-- End of Main -->
         <!-- sidebar starts -->
         <aside class="sidebar sm-hide" side-bar>
             <div>
                 <div class="border widget-sm">
-                    <p>Ads</p>
-                    <div class="btn modalBtn" data-toggle-id="adModal">Link To Ad</div>
+                    <p>
+                        Ads
+                    </p>
+                    <div class="btn modalBtn" data-toggle-id="adModal">
+                        Link To Ad
+                    </div>
                 </div>
             </div>
         </aside>
@@ -47,7 +73,9 @@
     <footer-bar></footer-bar>
     <div class="modal" tabindex="1" id="adModal">
         <span class="closeModal icon-cross"></span>
-        <h2>Ads Not Coming Soon ..</h2>
+        <h2>
+            Ads Not Coming Soon ..
+        </h2>
     </div>
 </div>
 <!-- <div class="page" ng-hide="author">

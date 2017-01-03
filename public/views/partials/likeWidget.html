@@ -1,0 +1,15 @@
+<div class="border widget-sm animated" id="user-widget"  ng-hide="endFade" ng-class="{fadeOut: startFade}">
+    <!-- ng-hide="endFade" -->
+    <p>
+        Was This Blog Helpfull ?
+    </p>
+    <label>
+        <input type="radio" name="userChoice" ng-model="user.choice" value="1" ng-change="userChoice()"/>
+        <span class="icon-radio-checked"></span>
+    </label>
+    <span style="padding-left: 18px;"></span>
+    <label>
+        <input type="radio" name="userChoice" ng-model="user.choice" value="-1" ng-change="userChoice()"/>
+        <span class="icon-radio-unchecked"></span>
+    </label>
+</div>

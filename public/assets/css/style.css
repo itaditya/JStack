@@ -20,6 +20,11 @@ a {
     text-decoration: none;
 }
 
+ul {
+    margin: 0;
+    padding: 0;
+}
+
 ul li {
     list-style: none !important;
 }
@@ -91,6 +96,13 @@ ul li {
     overflow-y: auto;
 }
 
+.modal.full {
+    width: 100%;
+    top: 0;
+    left: 0;
+    height: 100vh;
+}
+
 .modal h2 {
     text-align: center;
     margin-top: 12%;
@@ -103,7 +115,7 @@ ul li {
     font-size: 20px !important;
     top: -16px;
     z-index: 1;
-    color: rgba(0,0,0,0.7) !important;
+    color: rgba(0, 0, 0, 0.7) !important;
 }
 
 .closeModal:hover {
@@ -244,9 +256,12 @@ ul li {
     z-index: 2;
     opacity: 1;
 }
+
+
 /*.img-container:hover>img{
     transform: scale(1);
 }*/
+
 .card-details>p {
     padding: 5px 12px;
     margin: 0;
@@ -260,6 +275,7 @@ ul li {
 .input-field:focus {
     background: #fff;
     border-color: #fff;
+    width: 250px;
 }
 
 *, *:hover, *:focus {
@@ -279,6 +295,7 @@ ul li {
     background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("../img/hero.jpg");
     background-size: cover;
     background-attachment: fixed;
+    background-position: center;
     height: 65vh;
     min-height: 450px;
     position: relative;
@@ -394,12 +411,14 @@ ul li {
     transition: .3s;
     letter-spacing: 1px;
     border-bottom: 1px solid #E8DADA;
-    font-size: 14px;
+    font-size: 12px;
     /*color: #888;*/
 }
-.index-list li a{
+
+.index-list li a {
     color: #333;
 }
+
 .index-list li:hover {
     background: rgba(0, 0, 0, 0.1);
     padding-left: 18px;
@@ -492,13 +511,14 @@ ul li {
     -ms-transition: none;
     -o-transition: none;
     transition: none;
-    transform: scale(0.94);
+    /*transform: scale(0.94);*/
+    transform: scaleX(0.84);
 }
 
 #user-widget {
     /*min-height: 320px;*/
     text-align: center;
-    padding: 20px 10px;
+    /*padding: 20px 10px;*/
 }
 
 
@@ -548,6 +568,21 @@ ul li {
 
 div[role="comments"]>p:before {
     content: attr(data-num);
+}
+
+.choicesContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.choicesContainer>div {}
+
+.choicesBox {
+    width: 30%;
+    padding: 20px 0;
+    position: relative;
+    z-index: 30000;
 }
 
 
@@ -608,10 +643,12 @@ position: relative;
 
 }
 */
-.editor-toolbar{
+
+.editor-toolbar {
     background: rgb(249, 249, 249);
 }
-.descriptionBox{
+
+.descriptionBox {
     background: rgb(249, 249, 249);
     border-color: rgb(221, 221, 221);
     width: 50%;
@@ -621,6 +658,7 @@ position: relative;
     padding: 10px;
     color: #888;
 }
+
 .quoted-text>p {
     /*width: 80%;*/
     margin: 0px;
@@ -982,7 +1020,6 @@ position: relative;
     color: #526F79;
     font-size: 35px;
     padding: 30px;
-    margin-right: -30px;
     transition: .6s;
     /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
@@ -992,6 +1029,10 @@ position: relative;
 [class^="icon-"]:hover, [class*=" icon-"]:hover {
     color: #fff;
     background: rgba(0, 0, 0, 0.2);
+}
+
+.social-bar [class^="icon-"], .social-bar [class*=" icon-"] {
+    margin-right: -20px;
 }
 
 .icon-google-plus:before {

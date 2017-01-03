@@ -1,0 +1,13 @@
+<div class="border widget-sm widget-tag-box">
+    <p>
+        Popular tags
+        <br/>
+        <a class="tags" ng-repeat="tag in tags" ng-href="/tagSearch/{{ tag.id }}" target="_blank">
+            {{ tag.name }}
+        </a>
+        <!-- <a class="tags" id="moreTag" ng-click="scrollTo('tag-container')" href=""> -->
+        <a class="tags" id="moreTag" scroller scroll-to="tag-container" href="">
+            More
+        </a>
+    </p>
+</div>

@@ -1,0 +1,21 @@
+<!-- <div class="widget border">
+    <p>
+        You may also like
+    </p>
+    <ul class="index-list">
+        <li data-ng-repeat="link in popularLinks">
+            <a ng-href="/blogs/{{ link._id }}" ng-bind-html="trustAsHtml(link.title)"></a>
+        </li>
+    </ul>
+</div>
+ -->
+ <div class="widget border">
+     <p>
+         You may also like
+     </p>
+     <ul class="index-list">
+         <a data-ng-repeat="link in popularLinks" ng-href="/blogs/{{ link._id }}">
+             <li ng-bind-html="trustAsHtml(link.title)"></li>
+         </a>
+     </ul>
+ </div>

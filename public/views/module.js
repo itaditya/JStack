@@ -21,6 +21,12 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
     this.getUserType = function() {
         return localStorageService.cookie.get("userType");
     };
+    this.setEditableBlog = function(blogs) {
+        localStorageService.cookie.set("editBlogs",blogs);
+    };
+    this.getEditableBlog = function() {
+        return localStorageService.cookie.get("editBlogs");
+    };
     this.getCanEditBlog = function(blogId) {
         var blogs = localStorageService.cookie.get("editBlogs");
         if (blogs && blogs.indexOf(blogId) != -1) {
