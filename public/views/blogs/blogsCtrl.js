@@ -1,4 +1,4 @@
-angular.module('blogs').controller('blogsCtrl', function($scope, $sce, $timeout, $rootScope, blogFactory, $routeParams) {
+angular.module('blogs').controller('blogsCtrl', function($scope, $sce, $timeout, $rootScope, blogFactory, $routeParams, userFactory) {
     blogFactory.getList("limit=9&design=short").then(function(blogs) {
         $scope.featuredBlogs = blogs.data;
         $scope.postsLoaded = true;
@@ -10,7 +10,7 @@ angular.module('blogs').controller('blogsCtrl', function($scope, $sce, $timeout,
             sr.reveal($rootScope.dd('.animateFeaturedBlogs'), {
                 // container: ".mainPage",
                 viewFactor: 0.6,
-                easing   : 'ease-in-out',
+                easing: 'ease-in-out',
                 // opacity: 0.3,
                 duration: 1000
             });
@@ -18,14 +18,15 @@ angular.module('blogs').controller('blogsCtrl', function($scope, $sce, $timeout,
         blogFactory.getList("limit=3&design=short&sort=-date").then(function(blogs) {
             $scope.recentBlogs = blogs.data;
             $scope.$watch("$viewContentLoaded", function() {
-                console.log('test2');
                 sr.reveal($rootScope.dd('.animateRecentBlogs'), {
                     // container: ".mainPage",
                     // reset: true,
                     duration: 800
                 }, 150);
             });
-            // console.log($rootScope.d(".mainPage"));
+        });
+        userFactory.getList().then(function(res) {
+            console.log(res.data);
         });
         $scope.isBig = function(index) {
             index = index % 9;

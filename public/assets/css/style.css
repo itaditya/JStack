@@ -38,7 +38,7 @@ ul li {
     overflow-x: hidden;
 }
 
-.page > * {
+.page>* {
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -1059,6 +1059,10 @@ position: relative;
     content: "\e920";
 }
 
+.icon-arrow:before {
+    content: "\e923";
+}
+
 .search {
     position: relative;
     display: flex;
@@ -1146,17 +1150,17 @@ position: relative;
     #card-details2 {
         margin: 20px 0;
     }
-    .img-container > img {
+    .img-container>img {
         height: 120px;
     }
     .overlay {
         height: 120px;
     }
-    .caption > a {
+    .caption>a {
         padding: 8px 30px;
         font-size: 20px;
     }
-    .card-details > p {
+    .card-details>p {
         font-size: 20px;
     }
     .brand-details {

@@ -69,7 +69,7 @@
                 <span class="form__error" ng-show="registerForm.Description.$dirty && registerForm.Description.$error.required">Description is Required</span>
             </div>
             <div class="form__field">
-                <input class="preloaderEffect" type="submit" value="Sign Up" ng-hide="isValidating"/>
+                <input class="preloaderEffect" type="submit" value="Sign Up" ng-hide="isValidating" ng-disabled="registerForm.$invalid"/>
                 <img class="preloaderEffect" style="margin: 0px;padding: 10px;" src="/assets/img/preloader2.svg" alt="" ng-show="isValidating"/>
             </div>
         </form>

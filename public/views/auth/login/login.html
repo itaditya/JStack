@@ -35,7 +35,7 @@
                 <span class="form__error" ng-show="loginForm.Password.$dirty && loginForm.Password.$error.minlength">Password must be atleast 6 characters</span>
             </div>
             <div class="form__field">
-                <input class="preloaderEffect" ng-disabled="loginForm.$dirty && loginForm.$invalid" ng-hide="isValidating" type="submit" value="Sign In"/>
+                <input class="preloaderEffect" ng-disabled="loginForm.$invalid" ng-hide="isValidating" type="submit" value="Sign In"/>
                 <img alt="" class="preloaderEffect" ng-show="isValidating" src="/assets/img/preloader2.svg" style="margin: 0px;padding: 10px;"/>
             </div>
         </form>

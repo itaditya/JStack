@@ -1,4 +1,4 @@
-angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorageModule', 'ngFileUpload']).config(function(localStorageServiceProvider, $locationProvider) {
+angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorageModule', 'ngFileUpload']).config(function(localStorageServiceProvider, $locationProvider, $httpProvider) {
     $locationProvider.html5Mode(true);
     localStorageServiceProvider.setPrefix('JStack').setStorageType('localStorage');
     notification.configProfile('global', {
@@ -6,6 +6,25 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
             position: ['right', 'top'],
             autoHide: 1
         }
+    });
+    $httpProvider.interceptors.push(function($q, $location, localStorageService) {
+        var token = localStorageService.cookie.get("authToken");
+        console.log(token);
+        return {
+            'request': function(config) {
+                config.headers = config.headers || {};
+                if (token) {
+                    config.headers.authorization = 'Bearer ' + token;
+                }
+                return config;
+            },
+            'responseError': function(response) {
+                if (response.status === 401 || response.status === 403) {
+                    // $location.path('/login');
+                }
+                return $q.reject(response);
+            }
+        };
     });
 }).service('SessionService', function(localStorageService) {
     // var userType;

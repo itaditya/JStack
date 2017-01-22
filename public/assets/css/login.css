@@ -184,6 +184,7 @@ input {
     color: #eee;
     font-weight: 700;
     text-transform: uppercase;
+    transition: 0.6s;
 }
 
 .login .preloaderEffect:focus, .login .preloaderEffect:hover {
@@ -191,7 +192,8 @@ input {
 }
 
 .login .preloaderEffect[disabled="disabled"] {
-    background-color: rgba(232, 93, 147, 0.81);
+    /*background-color: rgba(232, 93, 147, 0.81);*/
+    opacity: 0.8;
 }
 
 
