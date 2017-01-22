@@ -25,7 +25,7 @@ module.exports = {
         }, function(err, requester) {
             if (err) res.send(err);
             if (requester) {
-                callback(requester.role);
+                callback(requester.role, requester.id);
             } else {
                 res.send({
                     message: "No Access Rights",

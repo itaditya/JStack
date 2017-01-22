@@ -143,22 +143,37 @@ module.exports = function(app) {
             });
         });
     }).put('/api/blogs/:id', ensureAuthorized, function(req, res) {
-        tokenCheck(req.token, function(role) {
+        tokenCheck(req.token, function(role, id) {
             Blog.findById(req.params.id, function(err, blog) {
                 if (typeof blog != "undefined") {
-                    blog.title = req.body.title || blog.title;
-                    blog.coverImg = req.body.coverImg || blog.coverImg;
-                    blog.description = req.body.description || blog.description;
-                    blog.mdString = req.body.content || blog.content;
-                    blog.content = converter.makeHtml(blog.mdString);
-                    blog.tags = req.body.tags || blog.tags;
-                    blog.tagsData = req.body.tagsData || blog.tagsData;
+                    var temp = {
+                        id: blog.id,
+                        title: req.body.title || blog.title;
+                        coverImg: req.body.coverImg || blog.coverImg;
+                        description: req.body.description || blog.description;
+                        mdString: req.body.content || blog.content;
+                        content: converter.makeHtml(blog.mdString);
+                        tags: req.body.tags || blog.tags;
+                        tagsData: req.body.tagsData || blog.tagsData;
+                        authorId: req.body.authorId || blog.authorId;
+                        authorName: req.body.authorName || blog.authorName;
+                        date: req.body.date || blog.date;
+                        likes: req.body.likes || blog.likes;
+                        comments: req.body.comments || blog.comments;
+                        views: req.body.views || blog.views;
+                    }
                     if (role === "admin") {
-                        blog.authorId = req.body.authorId || blog.authorId;
-                        blog.authorName = req.body.authorName || blog.authorName;
-                        blog.date = req.body.date || blog.date;
-                        blog.likes = req.body.likes || blog.likes;
-                        blog.comments = req.body.comments || blog.comments;
+                        blog = temp;
+                    }
+                    if (id === blog.authorId) {
+                        //is author
+                        blog.title = temp.title;
+                        blog.coverImg = temp.coverImg;
+                        blog.description = temp.description;
+                        blog.mdString = temp.mdString;
+                        blog.content = temp.content;
+                        blog.tags = temp.tags;
+                        blog.tagsData = temp.tagsData;
                     }
                     blog.save(function(err) {
                         if (err) res.send(err);

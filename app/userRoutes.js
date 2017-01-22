@@ -88,7 +88,7 @@ module.exports = function(app) {
             }
         });
     }).put('/api/users/:id', ensureAuthorized, function(req, res) {
-        tokenCheck(req.token, function(role) {
+        tokenCheck(req.token, function(role, id) {
             User.findById(req.params.id, function(err, user) {
                 if (typeof user != "undefined") {
                     if (role === "admin") {
@@ -107,7 +107,7 @@ module.exports = function(app) {
                                 message: 'user updated!'
                             });
                         });
-                    } else if (role === "author") {
+                    } else if (id === user.id) {
                         user.name = req.body.name || user.name;
                         user.description = req.body.description || user.description;
                         user.image = req.body.image || user.image;
