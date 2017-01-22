@@ -3,9 +3,11 @@ var User = require('./models/user');
 var Tag = require('./models/tag');
 var async = require("async");
 var nodemailer = require('nodemailer');
-var mailSender = require('./../config/auth');
+var auth = require('./../config/auth');
 var showdown = require('showdown');
 var converter = new showdown.Converter();
+var ensureAuthorized = auth.ensureAuthorized;
+var tokenCheck = auth.tokenCheck;
 // var colors = require('colors/safe');
 var blogQuery = function(req, res, limitParam, sortParam, callback) {
     var sortList = ["-views", "-likes", "date", "-date"]
@@ -98,109 +100,117 @@ module.exports = function(app) {
                 });
             }
         });
-    }).post('/api/blogs', function(req, res) {
-        var blog = new Blog();
-        blog.authorId = req.body.authorId;
-        blog.authorName = req.body.authorName;
-        blog.date = Date.now();
-        blog.title = req.body.title;
-        blog.coverImg = req.body.coverImg;
-        blog.mdString = req.body.content;
-        blog.description = req.body.description;
-        blog.content = converter.makeHtml(blog.mdString);
-        var tags = req.body.tags;
-        blog.tagsData = req.body.tagsData;
-        blog.tags = [];
-        if (tags) {
-            blog.tags = tags;
-        } else {
-            async.forEachOf(blog.tagsData, function(tag, index) {
-                blog.tags.push(tag.value);
-            });
-        }
-        blog.save(function(err) {
-            if (err) res.send(err);
-            User.findById(blog.authorId, function(err, user) {
-                user.blogs.push(blog._id);
-                user.save();
-            });
-            async.forEachOf(blog.tags, function(tagId, index) {
-                if (err) return res.send(err);
-                Tag.findById(tagId, function(err, tag) {
-                    if (tag) {
-                        tag.blogs.push(blog._id);
-                        tag.save();
-                    }
-                });
-            });
-            res.json({
-                message: 'blog created!',
-                id: blog._id
-            });
-        });
-    }).put('/api/blogs/:id', function(req, res) {
-        Blog.findById(req.params.id, function(err, blog) {
-            if (typeof blog != "undefined") {
-                blog.authorId = req.body.authorId || blog.authorId;
-                blog.authorName = req.body.authorName || blog.authorName;
-                blog.date = req.body.date || blog.date;
-                blog.title = req.body.title || blog.title;
-                blog.coverImg = req.body.coverImg || blog.coverImg;
-                blog.description = req.body.description || blog.description;
-                blog.mdString = req.body.content || blog.content;
-                blog.content = converter.makeHtml(blog.mdString);
-                blog.tags = req.body.tags || blog.tags;
-                blog.tagsData = req.body.tagsData || blog.tagsData;
-                blog.likes = req.body.likes || blog.likes;
-                blog.comments = req.body.comments || blog.comments;
-                blog.save(function(err) {
-                    if (err) res.send(err);
-                    res.json({
-                        message: 'blog updated!'
-                    });
-                });
+    }).post('/api/blogs', ensureAuthorized, function(req, res) {
+        tokenCheck(req.token, function(role) {
+            var blog = new Blog();
+            blog.authorId = req.body.authorId;
+            blog.authorName = req.body.authorName;
+            blog.date = Date.now();
+            blog.title = req.body.title;
+            blog.coverImg = req.body.coverImg;
+            blog.mdString = req.body.content;
+            blog.description = req.body.description;
+            blog.content = converter.makeHtml(blog.mdString);
+            var tags = req.body.tags;
+            blog.tagsData = req.body.tagsData;
+            blog.tags = [];
+            if (tags) {
+                blog.tags = tags;
             } else {
-                res.json({
-                    message: "blog doesn't exist!"
+                async.forEachOf(blog.tagsData, function(tag, index) {
+                    blog.tags.push(tag.value);
                 });
             }
+            blog.save(function(err) {
+                if (err) res.send(err);
+                User.findById(blog.authorId, function(err, user) {
+                    user.blogs.push(blog._id);
+                    user.save();
+                });
+                async.forEachOf(blog.tags, function(tagId, index) {
+                    if (err) return res.send(err);
+                    Tag.findById(tagId, function(err, tag) {
+                        if (tag) {
+                            tag.blogs.push(blog._id);
+                            tag.save();
+                        }
+                    });
+                });
+                res.json({
+                    message: 'blog created!',
+                    id: blog._id
+                });
+            });
         });
-    }).delete('/api/blogs/:id', function(req, res) {
-        var blogId = req.params.id;
-        Blog.findOne({
-            _id: blogId
-        }, function(err, blog) {
-            if (err) res.send(err);
-            if (blog) {
-                User.findOne({
-                    _id: blog.authorId
-                }, function(err, user) {
-                    if (user) {
-                        var index = user.blogs.indexOf(blogId);
-                        user.blogs.splice(index, 1);
-                        user.save();
+    }).put('/api/blogs/:id', ensureAuthorized, function(req, res) {
+        tokenCheck(req.token, function(role) {
+            Blog.findById(req.params.id, function(err, blog) {
+                if (typeof blog != "undefined") {
+                    blog.title = req.body.title || blog.title;
+                    blog.coverImg = req.body.coverImg || blog.coverImg;
+                    blog.description = req.body.description || blog.description;
+                    blog.mdString = req.body.content || blog.content;
+                    blog.content = converter.makeHtml(blog.mdString);
+                    blog.tags = req.body.tags || blog.tags;
+                    blog.tagsData = req.body.tagsData || blog.tagsData;
+                    if (role === "admin") {
+                        blog.authorId = req.body.authorId || blog.authorId;
+                        blog.authorName = req.body.authorName || blog.authorName;
+                        blog.date = req.body.date || blog.date;
+                        blog.likes = req.body.likes || blog.likes;
+                        blog.comments = req.body.comments || blog.comments;
                     }
-                    Blog.remove({
-                        _id: blogId
-                    }, function(err) {
+                    blog.save(function(err) {
                         if (err) res.send(err);
                         res.json({
-                            message: 'blog deleted!'
+                            message: 'blog updated!'
                         });
                     });
-                    async.forEachOf(blog.tags, function(tagId, index) {
-                        if (err) return res.send(err);
-                        Tag.findById(tagId, function(err, tag) {
-                            if (tag) {
-                                var index = tag.blogs.indexOf(blogId);
-                                tag.blogs.splice(index, 1);
-                                tag.save();
-                            }
+                } else {
+                    res.json({
+                        message: "blog doesn't exist!"
+                    });
+                }
+            });
+        })
+    }).delete('/api/blogs/:id', ensureAuthorized, function(req, res) {
+        tokenCheck(req.token, function(role) {
+            var blogId = req.params.id;
+            Blog.findOne({
+                _id: blogId
+            }, function(err, blog) {
+                if (err) res.send(err);
+                if (blog) {
+                    User.findOne({
+                        _id: blog.authorId
+                    }, function(err, user) {
+                        if (user) {
+                            var index = user.blogs.indexOf(blogId);
+                            user.blogs.splice(index, 1);
+                            user.save();
+                        }
+                        Blog.remove({
+                            _id: blogId
+                        }, function(err) {
+                            if (err) res.send(err);
+                            res.json({
+                                message: 'blog deleted!'
+                            });
+                        });
+                        async.forEachOf(blog.tags, function(tagId, index) {
+                            if (err) return res.send(err);
+                            Tag.findById(tagId, function(err, tag) {
+                                if (tag) {
+                                    var index = tag.blogs.indexOf(blogId);
+                                    tag.blogs.splice(index, 1);
+                                    tag.save();
+                                }
+                            });
                         });
                     });
-                });
-            }
-        });
+                }
+            });
+        })
     }).post('/api/blogs/userChoice/:id', function(req, res) {
         var blogId = req.params.id;
         Blog.findOne({
@@ -219,12 +229,12 @@ module.exports = function(app) {
         var transporter = nodemailer.createTransport({
             service: 'Mailgun',
             auth: {
-                domain: mailSender.mailer.auth.domain,
-                api_key: mailSender.mailer.auth.api_key
-                    // pass: mailSender.mailer.auth.pass,
+                domain: auth.mailer.auth.domain,
+                api_key: auth.mailer.auth.api_key
+                // pass: auth.mailer.auth.pass,
             }
         });
-        console.log(mailSender.mailer.auth);
+        console.log(auth.mailer.auth);
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: '"Jstack Team" <adityaa803@gmail.com>', // sender address

@@ -29,11 +29,12 @@
 }
 .topic button{
     background: #E57E31 !important;
-    border-color: #E57E31;
+    border-color: #E57E31 !important;
     color: #fff;
     width: 250px;
     font-size: 22px;
     padding: 10px;
+    border-radius: 4px;
     /*font-family: 'Handwriting';*/
 
 
@@ -72,7 +73,8 @@
                 Blog Posts For
                 <strong>Developers Community</strong>
             </h2>
-            <div class="image-box">
+            <!-- delayed  -->
+            <div class="image-box animated fadeIn delayed" ng-class="{'fadeIn':postsLoaded}">
                 <img src="/assets/img/landing.svg" alt=""/>
             </div>
             <button class="btn">

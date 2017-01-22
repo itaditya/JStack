@@ -18,22 +18,20 @@ module.exports = function(app) {
                 })
             }
         });
-    }).get('/api/users/:id', ensureAuthorized, function(req, res) {
-        tokenCheck(req.token, function(role) {
-            var userId = req.params.id;
-            User.findOne({
-                _id: userId
-            }, function(err, user) {
-                if (err) res.send(err);
-                if (user) {
-                    res.json(user);
-                } else {
-                    res.json({
-                        message: 'User Not Found!',
-                        status: 0
-                    });
-                }
-            });
+    }).get('/api/users/:id', function(req, res) {
+        var userId = req.params.id;
+        User.findOne({
+            _id: userId
+        }, function(err, user) {
+            if (err) res.send(err);
+            if (user) {
+                res.json(user);
+            } else {
+                res.json({
+                    message: 'User Not Found!',
+                    status: 0
+                });
+            }
         });
     }).post('/api/register', function(req, res) {
         User.findOne({

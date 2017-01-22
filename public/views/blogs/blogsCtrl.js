@@ -25,9 +25,6 @@ angular.module('blogs').controller('blogsCtrl', function($scope, $sce, $timeout,
                 }, 150);
             });
         });
-        userFactory.getList().then(function(res) {
-            console.log(res.data);
-        });
         $scope.isBig = function(index) {
             index = index % 9;
             if (index == 2 || index == 3 || index == 7) {

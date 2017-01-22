@@ -9,7 +9,6 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
     });
     $httpProvider.interceptors.push(function($q, $location, localStorageService) {
         var token = localStorageService.cookie.get("authToken");
-        console.log(token);
         return {
             'request': function(config) {
                 config.headers = config.headers || {};
@@ -20,7 +19,7 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
             },
             'responseError': function(response) {
                 if (response.status === 401 || response.status === 403) {
-                    // $location.path('/login');
+                    $location.path('/login');
                 }
                 return $q.reject(response);
             }
