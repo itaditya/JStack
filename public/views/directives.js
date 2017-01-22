@@ -41,15 +41,22 @@ angular.module('JStack').directive('preLoader', function() {
         templateUrl: '/views/partials/footer.html',
         controller: function($scope, tagFactory, blogFactory, $timeout, tagsService) {
             $scope.subscribe = function() {
-                console.log('test');
                 blogFactory.subscribe($scope.emailId).then(function(message) {
                     console.log(message.data);
                 });
             }
-            $timeout(tagFactory.getTagList("design=category").then(function(categories) {
+            var tags = tagsService.getTags();
+            var setTags = function(categories) {
                 $scope.categories = categories.data;
                 tagsService.setTags(categories.data);
-            }), 0);
+            }
+            if (tags) {
+                setTags({
+                    data: tags
+                });
+            } else {
+                tagFactory.getTagList("design=category").then(setTags);
+            }
         }
     };
 }).directive('tagWidget', function() {

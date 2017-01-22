@@ -190,6 +190,10 @@ input {
     background-color: #d44179;
 }
 
+.login .preloaderEffect[disabled="disabled"] {
+    background-color: rgba(232, 93, 147, 0.81);
+}
+
 
 /* modules/text.css */
 
@@ -210,20 +214,22 @@ p {
 
 .form__error {
     position: absolute;
-    top: 14px;
-    /* top: 50%; */
-    /* right: -100px; */
-    left: 10px;
+    top: 10px;
     left: 100%;
     white-space: nowrap;
     border-radius: 4px;
     background: #363b41;
     /* background: #606468; */
     z-index: 2;
-    padding: 5px 16px;
+    padding: 7px 16px;
+    box-shadow: 0px 1px 6px 0px rgba(0, 0, 0, 0.2);
 }
+
 .form__error:before {
     content: " ";
-    border: 20px solid transparent;
-    border-right: 20px solid #363b41;
+    top: 7px;
+    left: -20px;
+    position: absolute;
+    border: 10px solid transparent;
+    border-right: 10px solid #363b41;
 }

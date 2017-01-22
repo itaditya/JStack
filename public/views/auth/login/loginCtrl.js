@@ -8,10 +8,7 @@ angular.module('auth').controller('loginCtrl', function($scope, $location, authF
     $scope.isValidating = false;
     $scope.login = function(form) {
         $scope.isValidating = true;
-        console.log(form);
         if (form.$valid) {
-            /*
-            console.log($scope.user);
             authFactory.loginUser($scope.user).then(function(data) {
                 console.log(data.data);
                 if (data.data.status === "1") {
@@ -26,18 +23,10 @@ angular.module('auth').controller('loginCtrl', function($scope, $location, authF
                     $scope.isValidating = false;
                 }
             });
-            */
         } else {
             console.log(form.$error);
-            var reqError = form.$error.required;
-            console.log(form.Password.$error.minlength);
-            for (var i = reqError.length - 1; i >= 0; i--) {
-                notification.notify('error', 'Please Enter a ' + reqError[i].$name);
-            }
-            // for (var i = reqError.length - 1; i >= 0; i--) {
-            //     notification.notify('error', 'This ' + reqError[i].$name + ' Is Incorrect');
-            // }
-            // notification.notify('warning', 'Please Fill Both Fields');
+            $scope.isValidating = false;
+            notification.notify('warning', 'Please Fill Both Fields Correctly');
         }
     }
 });

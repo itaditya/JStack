@@ -1,4 +1,4 @@
-angular.module('auth').controller('registerCtrl', function($scope,$location, authFactory) {
+angular.module('auth').controller('registerCtrl', function($scope, $location, authFactory) {
     $(document).ready(function() {
         $scope.isLoaded = true;
         $scope.isValidating = false;
@@ -6,10 +6,13 @@ angular.module('auth').controller('registerCtrl', function($scope,$location, aut
             $scope.isValidating = true;
             if (form.$valid) {
                 authFactory.registerUser($scope.user).then(function(data) {
-                    // console.log(data);
                     notification.notify('success', 'Register Successfully');
                     $location.path("/login");
                 });
+            } else {
+                console.log(form.$error);
+                $scope.isValidating = false;
+                notification.notify('warning', 'Please Fill All Fields Correctly');
             }
         }
     });

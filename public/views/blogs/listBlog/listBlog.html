@@ -1,9 +1,11 @@
-<pre-loader ng-hide="blogs.length> 0">
-</pre-loader>
+<pre-loader ng-hide="blogsLoaded != 0"></pre-loader>
 <!-- Custom CSS-->
 <link rel="stylesheet" type="text/css" href="/assets/css/style.css"/>
 <link rel="stylesheet" type="text/css" href="/assets/css/landing/searchList.css"/>
-<div class="page animated fadeIn mainPage" ng-cloak  ng-show="blogs.length> 0">
+<div class="page animated fadeIn mainPage" ng-cloak  ng-show="blogsLoaded == -1">
+    <h1>Sorry! No Blogs For This Tag</h1>
+</div>
+<div class="page animated fadeIn mainPage" ng-cloak  ng-show="blogsLoaded> 0">
     <nav-bar></nav-bar>
     <div info="author" class="hero-banner" style="background-image: linear-gradient(rgba(29,33,41,0.88),rgba(29,33,41,0.88)),url('/assets/img/coverImg/hero2.jpg')"></div>
     <section class="container" role="blog content">
@@ -12,32 +14,24 @@
                 <div class="card-img" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');"></div>
                 <div class="card-body">
                     <h2>
-                        <a ng-href="/blogs/{{ blog._id }}" ng-bind-html="trustAsHtml(blog.title)">
-                            <!-- {{ blog.title }} -->
-                        </a>
+                        <a ng-href="/blogs/{{ blog._id }}" ng-bind-html="trustAsHtml(blog.title)"></a>
                     </h2>
-                    <div>
-                        {{ blog.description }}
-                    </div>
+                    <div>{{ blog.description }}</div>
                     <p class="card-footer">
                         <span>
-                            <strong>
-                                {{ blog.likes }}
-                            </strong>
+                            <strong>{{ blog.likes }}</strong>
                             likes
                         </span>
                         <span>
-                            <strong>
-                                {{ blog.views }}
-                            </strong>
+                            <strong>{{ blog.views }}</strong>
                             views
                         </span>
                     </p>
                 </div>
             </div>
         </main>
+        <!-- {{ blog.title }} -->
         <!-- End of Main -->
-        <!-- sidebar starts -->
         <aside class="sidebar sm-hide" side-bar>
             <div info="sidebar" class="sm-hide">
                 <tag-widget></tag-widget>
@@ -50,61 +44,27 @@
         <div class="preloader"></div>
     </div>
     <div class="card-details border" ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded">
-        <!-- ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded" -->
+        <!-- sidebar starts -->
         <div class="img-container">
             <img ng-src="/assets/img/coverImg/{{ post.coverImg }} "/>
             <div class="overlay">
                 <div class="caption">
-                    <a ng-href="/blogs/{{ post._id }}" class="btn" target="_blank">
-                        View
-                    </a>
+                    <a ng-href="/blogs/{{ post._id }}" class="btn" target="_blank">View</a>
                 </div>
             </div>
         </div>
-        <p>
-            {{ post.title }}
-        </p>
-        <span class="post-date">
-            {{ post.date | date }}
-        </span>
+        <p>{{ post.title }}</p>
+        <span class="post-date">{{ post.date | date }}</span>
     </div>
-    <!-- <input autofocus> -->
+    <!-- ng-repeat="post in posts | orderBy : 'date'" ng-show="postsLoaded" -->
 </section>
 <footer-bar></footer-bar>
-<div class="modal" tabindex="1" id="commentModal">
-    <span class="closeModal icon-cross"></span>
-    <!-- <h2>Fb Comments Coming Soon ..</h2> -->
-    <div id="fb-root"></div>
-    <script>
-    (function(d, s, id) {
-        console.log(d, s, id);
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s);
-        js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.8&appId=1149863308401381";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <div class="fb-comments" data-href="http://localhost:8080/#/blogs/{{ blog._id }}" data-order-by="reverse_time" data-width="800" data-numposts="5"></div>
-</div>
 <div class="modal" tabindex="1" id="quizModal">
     <span class="closeModal icon-cross"></span>
-    <h2>
-        Quiz Coming Soon ..
-    </h2>
+    <h2>Quiz Coming Soon ..</h2>
 </div>
 <div class="modal" tabindex="1" id="adModal">
     <span class="closeModal icon-cross"></span>
-    <h2>
-        Ads Not Coming Soon ..
-    </h2>
+    <h2>Ads Not Coming Soon ..</h2>
 </div>
 </div>
-<!-- <div class="page bg-dk-purple" ng-hide="author">
-<div class="preloader-box">
-    <div class="preloader"></div>
-    <img class="preloader" src="/assets/img/preloaderLg.svg" alt="">
-</div>
-</div> -->
-<!-- style="background: #2c3e50;" -->

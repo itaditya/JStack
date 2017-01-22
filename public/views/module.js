@@ -1,4 +1,4 @@
-angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorageModule','ngFileUpload']).config(function(localStorageServiceProvider, $locationProvider) {
+angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorageModule', 'ngFileUpload']).config(function(localStorageServiceProvider, $locationProvider) {
     $locationProvider.html5Mode(true);
     localStorageServiceProvider.setPrefix('JStack').setStorageType('localStorage');
     notification.configProfile('global', {
@@ -22,7 +22,7 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
         return localStorageService.cookie.get("userType");
     };
     this.setEditableBlog = function(blogs) {
-        localStorageService.cookie.set("editBlogs",blogs);
+        localStorageService.cookie.set("editBlogs", blogs);
     };
     this.getEditableBlog = function() {
         return localStorageService.cookie.get("editBlogs");
@@ -34,7 +34,7 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
         }
         return false;
     };
-}).run(function($rootScope,$route, $templateCache, $http) {
+}).run(function($rootScope, $route, $templateCache, $http) {
     // $templateCache.removeAll()
     $rootScope.d = function(elem) {
         elem = document.querySelector(elem);
@@ -57,5 +57,17 @@ angular.module('JStack', ['ngRoute', 'auth', 'blogs', 'dashboard', 'LocalStorage
             timeout = setTimeout(later, wait);
             if (callNow) func.apply(context, args);
         };
+    }
+    if (navigator.serviceWorker) {
+        console.log('Yeah serviceWorker');
+        // navigator.serviceWorker.register('./service-worker.js', {scope: './'})
+        //     .then(function (registration) {
+        //         console.log(registration);
+        //     })
+        //     .catch(function (e) {
+        //         console.error(e);
+        //     })
+    } else {
+        console.log('Service Worker is not supported in this browser.')
     }
 });
