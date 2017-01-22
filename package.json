@@ -1,27 +1,30 @@
 {
-  "name": "jstack",
-  "main": "app.js",
-  "version": "6.9.1",
-  "scripts": {
-    "postinstall": "bower install",
-    "nodemon": "nodemon app.js",
-    "mongo": "mongod --storageEngine=mmapv1 --dbpath f:/data",
-    "repmongo": "mongod --dbpath f:/data --repair",
-    "start": "heroku local -p 8080 -e .env.local"
-  },
-  "dependencies": {
-    "async": "^2.1.4",
-    "better-console": "^0.2.4",
-    "body-parser": "~1.4.2",
-    "bower": "1.8.0",
-    "colors": "^1.1.2",
-    "connect-multiparty": "^2.0.0",
-    "express": "~4.5.1",
-    "jsonwebtoken": "^7.2.1",
-    "method-override": "~2.0.2",
-    "mongoose": "~3.8.0",
-    "nodemailer": "^2.6.4",
-    "showdown": "^1.5.1",
-    "xoauth2": "^1.2.0"
-  }
+    "name": "jstack",
+    "main": "app.js",
+    "version": "6.9.1",
+    "engines": {
+        "node": "6.9.1"
+    },
+    "scripts": {
+        "postinstall": "bower install",
+        "nodemon": "nodemon app.js",
+        "mongo": "mongod --storageEngine=mmapv1 --dbpath f:/data",
+        "repmongo": "mongod --dbpath f:/data --repair",
+        "start": "heroku local -p 8080 -e .env.local"
+    },
+    "dependencies": {
+        "async": "^2.1.4",
+        "better-console": "^0.2.4",
+        "body-parser": "~1.4.2",
+        "bower": "1.8.0",
+        "colors": "^1.1.2",
+        "connect-multiparty": "^2.0.0",
+        "express": "~4.5.1",
+        "jsonwebtoken": "^7.2.1",
+        "method-override": "~2.0.2",
+        "mongoose": "~3.8.0",
+        "nodemailer": "^2.6.4",
+        "showdown": "^1.5.1",
+        "xoauth2": "^1.2.0"
+    }
 }
