@@ -148,19 +148,19 @@ module.exports = function(app) {
                 if (typeof blog != "undefined") {
                     var temp = {
                         id: blog.id,
-                        title: req.body.title || blog.title;
-                        coverImg: req.body.coverImg || blog.coverImg;
-                        description: req.body.description || blog.description;
-                        mdString: req.body.content || blog.content;
-                        content: converter.makeHtml(blog.mdString);
-                        tags: req.body.tags || blog.tags;
-                        tagsData: req.body.tagsData || blog.tagsData;
-                        authorId: req.body.authorId || blog.authorId;
-                        authorName: req.body.authorName || blog.authorName;
-                        date: req.body.date || blog.date;
-                        likes: req.body.likes || blog.likes;
-                        comments: req.body.comments || blog.comments;
-                        views: req.body.views || blog.views;
+                        title: req.body.title || blog.title,
+                        coverImg: req.body.coverImg || blog.coverImg,
+                        description: req.body.description || blog.description,
+                        mdString: req.body.content || blog.content,
+                        content: converter.makeHtml(blog.mdString),
+                        tags: req.body.tags || blog.tags,
+                        tagsData: req.body.tagsData || blog.tagsData,
+                        authorId: req.body.authorId || blog.authorId,
+                        authorName: req.body.authorName || blog.authorName,
+                        date: req.body.date || blog.date,
+                        likes: req.body.likes || blog.likes,
+                        comments: req.body.comments || blog.comments,
+                        views: req.body.views || blog.views
                     }
                     if (role === "admin") {
                         blog = temp;

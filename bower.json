@@ -4,7 +4,7 @@
     "dependencies": {
         "font-awesome": "latest",
         "animate.css": "latest",
-        "angular": "1.6.0",
+        "angular": "!1.6.0",
         "angular-route": "latest",
         "simplemde": "^1.11.2",
         "angular-permission": "^4.0.6",

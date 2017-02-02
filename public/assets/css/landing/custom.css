@@ -21,7 +21,8 @@
 }
 
 .mainPage {
-    background: #e1e2e1;
+    /*background: #e1e2e1;*/
+    background: #191919;
 }
 
 .container {
@@ -39,7 +40,8 @@
     color: #fff;
     font-size: 24px;
     padding: 10px 65px;
-    background:#053140;
+    /*background: #053140;*/
+    background: #da0f4b;
     /*font-size: 30px;*/
     margin: 0;
     border-radius: 3px;
@@ -90,9 +92,11 @@ p:last-child {
     flex-direction: column;
     transition: 0.6s;
 }
+
 .card:hover {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
+
 .card_main {
     width: 100%;
 }
@@ -145,8 +149,9 @@ p:last-child {
     height: 186px;
     background-position: center;
     background-size: cover;
+    background-blend-mode: overlay;
     transition: 0.6s;
-    filter: brightness(0.95);
+    /*filter: brightness(0.95);*/
 }
 
 *::-ms-backdrop, .card__header {
@@ -249,7 +254,8 @@ p:last-child {
     padding: 1.5em 4%;
     border-top-width: 1px;
     /*border-top-style: solid;*/
-    background: #f7f7f7;
+    /*background: #f7f7f7;*/
+    background: #262626;
     font-size: 90%;
     display: -webkit-box;
     display: -webkit-flex;
@@ -285,8 +291,10 @@ p:last-child {
  */
 
 .card {
-    background-color: #fff;
-    color: #212121;
+    /*background-color: #fff;*/
+    background: #333;
+    /*color: #212121;*/
+    color: #fff;
     font-size: 1.4rem;
 }
 
@@ -313,29 +321,43 @@ p:last-child {
 }
 
 .card__showmore {
-    color: #303f9f;
-    color: #444;
+    /*color: #444;*/
+    color: #fff;
     -webkit-transition: color 0.3s ease-out;
     transition: color 0.3s ease-out;
 }
 
+
+/*
 .card__showmore:hover, .card__showmore:focus {
-    color: #3f51b5;
+    color: #de5f85;
+}*/
+
+.card:hover .card__showmore {
+    /*color: #3f51b5;*/
+    /*color: #da0f4b;*/
+    color: #de5f85;
 }
 
 .card__meta-comments {
-    background-image: url("https://stas-melnikov.ru/cssgrid/comment.svg");
+    /*background-image: url("https://stas-melnikov.ru/cssgrid/comment.svg");*/
+    background-image: url("/assets/img/comment.svg");
 }
 
 .card__meta-likes {
-    background-image: url("https://stas-melnikov.ru/cssgrid/favorite.svg");
+    background-image: url("/assets/img/favorite.svg");
 }
 
 .card:hover .card__header {
     /*height: 150px;*/
-    filter: brightness(.7);
+    /*filter: brightness(.7);*/
+    background-color: rgba(218, 15, 75, 0.42);
 }
 
 .card:hover .card__title {
     /*font-size: 22px;*/
+}
+
+.card__desc {
+    color: #9d9d9d;
 }
