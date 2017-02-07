@@ -3,11 +3,11 @@ var auth = require('./../config/auth');
 var jwt = require("jsonwebtoken");
 var ensureAuthorized = auth.ensureAuthorized;
 var tokenCheck = auth.tokenCheck;
-module.exports = function(app) {
-    app.get('/api/users', ensureAuthorized, function(req, res) {
-        tokenCheck(req.token, function(role) {
+module.exports = function (app) {
+    app.get('/api/users', ensureAuthorized, function (req, res) {
+        tokenCheck(req.token, res, function (role) {
             if (role === "admin") {
-                User.find(function(err, users) {
+                User.find(function (err, users) {
                     if (err) res.send(err);
                     res.json(users);
                 });
@@ -18,11 +18,11 @@ module.exports = function(app) {
                 })
             }
         });
-    }).get('/api/users/:id', function(req, res) {
+    }).get('/api/users/:id', function (req, res) {
         var userId = req.params.id;
         User.findOne({
             _id: userId
-        }, function(err, user) {
+        }, function (err, user) {
             if (err) res.send(err);
             if (user) {
                 res.json(user);
@@ -33,10 +33,10 @@ module.exports = function(app) {
                 });
             }
         });
-    }).post('/api/register', function(req, res) {
+    }).post('/api/register', function (req, res) {
         User.findOne({
             email: req.body.email
-        }, function(err, user) {
+        }, function (err, user) {
             if (!user) {
                 var user = new User();
                 user.password = req.body.password;
@@ -46,7 +46,7 @@ module.exports = function(app) {
                     user.email = req.body.email;
                     user.description = req.body.description;
                     user.token = jwt.sign(user, process.env.JWT_SECRET);
-                    user.save(function(err) {
+                    user.save(function (err) {
                         if (err) res.send(err);
                         res.json({
                             message: 'User Registered!',
@@ -67,11 +67,11 @@ module.exports = function(app) {
                 });
             }
         });
-    }).post('/api/login', function(req, res) {
+    }).post('/api/login', function (req, res) {
         User.findOne({
             email: req.body.email,
             password: req.body.password
-        }, function(err, user) {
+        }, function (err, user) {
             if (err) res.send(err);
             if (user) {
                 res.json({
@@ -87,9 +87,9 @@ module.exports = function(app) {
                 });
             }
         });
-    }).put('/api/users/:id', ensureAuthorized, function(req, res) {
-        tokenCheck(req.token, function(role, id) {
-            User.findById(req.params.id, function(err, user) {
+    }).put('/api/users/:id', ensureAuthorized, function (req, res) {
+        tokenCheck(req.token, res, function (role, id) {
+            User.findById(req.params.id, function (err, user) {
                 if (typeof user != "undefined") {
                     if (role === "admin") {
                         user.name = req.body.name || user.name;
@@ -101,7 +101,7 @@ module.exports = function(app) {
                         user.verified = req.body.verified || user.verified;
                         user.role = req.body.role || user.role;
                         user.token = req.body.token || user.token;
-                        user.save(function(err) {
+                        user.save(function (err) {
                             if (err) res.send(err);
                             res.json({
                                 message: 'user updated!'
@@ -112,7 +112,7 @@ module.exports = function(app) {
                         user.description = req.body.description || user.description;
                         user.image = req.body.image || user.image;
                         user.email = req.body.email || user.email;
-                        user.save(function(err) {
+                        user.save(function (err) {
                             if (err) res.send(err);
                             res.json({
                                 message: 'user updated!'
@@ -131,13 +131,13 @@ module.exports = function(app) {
                 }
             });
         })
-    }).delete('/api/users/:id', ensureAuthorized, function(req, res) {
+    }).delete('/api/users/:id', ensureAuthorized, function (req, res) {
         var userId = req.params.id;
-        tokenCheck(req.token, function(role) {
+        tokenCheck(req.token, res, function (role) {
             if (role === "admin") {
                 User.remove({
                     _id: userId
-                }, function(err) {
+                }, function (err) {
                     if (err) res.send(err);
                     res.json({
                         message: 'user deleted!'

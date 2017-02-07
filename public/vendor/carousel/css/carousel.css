@@ -1,0 +1,82 @@
+.carousel-container {
+    position: relative;
+}
+
+.carousel-view {
+    width: 600px;
+    overflow-x: hidden;
+}
+
+.carousel-images {
+    height: 400px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    /*transition: .4s ease-in-out;*/
+    transition: .4s cubic-bezier(0.6, -0.28, 0.74, 0.05);
+}
+
+.carousel-images li {
+    list-style-type: none;
+    height: 100%;
+    /*box-shadow: inset 0px -23px 45px 20px rgba(0,0,0,0.5);*/
+    background-size: cover !important;
+    background-position: center !important;
+}
+/*
+.carousel-btn {
+    border: 30px solid transparent;
+    background: transparent;
+    position: absolute;
+    top: 50%;
+    margin-top: -15px;
+    padding: 0;
+    transition: .6s;
+}
+
+#cprev {
+    border-right: 50px solid #293541;
+    left: -100px;
+}
+
+#cnext {
+    border-left: 50px solid #293541;
+    right: -100px;
+}
+
+#cprev:hover {
+    border-right: 50px solid #34404c;
+    transform: rotateY(-20deg);
+}
+
+#cnext:hover {
+    border-left: 50px solid #34404c;
+    transform: rotateY(20deg);
+}
+*/
+.content {
+    height: 350px;
+    overflow-y: scroll;
+}
+
+.box {
+    width: 50%;
+    background: #000;
+    color: #fff;
+    height: 100%;
+    float: left;
+    padding: 10px;
+}
+.carousel-3 .carousel-view {
+    width: 1000px;
+}
+.carousel-3 .box {
+    font-size: 20px;
+    padding: 10px 40px;
+    text-align: left;
+    font-weight: normal;
+    line-height: 1.1em;
+    background: transparent;
+}

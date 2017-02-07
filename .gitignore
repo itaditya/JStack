@@ -1,5 +1,4 @@
 /node_modules
-/public/vendor
 /public/paths.txt
 /public/manifest.appcache
 /public/views/offline.js

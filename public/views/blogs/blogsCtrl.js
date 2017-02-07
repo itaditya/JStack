@@ -1,31 +1,33 @@
-angular.module('blogs').controller('blogsCtrl', function($scope, $sce, $timeout, $rootScope, blogFactory, $routeParams, userFactory) {
-    blogFactory.getList("limit=9&design=short").then(function(blogs) {
+angular.module('blogs').controller('blogsCtrl', function ($scope, $sce, $timeout, $rootScope, blogFactory, $routeParams, userFactory) {
+    blogFactory.getList("limit=9&design=short").then(function (blogs) {
         $scope.featuredBlogs = blogs.data;
         $scope.postsLoaded = true;
         $scope.trustAsHtml = $sce.trustAsHtml;
         window.sr = ScrollReveal({});
-        $scope.$watch("$viewContentLoaded", function() {
+        $scope.$watch("$viewContentLoaded", function () {
             console.log('test1');
             // sr.sync();
             sr.reveal($rootScope.dd('.animateFeaturedBlogs'), {
                 // container: ".mainPage",
                 viewFactor: 0.6,
+                scale: 0.9,
                 easing: 'ease-in-out',
-                // opacity: 0.3,
+                opacity: 0.3,
+                reset: true,
                 duration: 1000
-            });
+            }, 150);
         });
-        blogFactory.getList("limit=3&design=short&sort=-date").then(function(blogs) {
+        blogFactory.getList("limit=3&design=short&sort=-date").then(function (blogs) {
             $scope.recentBlogs = blogs.data;
-            $scope.$watch("$viewContentLoaded", function() {
+            $scope.$watch("$viewContentLoaded", function () {
                 sr.reveal($rootScope.dd('.animateRecentBlogs'), {
                     // container: ".mainPage",
-                    // reset: true,
+                    reset: true,
                     duration: 800
                 }, 150);
             });
         });
-        $scope.isBig = function(index) {
+        $scope.isBig = function (index) {
             index = index % 9;
             if (index == 2 || index == 3 || index == 7) {
                 return true;

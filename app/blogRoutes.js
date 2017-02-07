@@ -9,99 +9,63 @@ var converter = new showdown.Converter();
 var ensureAuthorized = auth.ensureAuthorized;
 var tokenCheck = auth.tokenCheck;
 // var colors = require('colors/safe');
-var blogQuery = function(req, res, limitParam, sortParam, callback) {
-    var sortList = ["-views", "-likes", "date", "-date"]
-    if (sortList.indexOf(sortParam) != -1) {
-        Blog.find().limit(limitParam).sort(sortParam).exec(function(err, blogs) {
-            if (err) res.send(err);
-            callback(req, res, err, blogs)
-        });
-    } else {
-        res.json({
-            message: 'Undefined Sort Query'
-        });
-    }
-};
-module.exports = function(app) {
-    app.get('/api/blogs', function(req, res) {
-        console.dir(req.query);
+module.exports = function (app) {
+    app.get('/api/blogs', function (req, res) {
         var limit = parseInt(req.query.limit);
         var sort = req.query.sort || "-views";
         var design = req.query.design;
+        var select = "";
         if (limit < 0) {
             limit = 0;
         }
-        blogQuery(req, res, limit, sort, function(req, res, err, blogs) {
-            var l = blogs.length;
-            var blogList = [];
-            var j = 0;
-            if (!limit || limit > l) {
-                limit = l;
-            }
-            if (err) res.send(err);
-            if (design === "short") {
-                // async.forEachOfLimit(blogs, n, function(blog, i, callback) {
-                async.forEachOf(blogs, function(blog, i, callback) {
-                    if (err) return callback(err);
-                    blogList.push({
-                        _id: blog._id,
-                        coverImg: blog.coverImg,
-                        title: blog.title,
-                        likes: blog.likes,
-                        views: blog.views,
-                        description: blog.description,
-                        authorName: blog.authorName
-                    });
-                    if (++j === limit) {
-                        return callback(blogList);
-                    }
-                }, function(blogList) {
-                    return res.json(blogList);
-                });
-            } else if (design === "links") {
-                async.forEachOf(blogs, function(blog, i, callback) {
-                    if (err) return callback(err);
-                    blogList.push({
-                        _id: blog._id,
-                        title: blog.title
-                    });
-                    if (++j === limit) {
-                        return callback(blogList);
-                    }
-                }, function(blogList) {
-                    return res.json(blogList);
+        if (design === "short") {
+            select = "coverImg title likes views description authorName";
+        } else if (design === "links") {
+            select = "title";
+        } else {
+            select = "";
+        }
+        var blogQuery = function (req, res, limitParam, sortParam, selectParam, callback) {
+            var sortList = ["-views", "-likes", "date", "-date"];
+            if (sortList.indexOf(sortParam) != -1) {
+                Blog.find().limit(limitParam).select(selectParam).sort(sortParam).exec(function (err, blogs) {
+                    if (err) res.send(err);
+                    callback(req, res, err, blogs);
                 });
             } else {
-                res.json(blogs);
+                res.json({
+                    message: 'Undefined Sort Query'
+                });
             }
-        })
-    }).get('/api/blogs/:id', function(req, res) {
-        console.log(req.query);
+        };
+        blogQuery(req, res, limit, sort, select, function (req, res, err, blogs) {
+            res.json(blogs);
+        });
+    }).get('/api/blogs/:id', function (req, res) {
         var blogId = req.params.id;
-        Blog.findById(blogId, function(err, blog) {
+        if (req.query.type === "short") {
+            var select = "coverImg title likes views description authorName";
+            Blog.findById(blogId, select, function (err, blog) {
+                sendBlog(err, blog);
+            });
+        } else {
+            Blog.findById(blogId, function (err, blog) {
+                sendBlog(err, blog)
+            });
+        }
+
+        function sendBlog(err, blog) {
             if (err) res.send(err);
             if (blog) {
                 blog.views += 1;
-                blog.save(function(err) {
+                blog.save(function (err) {
                     if (err) res.send(err);
-                    if (req.query.type === "short") {
-                        res.json({
-                            _id: blog._id,
-                            coverImg: blog.coverImg,
-                            title: blog.title,
-                            likes: blog.likes,
-                            views: blog.views,
-                            description: blog.description,
-                            authorName: blog.authorName
-                        });
-                    } else {
-                        res.json(blog);
-                    }
+                    res.json(blog);
                 });
             }
-        });
-    }).post('/api/blogs', ensureAuthorized, function(req, res) {
-        tokenCheck(req.token, function(role) {
+        }
+    }).post('/api/blogs', ensureAuthorized, function (req, res) {
+        tokenCheck(req.token, res, function (role) {
             var blog = new Blog();
             blog.authorId = req.body.authorId;
             blog.authorName = req.body.authorName;
@@ -117,19 +81,19 @@ module.exports = function(app) {
             if (tags) {
                 blog.tags = tags;
             } else {
-                async.forEachOf(blog.tagsData, function(tag, index) {
+                async.forEachOf(blog.tagsData, function (tag, index) {
                     blog.tags.push(tag.value);
                 });
             }
-            blog.save(function(err) {
+            blog.save(function (err) {
                 if (err) res.send(err);
-                User.findById(blog.authorId, function(err, user) {
+                User.findById(blog.authorId, function (err, user) {
                     user.blogs.push(blog._id);
                     user.save();
                 });
-                async.forEachOf(blog.tags, function(tagId, index) {
+                async.forEachOf(blog.tags, function (tagId, index) {
                     if (err) return res.send(err);
-                    Tag.findById(tagId, function(err, tag) {
+                    Tag.findById(tagId, function (err, tag) {
                         if (tag) {
                             tag.blogs.push(blog._id);
                             tag.save();
@@ -142,9 +106,9 @@ module.exports = function(app) {
                 });
             });
         });
-    }).put('/api/blogs/:id', ensureAuthorized, function(req, res) {
-        tokenCheck(req.token, function(role, id) {
-            Blog.findById(req.params.id, function(err, blog) {
+    }).put('/api/blogs/:id', ensureAuthorized, function (req, res) {
+        tokenCheck(req.token, res, function (role, id) {
+            Blog.findById(req.params.id, function (err, blog) {
                 if (typeof blog != "undefined") {
                     var temp = {
                         id: blog.id,
@@ -175,7 +139,7 @@ module.exports = function(app) {
                         blog.tags = temp.tags;
                         blog.tagsData = temp.tagsData;
                     }
-                    blog.save(function(err) {
+                    blog.save(function (err) {
                         if (err) res.send(err);
                         res.json({
                             message: 'blog updated!'
@@ -188,17 +152,17 @@ module.exports = function(app) {
                 }
             });
         })
-    }).delete('/api/blogs/:id', ensureAuthorized, function(req, res) {
-        tokenCheck(req.token, function(role) {
+    }).delete('/api/blogs/:id', ensureAuthorized, function (req, res) {
+        tokenCheck(req.token, res, function (role) {
             var blogId = req.params.id;
             Blog.findOne({
                 _id: blogId
-            }, function(err, blog) {
+            }, function (err, blog) {
                 if (err) res.send(err);
                 if (blog) {
                     User.findOne({
                         _id: blog.authorId
-                    }, function(err, user) {
+                    }, function (err, user) {
                         if (user) {
                             var index = user.blogs.indexOf(blogId);
                             user.blogs.splice(index, 1);
@@ -206,15 +170,15 @@ module.exports = function(app) {
                         }
                         Blog.remove({
                             _id: blogId
-                        }, function(err) {
+                        }, function (err) {
                             if (err) res.send(err);
                             res.json({
                                 message: 'blog deleted!'
                             });
                         });
-                        async.forEachOf(blog.tags, function(tagId, index) {
+                        async.forEachOf(blog.tags, function (tagId, index) {
                             if (err) return res.send(err);
-                            Tag.findById(tagId, function(err, tag) {
+                            Tag.findById(tagId, function (err, tag) {
                                 if (tag) {
                                     var index = tag.blogs.indexOf(blogId);
                                     tag.blogs.splice(index, 1);
@@ -226,20 +190,20 @@ module.exports = function(app) {
                 }
             });
         })
-    }).post('/api/blogs/userChoice/:id', function(req, res) {
+    }).post('/api/blogs/userChoice/:id', function (req, res) {
         var blogId = req.params.id;
         Blog.findOne({
             _id: blogId
-        }, function(err, blog) {
+        }, function (err, blog) {
             blog.likes += parseInt(req.body.value);
-            blog.save(function(err) {
+            blog.save(function (err) {
                 if (err) res.send(err);
                 res.json({
                     message: 'blog liked!'
                 });
             });
         });
-    }).post('/api/subscribe', function(req, res) {
+    }).post('/api/subscribe', function (req, res) {
         var emailId = req.body.emailId;
         var transporter = nodemailer.createTransport({
             service: 'Mailgun',
@@ -272,7 +236,7 @@ module.exports = function(app) {
         //         message: 'User Subscribed!'
         //     });
         // });
-    }).get('*', function(req, res) {
+    }).get('*', function (req, res) {
         res.sendfile('./public/views/index.html'); // load our public/index.html file
     })
 };
