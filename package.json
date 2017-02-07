@@ -9,7 +9,7 @@
     "nodemon": "nodemon app.js",
     "mongo": "mongod --storageEngine=mmapv1 --dbpath f:/data",
     "repmongo": "mongod --dbpath f:/data --repair",
-    "start": "nodemon app.js"
+    "start": "node app.js"
   },
   "dependencies": {
     "async": "^2.1.4",
