@@ -10,7 +10,8 @@
     "nodemon": "nodemon app.js",
     "mongo": "mongod --storageEngine=mmapv1 --dbpath f:/data",
     "repmongo": "mongod --dbpath f:/data --repair",
-    "dev": "heroku local -p 8080 -e .env.local"
+    "dev": "heroku local -p 8080 -e .env.local",
+    "start" : "node app.js"
   },
   "dependencies": {
     "async": "^2.1.4",
