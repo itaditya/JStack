@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Carousel | CSS</title>
+    <link type="text/css" rel="stylesheet" href="css/carousel.css" />
+    <!-- <link rel="shortcut icon" type="image/ico" href="images/favicon.ico"> -->
+</head>
+
+<body>
+    <div class="container">
+        <div class="carousel-container carousel-1">
+            <div class="carousel-view">
+                <ul class="carousel-images">
+                    <li data-src="media/banner-1.png"></li>
+                    <li data-src="media/banner-2.png"></li>
+                    <li data-src="media/b3.jpg"></li>
+                    <li data-src="media/b4.jpg"></li>
+                    <li data-src="media/banner-1.png"></li>
+                    <li data-src="media/b3.jpg"></li>
+                </ul>
+            </div>
+            <button class="carousel-btn" id="cprev"></button>
+            <button class="carousel-btn" id="cnext"></button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="carousel-container carousel-2">
+            <div class="carousel-view">
+                <ul class="carousel-images">
+                    <li data-src="media/banner-1.png"></li>
+                    <li data-src="media/banner-2.png"></li>
+                    <li>
+                        <div class="content">
+                            <p>Hello</p>
+                            <h2>You are tested Bra ! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est iure fugit dolore dolorem sapiente veritatis odio a voluptatum esse, expedita quisquam quas, asperiores odit voluptas nulla quidem dolor quibusdam repellendus! Lorem ipsum dolor sit amet, consectetur adipisicing elit. Esse amet ad ratione voluptatum pariatur tempora saepe atque dolorem fugit neque, porro, repellat, dicta voluptatibus reiciendis deserunt, consequuntur voluptates quisquam incidunt. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cumque quam pariatur ipsa, laudantium placeat sunt eaque excepturi molestias, voluptate, omnis accusantium enim tenetur molestiae hic id cupiditate minus reiciendis? Impedit. </h2>
+                        </div>
+                    </li>
+                    <li data-src="media/b4.jpg"></li>
+                    <li data-src="media/banner-1.png"></li>
+                    <li>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi ipsam ratione hic quae! Ipsa eveniet ex perferendis velit veritatis adipisci quo minus porro laboriosam nemo fugiat iusto a, nisi magni!</div>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quo, harum recusandae atque maxime delectus sint dignissimos alias, dolorem tempora eveniet illo pariatur quas ipsam veniam eligendi vel nostrum error?</div>
+                    </li>
+                </ul>
+            </div>
+            <button class="carousel-btn" id="cprev"></button>
+            <button class="carousel-btn" id="cnext"></button>
+        </div>
+    </div>
+    <div class="container">
+        <div class="carousel-container carousel-3">
+            <div class="carousel-view">
+                <ul class="carousel-images">
+                    <li>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi ipsam ratione hic quae! Ipsa eveniet ex perferendis velit veritatis adipisci quo minus porro laboriosam nemo fugiat iusto a, nisi magni!</div>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quo, harum recusandae atque maxime delectus sint dignissimos alias, dolorem tempora eveniet illo pariatur quas ipsam veniam eligendi vel nostrum error?</div>
+                    </li>
+                    <li>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi ipsam ratione hic quae! Ipsa eveniet ex perferendis velit veritatis adipisci quo minus porro laboriosam nemo fugiat iusto a, nisi magni!</div>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quo, harum recusandae atque maxime delectus sint dignissimos alias, dolorem tempora eveniet illo pariatur quas ipsam veniam eligendi vel nostrum error?</div>
+                    </li>
+                    <li>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi ipsam ratione hic quae! Ipsa eveniet ex perferendis velit veritatis adipisci quo minus porro laboriosam nemo fugiat iusto a, nisi magni!</div>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quo, harum recusandae atque maxime delectus sint dignissimos alias, dolorem tempora eveniet illo pariatur quas ipsam veniam eligendi vel nostrum error?</div>
+                    </li>
+                    <li>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Sequi ipsam ratione hic quae! Ipsa eveniet ex perferendis velit veritatis adipisci quo minus porro laboriosam nemo fugiat iusto a, nisi magni!</div>
+                        <div class="box">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis quo, harum recusandae atque maxime delectus sint dignissimos alias, dolorem tempora eveniet illo pariatur quas ipsam veniam eligendi vel nostrum error?</div>
+                    </li>
+                </ul>
+            </div>
+            <button class="carousel-btn" id="cprev"></button>
+            <button class="carousel-btn" id="cnext"></button>
+        </div>
+    </div>
+    <script type="text/javascript" src="js/carousel.js"></script>
+    <script>
+    new SCarousel({
+        element: ".carousel-1",
+        animation : "elastic"
+    });
+    new SCarousel({
+        element: ".carousel-2",
+        animation : "simple"
+    });
+    new SCarousel({
+        element: ".carousel-3",
+    });
+    </script>
+</body>
+<!-- Usage Notes -->
+<!--
+  > Make a div and give class carousel-outer then nest everything as done here .
+  > Give carousel-inner the width and height you require.
+  > In the li , make data-src atrributes and give them relative add of images wrt html file . 
+  > Add buttons and give them classes and id as given . 
+  > carousel-outer contains centrally the image slides and p,n buttons around it ,
+    so any styling of these buttons won't affect the slides .
+  > Use negative value of left , right to move buttons outside the slides or +ve for inside it.
+  > Set data-loadtype in carousel-outer to define whether lazy load or simple.
+-->

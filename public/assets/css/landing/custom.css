@@ -41,7 +41,8 @@
     font-size: 24px;
     padding: 10px 65px;
     /*background: #053140;*/
-    background: #da0f4b;
+    /*background: #da0f4b;*/
+    background-color: #E57E31;
     /*font-size: 30px;*/
     margin: 0;
     border-radius: 3px;
@@ -149,7 +150,7 @@ p:last-child {
     height: 186px;
     background-position: center;
     background-size: cover;
-    background-blend-mode: overlay;
+    background-blend-mode: multiply;
     transition: 0.6s;
     /*filter: brightness(0.95);*/
 }
@@ -336,7 +337,8 @@ p:last-child {
 .card:hover .card__showmore {
     /*color: #3f51b5;*/
     /*color: #da0f4b;*/
-    color: #de5f85;
+    /*color: #de5f85;*/
+    color: #E57E31;
 }
 
 .card__meta-comments {
@@ -351,7 +353,8 @@ p:last-child {
 .card:hover .card__header {
     /*height: 150px;*/
     /*filter: brightness(.7);*/
-    background-color: rgba(218, 15, 75, 0.42);
+    /*background-color: rgba(218, 15, 75, 0.42);*/
+    background-color: #777777;
 }
 
 .card:hover .card__title {

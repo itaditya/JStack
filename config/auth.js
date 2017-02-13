@@ -12,6 +12,7 @@ module.exports = {
         var bearerHeader = req.headers["authorization"];
         if (typeof bearerHeader !== 'undefined') {
             var bearer = bearerHeader.split(" ");
+            console.log(bearer);
             bearerToken = bearer[1];
             req.token = bearerToken;
             next();
@@ -19,10 +20,11 @@ module.exports = {
             res.send(403);
         }
     },
-    tokenCheck: function(token, callback) {
+    tokenCheck: function(token,res, callback) {
         User.findOne({
             token: token
         }, function(err, requester) {
+            console.log(requester);
             if (err) res.send(err);
             if (requester) {
                 callback(requester.role, requester.id);

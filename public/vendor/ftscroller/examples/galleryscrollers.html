@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+	<title>FT scroller demo: Gallery</title>
+	<style>
+
+		/* Styles not relevant to scrolling (just to make the demo look neat and tidy) */
+		body { font-family: sans-serif; -webkit-text-size-adjust: 100% }
+		section { padding: 0.7em; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; -ms-box-sizing: border-box; box-sizing: border-box }
+		p { margin: 0.5em 0; }
+		.gallerywrapper { height: 402px; }
+
+		/* This is the container of the horizontal scroller (border given so the scrolling canvas is clearly distinguishable). */
+		.scrollable_h { width: 400px; height: 400px; border: 1px solid #555; white-space: nowrap; overflow: hidden }
+
+		/* Each of the sections within the scrollable content is sized to fit the container, and will itself be scrollable vertically.  This is the style for the vertical scroll containers */
+		.horizontalwrapper { width: 800px; overflow: hidden }
+		.vscroller { width: 400px; height: 400px; display: inline-block; white-space: normal; }
+
+	</style>
+</head>
+<body>
+
+	<p>The container below can be scrolled vertically to read the content of the article, and can be swiped horizontally to move between articles.  This example demonstrates a number of features:</p>
+	<ul>
+		<li>The vertical scrollers have visible scrollbars and bouncing enabled, while the horizontal scroller has no scrollbars or bouncing.</li>
+		<li>The windowScrollingActiveFlag property is used to ensure that it's not possible to scroll on multiple axes simultaneously.</li>
+		<li>Snapping is used on the horizontal scroller to ensure that a scroll movement always ends properly centered on a column.</li>
+	</ul>
+	<p>Three examples of the gallery are shown, to show the different effects of the scrollBoundary and scrollResponseBoundary options.</p>
+	<h3>Example One</h3>
+	<p>This example is set up as you might want to set up a genuine gallery.  Scrolling responds at once, using a scrollResponseBoundary of 1, but only locks scrolling to that axis after 15 pixels using a scrollBoundary of 15.  Panning takes a little more to respond, with a scrollResponseBoundary of 8, and also locks to panning using a scrollBoundary of 20.  Scrolls respond instantly but can convert to pans, and scrolling is preferred over panning if the input movement is diagonal.</p>
+	<div id='gallery_one' class='gallerywrapper'>
+		<div class='scrollable_h'>
+	
+			<!-- Content from Wikipedia.  Skip to the bottom for the scroller JavaScript. -->
+			<div class="horizontalwrapper">
+				<div class='scrollable_v1 vscroller'><section>
+				<h2>Carbon</h2>
+				<p><b>Carbon</b> (from Latin: <i>carbo</i> "coal") is the chemical element with symbol <b>C</b> and atomic number 6. As a member of group 14 on the periodic table, it is nonmetallic and tetravalent—making four electrons available to form covalent chemical bonds. There are three naturally occurring isotopes, with <sup>12</sup>C and <sup>13</sup>C being stable, while <sup>14</sup>C is radioactive, decaying with a half-life of about 5,730&nbsp;years. Carbon is one of the few elements known since antiquity.</p>
+				<p>There are several allotropes of carbon of which the best known are graphite, diamond, and amorphous carbon. The physical properties of carbon vary widely with the allotropic form. For example, diamond is highly transparent, while graphite is opaque and black. Diamond is among the hardest materials known, while graphite is soft enough to form a streak on paper (hence its name, from the Greek word "to write"). Diamond has a very low electrical conductivity, while graphite is a very good conductor. Under normal conditions, diamond has the highest thermal conductivity of all known materials.</p>
+				<p>All carbon allotropes are solids under normal conditions with graphite being the most thermodynamically stable form. They are chemically resistant and require high temperature to react even with oxygen. The most common oxidation state of carbon in inorganic compounds is +4, while +2 is found in carbon monoxide and other transition metal carbonyl complexes. The largest sources of inorganic carbon are limestones, dolomites and carbon dioxide, but significant quantities occur in organic deposits of coal, peat, oil and methane clathrates. Carbon forms more compounds than any other element, with almost ten million pure organic compounds described to date, which in turn are a tiny fraction of such compounds that are theoretically possible under standard conditions.</p>
+				<p>Carbon is the 15th most abundant element in the Earth's crust, and the fourth most abundant element in the universe by mass after hydrogen, helium, and oxygen. It is present in all known life forms, and in the human body carbon is the second most abundant element by mass (about 18.5%) after oxygen. This abundance, together with the unique diversity of organic compounds and their unusual polymer-forming ability at the temperatures commonly encountered on Earth, make this element the chemical basis of all known life.</p>
+	
+				<h2> <span class="mw-headline" id="Characteristics">Characteristics</span></h2>
+				<p>The different forms or <i>allotropes</i> of carbon (see below) include the hardest naturally occurring substance, diamond, and also one of the softest known substances, graphite. Moreover, it has an affinity for bonding with other small atoms, including other carbon atoms, and is capable of forming multiple stable covalent bonds with such atoms. As a result, carbon is known to form almost ten million different compounds; the large majority of all chemical compounds. Carbon also has the highest sublimation point of all elements. At atmospheric pressure it has no melting point as its triple point is at 10.8 ± 0.2&nbsp;MPa and 4,600 ± 300 K (~4,330 °C or 7,820 °F), so it sublimates at about 3,900&nbsp;K.</p>
+				<p>Carbon sublimes in a carbon arc which has a temperature of about 5,800 K (5,530 °C; 9,980 °F). Thus, irrespective of its allotropic form, carbon remains solid at higher temperatures than the highest melting point metals such as tungsten or rhenium. Although thermodynamically prone to oxidation, carbon resists oxidation more effectively than elements such as iron and copper that are weaker reducing agents at room temperature.</p>
+				<p>Carbon compounds form the basis of all known life on Earth, and the carbon-nitrogen cycle provides some of the energy produced by the Sun and other stars. Although it forms an extraordinary variety of compounds, most forms of carbon are comparatively unreactive under normal conditions. At standard temperature and pressure, it resists all but the strongest oxidizers. It does not react with sulfuric acid, hydrochloric acid, chlorine or any alkalis. At elevated temperatures carbon reacts with oxygen to form carbon oxides, and will reduce such metal oxides as iron oxide to the metal. This exothermic reaction is used in the iron and steel industry to control the carbon content of steel:</p>
+				<dl>
+				<dd><span class="chemf" style="white-space:nowrap;">Fe<sub>3</sub>O<sub>4</sub></span> + 4 C<sub>(s)</sub> → 3 Fe<sub>(s)</sub> + 4 CO<sub>(g)</sub></dd>
+				</dl>
+				<p>with sulfur to form carbon disulfide and with steam in the coal-gas reaction:</p>
+				<dl>
+				<dd>C<sub>(s)</sub> + H<sub>2</sub>O<sub>(g)</sub> → CO<sub>(g)</sub> + H<sub>2(g)</sub>.</dd>
+				</dl>
+				<p>Carbon combines with some metals at high temperatures to form metallic carbides, such as the iron carbide cementite in steel, and tungsten carbide, widely used as an abrasive and for making hard tips for cutting tools.</p>
+				<p>As of 2009, graphene appears to be the strongest material ever tested. However, the process of separating it from graphite will require some technological development before it is economical enough to be used in industrial processes.</p>
+			</section></div><div class='scrollable_v2 vscroller'><section>
+				<h2>Oxygen</h2>
+				<p><b>Oxygen</b> is the element with atomic number 8 and represented by the symbol <b>O</b>. Its name derives from the Greek roots ὀξύς (oxys) ("acid", literally "sharp", referring to the sour taste of acids) and -γενής (-genēs) ("producer", literally "begetter"), because at the time of naming, it was mistakenly thought that all acids required oxygen in their composition. At standard temperature and pressure, two atoms of the element bind to form dioxygen, a very pale blue, odorless, tasteless diatomic gas with the formula <span class="chemf" style="white-space:nowrap;">O<sub>2</sub></span>.</p>
+				<p>Oxygen is a member of the chalcogen group on the periodic table and is a highly reactive nonmetallic element that readily forms compounds (notably oxides) with almost all other elements. Oxygen is a strong oxidizing agent and has the second-highest electronegativity of all the elements (only fluorine has a higher electronegativity). By mass, oxygen is the third-most abundant element in the universe, after hydrogen and helium and the most abundant element by mass in the Earth's crust, making up almost half of the crust's mass. Free oxygen is too chemically reactive to appear on Earth without the photosynthetic action of living organisms, which use the energy of sunlight to produce elemental oxygen from water. Elemental <span class="chemf" style="white-space:nowrap;">O<sub>2</sub></span> only began to accumulate in the atmosphere after the evolutionary appearance of these organisms, roughly 2.5&nbsp;billion years ago. Diatomic oxygen gas constitutes 20.8% of the volume of air.</p>
+				<p>Because it comprises most of the mass in water, oxygen comprises most of the mass of living organisms (for example, about two-thirds of the human body's mass). All major classes of structural molecules in living organisms, such as proteins, carbohydrates, and fats, contain oxygen, as do the major inorganic compounds that comprise animal shells, teeth, and bone. Elemental oxygen is produced by cyanobacteria, algae and plants, and is used in cellular respiration for all complex life. Oxygen is toxic to obligately anaerobic organisms, which were the dominant form of early life on Earth until <span class="chemf" style="white-space:nowrap;">O<sub>2</sub></span> began to accumulate in the atmosphere. Another form (allotrope) of oxygen, ozone (<span class="chemf" style="white-space:nowrap;">O<sub>3</sub></span>), helps protect the biosphere from ultraviolet radiation with the high-altitude ozone layer, but is a pollutant near the surface where it is a by-product of smog. At even higher low earth orbit altitudes atomic oxygen is a significant presence and a cause of erosion for spacecraft.</p>
+				<p>Oxygen was independently discovered by Carl Wilhelm Scheele, in Uppsala, in 1773 or earlier, and Joseph Priestley in Wiltshire, in 1774, but Priestley is often given priority because his work was published first. The name <i>oxygen</i> was coined in 1777 by Antoine Lavoisier, whose experiments with oxygen helped to discredit the then-popular phlogiston theory of combustion and corrosion. Oxygen is produced industrially by fractional distillation of liquefied air, use of zeolites with pressure-cycling to concentrate oxygen from air, electrolysis of water and other means. Uses of oxygen include the production of steel, plastics and textiles; rocket propellant; oxygen therapy; and life support in aircraft, submarines, spaceflight and diving.</p>
+				<h2><span class="mw-headline" id="Characteristics">Characteristics</span></h2>
+				<h3><span class="mw-headline" id="Structure">Structure</span></h3>
+				<div class="thumb tleft">
+				<div class="thumbinner" style="width:172px;"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/4/45/Oxygen_discharge_tube.jpg/170px-Oxygen_discharge_tube.jpg" width="170" height="57" class="thumbimage" />
+				<div class="thumbcaption">
+				Oxygen discharge (spectrum) tube</div>
+				</div>
+				</div>
+				<p>At standard temperature and pressure, oxygen is a very pale blue, odorless gas with the molecular formula <span class="chemf" style="white-space:nowrap;">O<sub>2</sub></span>, in which the two oxygen atoms are chemically bonded to each other with a spin triplet electron configuration. This bond has a bond order of two, and is often simplified in description as a double bond or as a combination of one two-electron bond and two three-electron bonds.</p>
+				<p>Triplet oxygen (not to be confused with ozone, <span class="chemf" style="white-space:nowrap;">O<sub>3</sub></span>) is the ground state of the <span class="chemf" style="white-space:nowrap;">O<sub>2</sub></span> molecule. The electron configuration of the molecule has two unpaired electrons occupying two degenerate molecular orbitals. These orbitals are classified as antibonding (weakening the bond order from three to two), so the diatomic oxygen bond is weaker than the diatomic nitrogen triple bond in which all bonding molecular orbitals are filled, but some antibonding orbitals are not.</p>
+				<div class="thumb tleft">
+				<div class="thumbinner" style="width:172px;"><img alt="" src="//upload.wikimedia.org/wikipedia/commons/thumb/a/a1/Paramagnetism_of_liquid_oxygen.jpeg/170px-Paramagnetism_of_liquid_oxygen.jpeg" width="170" height="120" class="thumbimage" />
+				<div class="thumbcaption">
+				A trickle of liquid oxygen is deflected by a magnetic field, illustrating its paramagnetic property</div>
+				</div>
+				</div>
+				<p>In normal triplet form, <span class="chemf" style="white-space:nowrap;">O<sub>2</sub></span> molecules are paramagnetic. That is, they form a magnet in the presence of a magnetic field—because of the spin magnetic moments of the unpaired electrons in the molecule, and the negative exchange energy between neighboring <span class="chemf" style="white-space:nowrap;">O<sub>2</sub></span> molecules. Liquid oxygen is attracted to a magnet to a sufficient extent that, in laboratory demonstrations, a bridge of liquid oxygen may be supported against its own weight between the poles of a powerful magnet.</p>
+				<p>Singlet oxygen is a name given to several higher-energy species of molecular <span class="chemf" style="white-space:nowrap;">O<sub>2</sub></span> in which all the electron spins are paired. It is much more reactive towards common organic molecules than is molecular oxygen per se. In nature, singlet oxygen is commonly formed from water during photosynthesis, using the energy of sunlight. It is also produced in the troposphere by the photolysis of ozone by light of short wavelength, and by the immune system as a source of active oxygen. Carotenoids in photosynthetic organisms (and possibly also in animals) play a major role in absorbing energy from singlet oxygen and converting it to the unexcited ground state before it can cause harm to tissues.</p>
+			</section></div>
+			</div>
+		</div>
+	</div>
+
+	<h3>Example Two</h3>
+	<p>This example is set up an an example of all FTScroller instances being left at the default settings of scrollResponseBoundary: 1 and scrollBoundary: 1.  This is generally undesirable with nested scrollers because finger-based input will often trigger a small scroll as the finger touches the screen, so it's hard to control the intended scroll direction.</p>
+	<div id='gallery_two' class='gallerywrapper'></div>
+
+	<h3>Example Three</h3>
+	<p>This example is set up with large boundaries (30px) for all scrollers or both the scrollResponseBoundary and scrollBoundary settings.  This requires a reasonable move before scrolls become locked to an axis, reducing the chance of accidental scrolls or pans, but the equally high response boundary means there is no visual feedback before scrolling is locked, which is also not desirable.</p>
+	<div id='gallery_three' class='gallerywrapper'></div>
+
+	<!--Include FT Scroller source (can be included at any point as long as it's loaded before being used)-->
+	<script src='../lib/ftscroller.js'></script>
+
+	<!--Set up the scrollers-->
+	<script>
+
+		// Duplicate the content of the first wrapper into the second and third wrappers
+		var gallerycontent = document.querySelector('#gallery_one').innerHTML;
+		document.querySelector('#gallery_two').innerHTML = gallerycontent;
+		document.querySelector('#gallery_three').innerHTML = gallerycontent;
+
+
+		/** Demo one **/
+
+		// Set up options to be used by the two vertical scrollers and create them
+		var opts = {
+			scrollingX: false,
+			scrollResponseBoundary: 1, // This is the default response boundary, spelt out for reference
+			scrollBoundary: 15
+		};
+		new FTScroller(document.querySelector('#gallery_one .scrollable_v1'), opts);
+		new FTScroller(document.querySelector('#gallery_one .scrollable_v2'), opts);
+
+		// Set up the horizontal scroller, enabling snapping and disabling bouncing
+		var panningOpts = {
+			scrollingY: false, 
+			scrollbars: false,
+			snapping: true,
+			scrollResponseBoundary: 8,
+			scrollBoundary: 20,
+			bouncing: false
+		};
+		new FTScroller(document.querySelector('#gallery_one .scrollable_h'), panningOpts);
+
+
+		/** Demo two **/
+
+		opts.scrollBoundary = 1;
+		new FTScroller(document.querySelector('#gallery_two .scrollable_v1'), opts);
+		new FTScroller(document.querySelector('#gallery_two .scrollable_v2'), opts);
+
+		panningOpts.scrollResponseBoundary = 1;
+		panningOpts.scrollBoundary = 1;
+		new FTScroller(document.querySelector('#gallery_two .scrollable_h'), panningOpts);
+
+
+		/** Demo three **/
+
+		// Set up options to be used by the two vertical scrollers and create them
+		opts.scrollBoundary = 30;
+		opts.scrollResponseBoundary = 30;
+		new FTScroller(document.querySelector('#gallery_three .scrollable_v1'), opts);
+		new FTScroller(document.querySelector('#gallery_three .scrollable_v2'), opts);
+
+		panningOpts.scrollResponseBoundary = 30;
+		panningOpts.scrollBoundary = 30;
+		new FTScroller(document.querySelector('#gallery_three .scrollable_h'), panningOpts);
+	</script>
+</body>
+</html>
