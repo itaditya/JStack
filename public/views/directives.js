@@ -46,16 +46,16 @@ angular.module('JStack').directive('preLoader', function() {
                 });
             }
             var tags = tagsService.getTags();
-            var setTags = function(categories) {
-                $scope.categories = categories.data;
-                tagsService.setTags(categories.data);
+            var setTags = function(res) {
+                $scope.categories = res.data;
+                tagsService.setTags(res.data);
             }
             if (tags) {
                 setTags({
                     data: tags
                 });
             } else {
-                tagFactory.getTagList("design=category").then(setTags);
+                tagFactory.getTagList("select=name category").then(setTags);
             }
         }
     };
@@ -65,11 +65,12 @@ angular.module('JStack').directive('preLoader', function() {
         templateUrl: '/views/partials/tagWidget.html',
         controller: function($scope, tagsService) {
             $scope.$on('tagsSet', function() {
-                var min = 0,
-                    max = 3;
-                var rIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+                // var min = 0,
+                //     max = 3;
+                // var rIndex = Math.floor(Math.random() * (max - min + 1)) + min;
+                // $scope.tags = footerTags[rIndex].tags;
                 var footerTags = tagsService.getTags();
-                $scope.tags = footerTags[rIndex].tags;
+                $scope.tags = footerTags;
             });
         }
     };
@@ -214,3 +215,36 @@ angular.module('JStack').directive('preLoader', function() {
         }
     };
 });
+
+/*$scope.categories = [
+  {
+    "_id": "5893632dc8936aac15c95286",
+    "name": "jquery",
+    "category": "frontend"
+  },
+  {
+    "_id": "5893632dc8936aac15c95286",
+    "name": "jquery",
+    "category": "frontend"
+  },
+  {
+    "_id": "5893632dc8936aac15c95286",
+    "name": "jquery",
+    "category": "tech"
+  },
+  {
+    "_id": "5893632dc8936aac15c95286",
+    "name": "juery",
+    "category": "asdend"
+  },
+  {
+    "_id": "5893632dc8936aac15c95288",
+    "name": "jery",
+    "category": "backend"
+  },
+  {
+    "_id": "5893632dc8936aac15c95288",
+    "name": "jasery",
+    "category": "backend"
+  }
+];*/

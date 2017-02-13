@@ -26,11 +26,11 @@
     </div>
     <div class="posts-list txt-orange" id="tag-container">
         <!-- <h4 class="txt-orange"></h4> ng-repeat="category in categories" -->
-        <div class="post"  ng-repeat="category in categories">
-            <h5 class="txt-orange">{{ category.category }}</h5>
+        <div class="post"  ng-repeat="(category,tags) in (categories | groupBy: 'category')">
+            <h5 class="txt-orange">{{ category | uppercase }}</h5>
             <div class="tag-box">
                 <p>
-                    <a class="tags" ng-repeat="tag in category.tags" ng-href="/tagSearch/{{ tag.id }}">{{ tag.name }}</a>
+                    <a class="tags" ng-repeat="tag in tags" ng-href="/tagSearch/{{ tag.id }}">{{ tag.name }}</a>
                 </p>
             </div>
         </div>

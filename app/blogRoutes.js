@@ -8,7 +8,6 @@ var showdown = require('showdown');
 var converter = new showdown.Converter();
 var ensureAuthorized = auth.ensureAuthorized;
 var tokenCheck = auth.tokenCheck;
-// var colors = require('colors/safe');
 module.exports = function (app) {
     app.get('/api/blogs', function (req, res) {
         var limit = parseInt(req.query.limit);
