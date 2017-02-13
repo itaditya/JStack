@@ -13,9 +13,9 @@ angular.module('blogs').controller('blogsCtrl', function ($scope, $sce, $timeout
                 scale: 0.9,
                 easing: 'ease-in-out',
                 opacity: 0.3,
-                reset: true,
-                duration: 1000
-            }, 150);
+                // reset: true,
+                duration: 600
+            }, 200);
         });
         blogFactory.getList("limit=3&design=short&sort=-date").then(function (blogs) {
             $scope.recentBlogs = blogs.data;
@@ -23,16 +23,11 @@ angular.module('blogs').controller('blogsCtrl', function ($scope, $sce, $timeout
                 sr.reveal($rootScope.dd('.animateRecentBlogs'), {
                     // container: ".mainPage",
                     reset: true,
+                    easing: 'ease-in-out',
+                    opacity: 0.3,
                     duration: 800
                 }, 150);
             });
         });
-        $scope.isBig = function (index) {
-            index = index % 9;
-            if (index == 2 || index == 3 || index == 7) {
-                return true;
-            }
-            return false;
-        }
     });
 });

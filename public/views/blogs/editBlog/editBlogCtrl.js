@@ -18,15 +18,15 @@ angular.module('blogs').controller('editBlogCtrl', function($scope, $rootScope, 
             $rootScope.d(".blog-title").innerHTML = $scope.blog.title;
             $scope.$watch("$viewContentLoaded", function() {
                 tagEditSelect = new Choices('.tag-edit-choice', {
-                    removeItems: true,
-                    removeItemButton: true,
+                    removeItems: false,
+                    removeItemButton: false,
                     flip: false,
-                    placeholderValue: "Select Tags",
+                    placeholderValue: "Selected Tags",
                     duplicateItems: false
                 });
-                tagFactory.getTagList("design=tags").then(function(categories) {
-                    $scope.tagsChoices = categories.data;
-                    tagEditSelect.setChoices($scope.tagsChoices, 'value', 'label', true);
+                tagFactory.getTagList("select=name category").then(function(res) {
+                    $scope.tagsChoices = res.data;
+                    tagEditSelect.setChoices($scope.tagsChoices, '_id', 'name', true);
                     for (var i = $scope.blog.tagsData.length - 1; i >= 0; i--) {
                         tagEditSelect.setValueByChoice($scope.blog.tagsData[i].value);
                     }

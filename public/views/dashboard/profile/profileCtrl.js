@@ -1,4 +1,4 @@
-angular.module('dashboard').controller('profileCtrl', function($scope, tagFactory, Upload, $http) {
+angular.module('dashboard').controller('profileCtrl', function($scope, $filter,tagFactory, Upload, $http) {
     const tagSelect = new Choices('.tag-choice', {
         removeItems: true,
         removeItemButton: true,
@@ -7,8 +7,33 @@ angular.module('dashboard').controller('profileCtrl', function($scope, tagFactor
         duplicateItems: false
     });
     $scope.progress = 0;
-    tagFactory.getTagList("design=tags").then(function(categories) {
-        tagSelect.setChoices(categories.data, 'value', 'label', false);
+    tagFactory.getTagList("select=name category").then(function(res) {
+        var choices = $filter('groupBy')(res.data, 'category');
+        var index = 0;
+        $scope.tagsChoices = [{
+            label: "Frontend",
+            id: 0,
+            choices: []
+        }, {
+            label: "Backend",
+            id: 1,
+            choices: []
+        }, {
+            label: "Design",
+            id: 2,
+            choices: []
+        }, {
+            label: "Technical",
+            id: 3,
+            choices: []
+        }];
+        angular.forEach(choices,function(value,key){
+            $scope.tagsChoices[index].choices = value;
+            console.log(index);
+            index++;
+        });
+        tagSelect.setChoices($scope.tagsChoices, '_id', 'name', true);
+        // tagSelect.setChoices(res.data, 'value', 'label', false);
     });
     $scope.uploadImg = function() {
         console.log($scope.coverImage);

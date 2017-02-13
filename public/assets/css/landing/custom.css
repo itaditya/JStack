@@ -98,6 +98,10 @@ p:last-child {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
+.card:hover .card__main-action{
+    opacity: 1;
+} 
+
 .card_main {
     width: 100%;
 }
@@ -118,7 +122,7 @@ p:last-child {
 
 .card_size-xl {
     /*width: 49%;*/
-    width: 40%;
+    width: 24%;
 }
 
 @media screen and (min-width: 801px) {
@@ -129,7 +133,7 @@ p:last-child {
 
 .card_size-m {
     width: 32%;
-    width: 27%;
+    width: 22%;
 }
 
 @media screen and (min-width: 481px) and (max-width: 800px) {
@@ -147,7 +151,7 @@ p:last-child {
 .card__header {
     position: relative;
     line-height: 0;
-    height: 186px;
+    height: 130px;
     background-position: center;
     background-size: cover;
     background-blend-mode: multiply;
@@ -175,7 +179,8 @@ p:last-child {
     text-decoration: none;
     text-indent: -9999px;
     cursor: pointer;
-    display: none;
+    /*display: none;*/
+    opacity: 0;
     border: none;
     border-radius: 50%;
     padding: 0;
@@ -187,6 +192,7 @@ p:last-child {
     transform: translateY(50%);
     width: 4em;
     height: 4em;
+    transition: 0.4s;
 }
 
 .card__main-action:before {
@@ -244,7 +250,7 @@ p:last-child {
 
 .card__content {
     /*padding: 2.5em 4% 1.5em;*/
-    padding: 2.5em 10% 1.5em;
+    padding: 1em 10% 1.5em;
     -webkit-box-flex: 2;
     -webkit-flex-grow: 2;
     -ms-flex-positive: 2;
@@ -306,15 +312,11 @@ p:last-child {
 }
 
 .card__main-action {
-    background-color: #3f51b5;
+    background-color: #333;
 }
 
 .card__main-action:before {
     background-image: url("https://stas-melnikov.ru/cssgrid/bookmark.svg");
-}
-
-.card__main-action:hover, .card__main-action:focus {
-    background-color: #303f9f;
 }
 
 .card__footer {

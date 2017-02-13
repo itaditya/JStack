@@ -56,7 +56,7 @@ ul li {
     width: 100%;
     /*background: #000;*/
     align-items: flex-start;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
 }
 
 .sidebar {

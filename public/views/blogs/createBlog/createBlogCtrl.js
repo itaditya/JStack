@@ -39,9 +39,33 @@ angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $
         $rootScope.d(".menu").addEventListener("click", function() {
             document.querySelector(".sidebar").classList.toggle("sm-hide");
         });
-        tagFactory.getTagList("design=tags").then(function(categories) {
-            $scope.tagsChoices = categories.data;
-            tagSelect.setChoices($scope.tagsChoices, 'value', 'label', true);
+        tagFactory.getTagList("select=name category").then(function(res) {
+            // $scope.tagsChoices = res.data;
+            var choices = $filter('groupBy')(res.data, 'category');
+            var index = 0;
+            $scope.tagsChoices = [{
+                label: "Frontend",
+                id: 0,
+                choices: []
+            }, {
+                label: "Backend",
+                id: 1,
+                choices: []
+            }, {
+                label: "Design",
+                id: 2,
+                choices: []
+            }, {
+                label: "Technical",
+                id: 3,
+                choices: []
+            }];
+            angular.forEach(choices,function(value,key){
+                $scope.tagsChoices[index].choices = value;
+                console.log(index);
+                index++;
+            });
+            tagSelect.setChoices($scope.tagsChoices, '_id', 'name', true);
             var blog = localStorageService.get("blog");
             if (blog) {
                 $scope.blog = blog;

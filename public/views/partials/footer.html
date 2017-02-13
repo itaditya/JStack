@@ -30,7 +30,7 @@
             <h5 class="txt-orange">{{ category | uppercase }}</h5>
             <div class="tag-box">
                 <p>
-                    <a class="tags" ng-repeat="tag in tags" ng-href="/tagSearch/{{ tag.id }}">{{ tag.name }}</a>
+                    <a class="tags" ng-repeat="tag in tags" ng-href="/tagSearch/{{ tag._id }}">{{ tag.name }}</a>
                 </p>
             </div>
         </div>

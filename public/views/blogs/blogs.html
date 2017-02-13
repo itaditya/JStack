@@ -88,7 +88,7 @@
     <div class="container featuredContainer">
         <p class="collectionTitle">Featured</p>
         <div class="cards">
-            <a class="card animateFeaturedBlogs" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in featuredBlogs | orderBy:'-views'" ng-href="/blogs/{{ blog._id }}">
+            <a class="card animateFeaturedBlogs card_size-m" ng-repeat="blog in featuredBlogs | orderBy:'-views'" ng-href="/blogs/{{ blog._id }}">
                 <div class="card__header" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');">
                     <button class="card__main-action" type="button">In bookmarks</button>
                 </div>
@@ -106,12 +106,12 @@
                         </span>
                         <div class="card__meta">
                             <div class="card__meta-item">
+                                <span class="card__label">{{ blog.views }}</span>
                                 <i class="card__meta-icon card__meta-comments"></i>
-                                <span class="card__label">7 comments</span>
                             </div>
                             <div class="card__meta-item">
+                                <span class="card__label">{{ blog.likes }}</span>
                                 <i class="card__meta-icon card__meta-likes"></i>
-                                <span class="card__label">{{ blog.likes }} likes</span>
                             </div>
                         </div>
                     </div>
@@ -122,35 +122,35 @@
     <div class="container">
         <p class="collectionTitle">Most Recent</p>
         <div class="cards ">
-            <article class="card animateRecentBlogs" ng-class="isBig($index) ? 'card_size-xl' : 'card_size-m'" ng-repeat="blog in recentBlogs | orderBy:'-views'">
-                <header class="card__header" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');">
+            <a class="card animateFeaturedBlogs card_size-m" ng-repeat="blog in recentBlogs | orderBy:'-views'" ng-href="/blogs/{{ blog._id }}">
+                <div class="card__header" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');">
                     <button class="card__main-action" type="button">In bookmarks</button>
-                </header>
+                </div>
                 <div class="card__body">
                     <div class="card__content">
                         <h3 class="card__title">
-                            <a ng-href="/blogs/{{ blog._id }}" class="card__showmore" ng-bind-html="trustAsHtml(blog.title)"></a>
+                            <span class="card__showmore" ng-bind-html="trustAsHtml(blog.title)"></span>
                         </h3>
-                        <div class="card__body">{{ blog.description }}</div>
+                        <div class="card__desc">{{ blog.description }}</div>
                     </div>
-                    <footer class="card__footer">
+                    <div class="card__footer">
                         <span class="card__author">
                             by
                             <strong>{{ blog.authorName }}</strong>
                         </span>
                         <div class="card__meta">
                             <div class="card__meta-item">
+                                <span class="card__label">{{ blog.views }}</span>
                                 <i class="card__meta-icon card__meta-comments"></i>
-                                <span class="card__label">7 comments</span>
                             </div>
                             <div class="card__meta-item">
-                                <i class="card__meta-icon card__meta-likes"></i>
                                 <span class="card__label">{{ blog.likes }}</span>
+                                <i class="card__meta-icon card__meta-likes"></i>
                             </div>
                         </div>
-                    </footer>
+                    </div>
                 </div>
-            </article>
+            </a>
         </div>
     </div>
     <footer-bar></footer-bar>

@@ -17,7 +17,7 @@ module.exports = function (app) {
         if (limit < 0) {
             limit = 0;
         }
-        tagQuery(req, res, limit,select, function (req, res, err, tags) {
+        tagQuery(req, res, limit, select, function (req, res, err, tags) {
             if (err) res.send(err);
             res.json(tags);
         })
