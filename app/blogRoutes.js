@@ -1,8 +1,8 @@
 var Blog = require('./models/blog');
 var User = require('./models/user');
 var Tag = require('./models/tag');
+var sendMail = require('./sendMail');
 var async = require("async");
-var nodemailer = require('nodemailer');
 var auth = require('./../config/auth');
 var showdown = require('showdown');
 var converter = new showdown.Converter();
@@ -204,15 +204,28 @@ module.exports = function (app) {
         });
     }).post('/api/subscribe', function (req, res) {
         var emailId = req.body.emailId;
+        console.log(emailId);
+        sendMail(1, function (error, info) {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Message sent: ' + info.response);
+            res.json({
+                message: 'User Subscribed!'
+            });
+        });
+    }).post('/api/subscribeBug', function (req, res) {
+        var emailId = req.body.emailId;
+        console.log(process.env.MAILGUN_DOMAIN, process.env.MAILGUN_KEY);
         var transporter = nodemailer.createTransport({
             service: 'Mailgun',
             auth: {
-                domain: auth.mailer.auth.domain,
-                api_key: auth.mailer.auth.api_key
-                // pass: auth.mailer.auth.pass,
+                domain: process.env.MAILGUN_DOMAIN,
+                api_key: process.env.MAILGUN_KEY,
+                user: process.env.MAILGUN_USER,
+                pass: process.env.MAILGUN_PASS
             }
         });
-        console.log(auth.mailer.auth);
         // setup e-mail data with unicode symbols
         var mailOptions = {
             from: '"Jstack Team" <adityaa803@gmail.com>', // sender address
@@ -222,19 +235,16 @@ module.exports = function (app) {
             text: 'We are happy that you subscribed us!', // plaintext body
             html: '<b>We are happy that you subscribed us!</b>' // html body
         };
-        res.json({
-            message: 'blog liked!'
-        });
         // send mail with defined transport object
-        // transporter.sendMail(mailOptions, function(error, info) {
-        //     if (error) {
-        //         return console.log(error);
-        //     }
-        //     console.log('Message sent: ' + info.response);
-        //     res.json({
-        //         message: 'User Subscribed!'
-        //     });
-        // });
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                return console.log(error);
+            }
+            console.log('Message sent: ' + info.response);
+            res.json({
+                message: 'User Subscribed!'
+            });
+        });
     }).get('*', function (req, res) {
         res.sendfile('./public/views/index.html'); // load our public/index.html file
     })

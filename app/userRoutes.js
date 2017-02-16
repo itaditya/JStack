@@ -1,4 +1,5 @@
 var User = require('./models/user');
+var sendMail = require('./sendMail');
 var auth = require('./../config/auth');
 var jwt = require("jsonwebtoken");
 var ensureAuthorized = auth.ensureAuthorized;
@@ -84,6 +85,7 @@ module.exports = function (app) {
             }
         });
     }).post('/api/recoverPassword', function (req, res) {
+        // sendMail(2);
         User.findOne({
             email: req.body.email,
         }, function (err, user) {
