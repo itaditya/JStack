@@ -5,6 +5,9 @@ angular.module('auth', []).config(function($routeProvider) {
     }).when('/register', {
         templateUrl: 'views/auth/register/register.html',
         controller: 'registerCtrl'
+    }).when('/forgotPassword', {
+        templateUrl: 'views/auth/forgotPassword/forgotPassword.html',
+        controller: 'forgotPasswordCtrl'
     }).when('/logout', {
         template: '<pre-loader></pre-loader>',
         controller: 'logoutCtrl'

@@ -163,6 +163,7 @@ angular.module('JStack').directive('preLoader', function() {
         restrict: 'A',
         controller: function($scope, $attrs, $element) {
             $element.bind("click", function(a) {
+                console.log('test');
                 var condition = $attrs.modalCondition;
                 toggleCommentModal();
                 console.log(condition);

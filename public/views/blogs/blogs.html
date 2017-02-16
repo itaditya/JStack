@@ -90,7 +90,7 @@
         <div class="cards">
             <a class="card animateFeaturedBlogs card_size-m" ng-repeat="blog in featuredBlogs | orderBy:'-views'" ng-href="/blogs/{{ blog._id }}">
                 <div class="card__header" style="background-image: url('/assets/img/coverImg/{{ blog.coverImg }}');">
-                    <button class="card__main-action" type="button">In bookmarks</button>
+                    <button class="card__main-action" type="button"><span class=" icon-link" style="color: #fff;padding: 0;font-size: 22px;"></span></button>
                 </div>
                 <div class="card__body">
                     <div class="card__content">

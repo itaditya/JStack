@@ -68,18 +68,29 @@ module.exports = function (app) {
             }
         });
     }).post('/api/login', function (req, res) {
+        var selectParam = "role token blogs";
         User.findOne({
             email: req.body.email,
             password: req.body.password
+        }).select(selectParam).lean().exec(function (err, user) {
+            if (err) res.send(err);
+            if (user) {
+                user.status = 1;
+                res.json(user);
+            } else {
+                res.json({
+                    status: 0
+                });
+            }
+        });
+    }).post('/api/recoverPassword', function (req, res) {
+        User.findOne({
+            email: req.body.email,
         }, function (err, user) {
             if (err) res.send(err);
             if (user) {
                 res.json({
-                    status: 1,
-                    id: user._id,
-                    role: user.role,
-                    blogs: user.blogs,
-                    token: user.token
+                    status: 1
                 });
             } else {
                 res.json({

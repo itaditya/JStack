@@ -1063,6 +1063,10 @@ position: relative;
     content: "\e923";
 }
 
+.icon-link:before {
+    content: "\e919";
+}
+
 .search {
     position: relative;
     display: flex;

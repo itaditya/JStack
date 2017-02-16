@@ -175,9 +175,9 @@ p:last-child {
 }
 
 .card__main-action {
-    font-size: 100%;
+    /*font-size: 100%;*/
     text-decoration: none;
-    text-indent: -9999px;
+    /*text-indent: -9999px;*/
     cursor: pointer;
     /*display: none;*/
     opacity: 0;
@@ -193,6 +193,7 @@ p:last-child {
     width: 4em;
     height: 4em;
     transition: 0.4s;
+    color: #fff;
 }
 
 .card__main-action:before {
@@ -316,7 +317,7 @@ p:last-child {
 }
 
 .card__main-action:before {
-    background-image: url("https://stas-melnikov.ru/cssgrid/bookmark.svg");
+    /*background-image: url("https://stas-melnikov.ru/cssgrid/bookmark.svg");*/
 }
 
 .card__footer {
