@@ -98,9 +98,9 @@ p:last-child {
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
 }
 
-.card:hover .card__main-action{
+.card:hover .card__main-action {
     opacity: 1;
-} 
+}
 
 .card_main {
     width: 100%;
@@ -326,6 +326,7 @@ p:last-child {
 .card__showmore {
     /*color: #444;*/
     color: #fff;
+    color: #E57E31;
     -webkit-transition: color 0.3s ease-out;
     transition: color 0.3s ease-out;
 }
@@ -340,7 +341,8 @@ p:last-child {
     /*color: #3f51b5;*/
     /*color: #da0f4b;*/
     /*color: #de5f85;*/
-    color: #E57E31;
+    /*color: #E57E31;*/
+    color: #fff;
 }
 
 .card__meta-comments {

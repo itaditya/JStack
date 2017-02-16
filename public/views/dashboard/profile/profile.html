@@ -41,7 +41,7 @@
     </div>
     <div>
         Upload Image From Computer
-        <form name="form">
+        <form name="uploadImgForm">
             <button class="button" ngf-select ng-model="coverImage" name="coverImage" ngf-pattern="'image/*'" ngf-accept="'image/*'" ngf-max-size="20MB" ngf-min-height="100"  ngf-capture="'camera'">
                 <!-- ngf-dimensions="$width > 1000 || $height > 400" -->
                 Select
@@ -60,12 +60,24 @@
     </div>
     <div>
         Upload Image From Url
-        <form name="form">
+        <form name="uploadUrlForm">
             <input type="text" placeholder="url" ng-model="fileUrl"/>
             <input type="text" placeholder="name" ng-model="fileName"/>
             <button type="submit" ng-click="uploadUrl()">submit</button>
         </form>
         Image thumbnail:
         <div class="" style="width: 268px;height: 185px;background: url('http://{{ fileUrl }}');background-position: center;background-size: cover;"></div>
+    </div>
+    <div>
+        Add New Tag
+        <form name="addTagForm" ng-submit="addTag(addTagForm);">
+            <input type="text" placeholder="Enter Name" ng-model="newTag.name" required>
+            Select Category : 
+            <label><input type="radio" value="frontend" name="tagCategory" required ng-model="newTag.category">frontend</label>
+            <label><input type="radio" value="backend" name="tagCategory" required ng-model="newTag.category">backend</label>
+            <label><input type="radio" value="design" name="tagCategory" required ng-model="newTag.category">design</label>
+            <label><input type="radio" value="technical" name="tagCategory" required ng-model="newTag.category">technical</label>
+            <button type="submit">submit</button>
+        </form>
     </div>
 </div>

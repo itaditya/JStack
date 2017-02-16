@@ -1,4 +1,4 @@
-angular.module('dashboard').controller('profileCtrl', function($scope, $filter,tagFactory, Upload, $http) {
+angular.module('dashboard').controller('profileCtrl', function ($scope, $filter, tagFactory, dashboardFactory, Upload, $http) {
     const tagSelect = new Choices('.tag-choice', {
         removeItems: true,
         removeItemButton: true,
@@ -7,7 +7,7 @@ angular.module('dashboard').controller('profileCtrl', function($scope, $filter,t
         duplicateItems: false
     });
     $scope.progress = 0;
-    tagFactory.getTagList("select=name category").then(function(res) {
+    tagFactory.getTagList("select=name category").then(function (res) {
         var choices = $filter('groupBy')(res.data, 'category');
         var index = 0;
         $scope.tagsChoices = [{
@@ -27,7 +27,7 @@ angular.module('dashboard').controller('profileCtrl', function($scope, $filter,t
             id: 3,
             choices: []
         }];
-        angular.forEach(choices,function(value,key){
+        angular.forEach(choices, function (value, key) {
             $scope.tagsChoices[index].choices = value;
             console.log(index);
             index++;
@@ -35,7 +35,7 @@ angular.module('dashboard').controller('profileCtrl', function($scope, $filter,t
         tagSelect.setChoices($scope.tagsChoices, '_id', 'name', true);
         // tagSelect.setChoices(res.data, 'value', 'label', false);
     });
-    $scope.uploadImg = function() {
+    $scope.uploadImg = function () {
         console.log($scope.coverImage);
         $scope.tags = tagSelect.getValue(true);
         Upload.upload({
@@ -45,18 +45,18 @@ angular.module('dashboard').controller('profileCtrl', function($scope, $filter,t
                 'tags': $scope.tags
             },
             file: $scope.coverImage
-        }).then(function(resp) {
+        }).then(function (resp) {
             // file is uploaded successfully
             console.log('file ' + resp.config.data.file.name + 'is uploaded successfully. Response: ' + resp.data);
-        }, function(resp) {
+        }, function (resp) {
             // handle error
-        }, function(evt) {
+        }, function (evt) {
             // progress notify
             $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
             console.log('progress: ' + $scope.progress + '% file :');
         });
     }
-    $scope.uploadUrl = function() {
+    $scope.uploadUrl = function () {
         console.log($scope.fileUrl);
         $scope.tags = tagSelect.getValue(true);
         $http.post("/api/images?method=1", {
@@ -64,5 +64,14 @@ angular.module('dashboard').controller('profileCtrl', function($scope, $filter,t
             name: $scope.fileName,
             tags: $scope.tags
         });
+    }
+    $scope.addTag = function (form) {
+        console.log(form);
+        if (form.$valid) {
+            console.log('test');
+            dashboardFactory.addTag($scope.newTag).then(function(res){
+                console.log(res.data);
+            })
+        }
     }
 });
