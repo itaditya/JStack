@@ -6,6 +6,9 @@ angular.module('auth').factory('authFactory', function($http) {
     recoverPassword: function(credentials) {
       return $http.post('/api/recoverPassword',credentials);
     },
+    changePassword: function(credentials) {
+      return $http.put('/api/changePassword',credentials);
+    },
     registerUser: function(credentials) {
       return $http.post('/api/register',credentials);
     }

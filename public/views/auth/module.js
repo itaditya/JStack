@@ -8,6 +8,9 @@ angular.module('auth', []).config(function($routeProvider) {
     }).when('/forgotPassword', {
         templateUrl: 'views/auth/forgotPassword/forgotPassword.html',
         controller: 'forgotPasswordCtrl'
+    }).when('/resetPassword', {
+        templateUrl: 'views/auth/resetPassword/resetPassword.html',
+        controller: 'resetPasswordCtrl'
     }).when('/logout', {
         template: '<pre-loader></pre-loader>',
         controller: 'logoutCtrl'

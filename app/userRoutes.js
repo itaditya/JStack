@@ -85,15 +85,60 @@ module.exports = function (app) {
             }
         });
     }).post('/api/recoverPassword', function (req, res) {
-        // sendMail(2);
+        console.log(req.body.email);
         User.findOne({
             email: req.body.email,
         }, function (err, user) {
             if (err) res.send(err);
             if (user) {
-                res.json({
-                    status: 1
+                user.resetPasswordToken = jwt.sign(user.password, process.env.JWT_SECRET);
+                var config = {
+                    type: 2,
+                    email: user.email,
+                    resetPasswordToken: user.resetPasswordToken
+                }
+                user.save(function (err) {
+                    sendMail(config, function (error, info) {
+                        if (error) {
+                            return console.log(error);
+                        }
+                        res.json({
+                            status: 1
+                        });
+                    });
                 });
+            } else {
+                res.json({
+                    status: 0
+                });
+            }
+        });
+    }).put('/api/changePassword', function (req, res) {
+        User.findOne({
+            email: req.body.email,
+        }, function (err, user) {
+            if (err) res.send(err);
+            if (user) {
+                var password = req.body.password;
+                var cpassword = req.body.cpassword;
+                var resetPasswordToken = req.body.resetPasswordToken;
+                if ((password === cpassword) && (user.resetPasswordToken.length > 0) && (resetPasswordToken === user.resetPasswordToken)) {
+                    user.password = password;
+                    user.resetPasswordToken = "";
+                    user.save(function (err) {
+                        if (err) res.send(err);
+                        res.json({
+                            message: 'Password Changed!',
+                            status: 1
+                        });
+                    });
+                } else {
+                    if (err) res.send(err);
+                    res.json({
+                        message: 'Passwords Do Not Match!',
+                        status: 0
+                    });
+                }
             } else {
                 res.json({
                     status: 0

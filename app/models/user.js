@@ -35,6 +35,10 @@ module.exports = mongoose.model('User', {
         type: String,
         default: ""
     },
+    resetPasswordToken: {
+        type: String,
+        default: ""
+    },
     role: {
         type: String,
         default: "author"
