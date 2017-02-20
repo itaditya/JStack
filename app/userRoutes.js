@@ -47,11 +47,21 @@ module.exports = function (app) {
                     user.email = req.body.email;
                     user.description = req.body.description;
                     user.token = jwt.sign(user, process.env.JWT_SECRET);
+                    var config = {
+                        type: 3,
+                        email: user.email,
+                        id: user.id,
+                    }
                     user.save(function (err) {
                         if (err) res.send(err);
-                        res.json({
-                            message: 'User Registered!',
-                            status: 1
+                        sendMail(config, function (error, info) {
+                            if (error) {
+                                return console.log(error);
+                            }
+                            res.json({
+                                message: 'User Registered!',
+                                status: 1
+                            });
                         });
                     });
                 } else {
@@ -87,7 +97,7 @@ module.exports = function (app) {
     }).post('/api/recoverPassword', function (req, res) {
         console.log(req.body.email);
         User.findOne({
-            email: req.body.email,
+            email: req.body.email
         }, function (err, user) {
             if (err) res.send(err);
             if (user) {
@@ -116,13 +126,14 @@ module.exports = function (app) {
     }).put('/api/changePassword', function (req, res) {
         User.findOne({
             email: req.body.email,
+            resetPasswordToken: req.body.resetPasswordToken
         }, function (err, user) {
             if (err) res.send(err);
             if (user) {
                 var password = req.body.password;
                 var cpassword = req.body.cpassword;
                 var resetPasswordToken = req.body.resetPasswordToken;
-                if ((password === cpassword) && (user.resetPasswordToken.length > 0) && (resetPasswordToken === user.resetPasswordToken)) {
+                if ((password === cpassword) && (user.resetPasswordToken.length > 0)) {
                     user.password = password;
                     user.resetPasswordToken = "";
                     user.save(function (err) {
@@ -145,6 +156,28 @@ module.exports = function (app) {
                 });
             }
         });
+    }).get('/api/users/verifyAccount/:id', function (req, res) {
+        console.log(req.query.email,req.params.id);
+        User.findOne({
+            email: req.query.email,
+            _id: req.params.id
+        }, function (err, user) {
+            if (err) res.send(err);
+            if (user) {
+                user.verified = true
+                user.save(function (err) {
+                    if (err) res.send(err);
+                    res.json({
+                        message: 'Account Verified!',
+                        status: 1
+                    });
+                });
+            } else {
+                res.json({
+                    status: 0
+                });
+            }
+        });
     }).put('/api/users/:id', ensureAuthorized, function (req, res) {
         tokenCheck(req.token, res, function (role, id) {
             User.findById(req.params.id, function (err, user) {
@@ -157,8 +190,8 @@ module.exports = function (app) {
                         user.password = req.body.password || user.password;
                         user.blogs = req.body.blogs || user.blogs;
                         user.verified = req.body.verified || user.verified;
-                        user.role = req.body.role || user.role;
                         user.token = req.body.token || user.token;
+                        user.role = req.body.role || user.role;
                         user.save(function (err) {
                             if (err) res.send(err);
                             res.json({
