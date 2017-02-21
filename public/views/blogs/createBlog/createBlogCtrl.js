@@ -1,5 +1,6 @@
 angular.module('blogs').controller('createBlogCtrl', function($scope, $filter, $rootScope, $interval, $timeout, localStorageService, blogFactory, tagFactory, userFactory, $routeParams, SessionService) {
     userFactory.get(localStorageService.cookie.get("authorId")).then(function(author) {
+        console.log(localStorageService.cookie.get("authorId"),author);
         var simplemde = new SimpleMDE({
             element: document.querySelector(".editor"),
             promptURLs: true,

@@ -17,16 +17,14 @@ module.exports = function (config, callback) {
         html: '<b>We are happy that you subscribed us!</b>' // html body
     };
     if (config.type === 2) {
-        mailOptions.text = "Reset Password";
+        mailOptions.subject = "Reset Password";
         var link = process.env.HOST_URL + "resetPassword?email=" + config.email + "&resetPasswordToken=" + config.resetPasswordToken;
-        mailOptions.html = "<h1>Hi we got your Request to change your Password</h1><p><a href='" + link + "'>Link to Reset</a></p>";
-        console.log(mailOptions.html);
+        mailOptions.html = "<h1>Hi! we got your Request to change your Password</h1><p><a href='" + link + "'>Link to Reset</a></p>";
     }
     if (config.type === 3) {
-        mailOptions.text = "Verify Account";
+        mailOptions.subject = "Verify Account";
         var link = process.env.HOST_URL + "api/users/verifyAccount/" + config.id + "?email=" + config.email;
-        mailOptions.html = "<h1>Hi Please Click the Link to Verify Account</h1><p><a href='" + link + "'>Link to Verify Account</a></p>";
-        console.log(mailOptions.html);
+        mailOptions.html = "<h1>Hi! Please Click the Link to Verify Account</h1><p><a href='" + link + "'>Link to Verify Account</a></p>";
     }
     mailOptions.to = 'b900000d7b-ee6731@inbox.mailtrap.io';
     transporter.sendMail(mailOptions, callback);

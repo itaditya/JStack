@@ -1,19 +1,22 @@
-angular.module('auth').controller('registerCtrl', function($scope, $location, authFactory, $timeout) {
+angular.module('auth').controller('registerCtrl', function ($scope, $location, authFactory, $timeout) {
     $scope.isLoaded = true;
     $scope.isValidating = false;
     $scope.user = {};
-    $scope.register = function(form) {
+    $scope.register = function (form) {
         $scope.isValidating = true;
         if (form.$valid) {
-            authFactory.registerUser($scope.user).then(function(data) {
-                $scope.isValidating = false;
-                if (data.data.status === 1) {
-                    notification.notify('success', 'Register Successfully');
-                    $location.path("/login");
+            authFactory.registerUser($scope.user).then(function (res) {
+                console.log(res.data);
+                if (res.data.status === 1) {
+                    authFactory.validateUser(res.data.id).then(function () {
+                        $scope.isValidating = false;
+                        notification.notify('success', 'Register Successfully');
+                        $location.path("/login");
+                    });
                 } else {
-                    notification.notify('error', data.data.message);
-                    if (data.data.status === -1) {
-                        $timeout(function() {
+                    notification.notify('error', res.data.message);
+                    if (res.data.status === -1) {
+                        $timeout(function () {
                             $location.path("/login").search({
                                 email: $scope.user.email
                             });

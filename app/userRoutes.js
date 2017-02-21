@@ -47,21 +47,13 @@ module.exports = function (app) {
                     user.email = req.body.email;
                     user.description = req.body.description;
                     user.token = jwt.sign(user, process.env.JWT_SECRET);
-                    var config = {
-                        type: 3,
-                        email: user.email,
-                        id: user.id,
-                    }
+                    user.password = jwt.sign(user.password, process.env.JWT_PASS_SECRET);
                     user.save(function (err) {
                         if (err) res.send(err);
-                        sendMail(config, function (error, info) {
-                            if (error) {
-                                return console.log(error);
-                            }
-                            res.json({
-                                message: 'User Registered!',
-                                status: 1
-                            });
+                        res.json({
+                            id: user.id,
+                            message: 'User Registered!',
+                            status: 1
                         });
                     });
                 } else {
@@ -78,11 +70,58 @@ module.exports = function (app) {
                 });
             }
         });
+    }).post('/api/users/verifyAccount/:id', function (req, res) {
+        User.findById(req.params.id, function (err, user) {
+            if (err) res.send(err);
+            if (user) {
+                var config = {
+                    type: 3,
+                    email: user.email,
+                    id: user.id,
+                }
+                sendMail(config, function (error, info) {
+                    if (error) {
+                        return console.log(error);
+                    }
+                    res.json({
+                        message: 'Verification Link Sent!',
+                        status: 1
+                    });
+                });
+            } else {
+                res.json({
+                    status: 0
+                });
+            }
+        });
+    }).get('/api/users/verifyAccount/:id', function (req, res) {
+        console.log(req.query.email, req.params.id);
+        User.findOne({
+            email: req.query.email,
+            _id: req.params.id
+        }, function (err, user) {
+            if (err) res.send(err);
+            if (user) {
+                user.verified = true
+                user.save(function (err) {
+                    if (err) res.send(err);
+                    res.json({
+                        message: 'Account Verified!',
+                        status: 1
+                    });
+                });
+            } else {
+                res.json({
+                    status: 0
+                });
+            }
+        });
     }).post('/api/login', function (req, res) {
         var selectParam = "role token blogs";
+        var password = jwt.sign(req.body.password, process.env.JWT_PASS_SECRET);
         User.findOne({
             email: req.body.email,
-            password: req.body.password
+            password: password
         }).select(selectParam).lean().exec(function (err, user) {
             if (err) res.send(err);
             if (user) {
@@ -150,28 +189,6 @@ module.exports = function (app) {
                         status: 0
                     });
                 }
-            } else {
-                res.json({
-                    status: 0
-                });
-            }
-        });
-    }).get('/api/users/verifyAccount/:id', function (req, res) {
-        console.log(req.query.email,req.params.id);
-        User.findOne({
-            email: req.query.email,
-            _id: req.params.id
-        }, function (err, user) {
-            if (err) res.send(err);
-            if (user) {
-                user.verified = true
-                user.save(function (err) {
-                    if (err) res.send(err);
-                    res.json({
-                        message: 'Account Verified!',
-                        status: 1
-                    });
-                });
             } else {
                 res.json({
                     status: 0

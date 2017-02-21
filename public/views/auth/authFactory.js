@@ -11,6 +11,9 @@ angular.module('auth').factory('authFactory', function($http) {
     },
     registerUser: function(credentials) {
       return $http.post('/api/register',credentials);
+    },
+    validateUser: function(id) {
+      return $http.post('/api/users/verifyAccount/'+id);
     }
   }
 });
